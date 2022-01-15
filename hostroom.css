@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
+body{
+    background-color: rgb(101, 78, 202);
+	background-size: cover;
+	padding: 0px;
+	margin: 0px;
+	font-family: 'Prompt', sans-serif;
+	font-size: 100%;
+}
+
+a{
+	color: black;
+}
+
+#homebox, #profileuserbox, .rewardlist, .namelist, #count{
+	background-color: rgb(255, 255, 255);
+	height: 60px;
+	width: 200px;
+	padding: 0px;
+	display: inline-block;
+	line-height: normal;
+	vertical-align: middle;
+	border-width: 2px;
+    border-style: solid;
+	border-radius: 50px;
+	border-color: black;
+	font-weight: bold;
+	font-size: 20px;
+	transition: 0.1s;
+}
+
+#homebox{
+	box-shadow: inset -8px -8px 2px rgba(0, 0, 0, 0.1);
+}
+
+#profileuserbox:hover, .rewardlist:hover, .namelist:hover{
+	/* box-shadow: inset -10px -10px 4px rgba(0, 0, 0, 0.1),
+	3px 3px 1px rgba(0,0,0,0.3); */
+	background-color: rgb(228, 228, 228);
+}
+
+#icon, .profilepicture{
+	cursor: pointer;
+	height: 50px;
+	width: 50px;
+	background-size: cover;
+	border-radius: 50%;
+	margin: 1px;
+}
+
+#profileuserbox{
+	width: fit-content;
+	font-size: 16px;
+}
+
+.profilename{
+	margin: 0% 0% 3% 0%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 11vw;
+}
+
+/* โครงสร้างหน้า */
+#page{
+    width:100%;
+    display:flex;
+}
+
+#left ,#right{
+    width: 20%;
+	margin: 10px;
+	text-align: center;
+}
+
+
+/* เนื้อหากล่องซ้าย */
+.rewardlist, .namelist{
+	width: 100%;
+	border-width: 1px;
+	font-size: 16px;
+	text-align: left;
+	margin-top: 2px;
+}
+
+/* เนื้อหากล่องกลาง */
+#mid{
+	width: 60%;
+	margin: 10px;
+	text-align: center;
+}
+
+#mid .boxmiddle{
+	background-color: snow;
+    border-width: 1px;
+    border-style: solid;
+	border-radius: 30px;
+	display: inline-block;
+	line-height: normal;
+	vertical-align: middle;
+	width: 50%;
+	margin-top: 0;
+	box-shadow: inset -10px -10px 10px rgba(0, 0, 0, 0.1),
+				inset 10px -10px 10px rgba(0, 0, 0, 0.1);
+}
+
+#gachabox{
+	margin-top: 20px;
+	width: 80%;
+	height: 360px;
+	background-size: cover;
+	background-image: url("http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif");
+}
+
+#count{
+	margin-top: 70px;
+	text-align: center;
+	width: 300px;
+	height: fit-content;
+	border-width: 1px;
+} 
+
+/* เนื้อหากล่องขวา */
+
+
+.box{
+	background-color: snow;
+    border-width: 1px;
+    border-style: solid;
+	border-radius: 20px;
+	margin-top: 10px;
+	height: fit-content;
+	vertical-align: middle;
+	padding: 10px;
+}
+
