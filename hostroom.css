@@ -74,6 +74,11 @@ a{
 	text-align: center;
 }
 
+.boxheader{
+	font-size: 120%;
+	margin-top: 1%;
+}
+
 
 /* เนื้อหากล่องซ้าย */
 .rewardlist, .namelist{
@@ -121,7 +126,6 @@ a{
 } 
 
 /* เนื้อหากล่องขวา */
-
 
 .box{
 	background-color: snow;
