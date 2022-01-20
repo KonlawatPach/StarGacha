@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 
 body{
-	background-color: rgb(47, 0, 255);
+	background-color: slateblue;
 	font-family: 'Prompt', sans-serif;
+}
+
+.hover{
+	background-color: white;
 }
 
 .hover:hover{
