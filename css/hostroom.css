@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 
 body{
-    background-color: rgb(101, 78, 202);
+	background-color: rgb(47, 0, 255);
 	background-size: cover;
 	padding: 0px;
 	margin: 0px;
@@ -22,7 +22,7 @@ a{
 	line-height: normal;
 	vertical-align: middle;
 	border-width: 2px;
-    border-style: solid;
+	border-style: solid;
 	border-radius: 50px;
 	border-color: black;
 	font-weight: bold;
@@ -64,14 +64,19 @@ a{
 
 /* โครงสร้างหน้า */
 #page{
-    width:100%;
-    display:flex;
+	width:100%;
+	display:flex;
 }
 
 #left ,#right{
-    width: 20%;
-	margin: 10px;
+	width: 20%;
+	margin: 1%;
 	text-align: center;
+}
+
+.boxheader{
+	font-size: 120%;
+	margin-top: 1%;
 }
 
 
@@ -93,24 +98,23 @@ a{
 
 #mid .boxmiddle{
 	background-color: snow;
-    border-width: 1px;
-    border-style: solid;
+	border-width: 1px;
+	border-style: solid;
 	border-radius: 30px;
 	display: inline-block;
 	line-height: normal;
 	vertical-align: middle;
-	width: 50%;
+	width: 70%;
 	margin-top: 0;
 	box-shadow: inset -10px -10px 10px rgba(0, 0, 0, 0.1),
 				inset 10px -10px 10px rgba(0, 0, 0, 0.1);
 }
 
 #gachabox{
-	margin-top: 20px;
+	margin-top: 1%;
 	width: 80%;
-	height: 360px;
-	background-size: cover;
-	background-image: url("http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif");
+	height: fit-content;
+	object-fit: contain;
 }
 
 #count{
@@ -123,15 +127,17 @@ a{
 
 /* เนื้อหากล่องขวา */
 
-
 .box{
 	background-color: snow;
-    border-width: 1px;
-    border-style: solid;
+	border-width: 1px;
+	border-style: solid;
 	border-radius: 20px;
 	margin-top: 10px;
 	height: fit-content;
 	vertical-align: middle;
 	padding: 10px;
-}
+}	
 
+/* @media only screen and (max-width: 1023px) {
+	
+} */
