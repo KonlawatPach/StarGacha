@@ -5,8 +5,16 @@ body{
 	font-family: 'Prompt', sans-serif;
 }
 
+.logo{
+	box-shadow: inset -10px -10px 10px rgba(0, 0, 0, 0.1),
+				inset 10px -10px 10px rgba(0, 0, 0, 0.1);
+}
+
 .hover{
 	background-color: white;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hover:hover{
