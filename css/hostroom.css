@@ -3,11 +3,22 @@
 body{
 	background-color: slateblue;
 	font-family: 'Prompt', sans-serif;
+	height: 100%;
+	
 }
+/* @media only screen and (min-width: 1400px) {
+	body{overflow: hidden;}
+} */
 
 .logo{
 	box-shadow: inset -10px -10px 10px rgba(0, 0, 0, 0.1),
 				inset 10px -10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.textcut{
+    overflow: hidden;
+    text-overflow: ellipsis;
+	word-break: break-all;
 }
 
 .hover{
