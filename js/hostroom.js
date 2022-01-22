@@ -1,26 +1,23 @@
-db.collection("room").get().then(test =>{
-    test.docs.forEach(doc =>{
-        console.log(doc.data());
-    })
+//get data from firebase to display in hostroom.
+db.collection("room").doc("0").onSnapshot(item => {
+    if ($('#giftlist').text().length == 54) {                                   //giftlist
+        for(let g in item.data().gift){
+            $(`
+                <tr>
+                    <td class="w-75">`+ g +`</td>
+                    <td>x`+ item.data().gift[g] +`</td>
+                </tr>
+            `).appendTo( "#giftlist" );
+        }
+    }
+    $("#room").html("ห้อง : " + item.data().room);  //roomname
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// const para = document.createElement("p");
+// const node = document.createTextNode("ห้อง : This is new.");
+// para.appendChild(node);
+// const element = document.getElementById("room");
+// element.appendChild(para);
 
 
 

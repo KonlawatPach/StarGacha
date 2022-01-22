@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/firebase.js"></script>
     <script src="js/hostroom.js"></script>
     <link rel="stylesheet" href="css/hostroom.css">
@@ -25,49 +26,14 @@
                         </div>
                     </a>
                 </div>
-                <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 mx-sm-auto mx-md-4 bg-light text-start overflow-auto" style="height: 30%;">
+                <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 mx-sm-auto mx-md-4 bg-light text-start overflow-auto" style="height: 40%;">
                     <h6 class="mb-2 fw-bold text-center">รายการของรางวัล</h6>
                         <table class="table table-hover textcut" id="giftlist">
                             <tr>
-                                <td class="w-75">item1</td>
-                                <td>x1</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item2</td>
-                                <td>x2</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item3</td>
-                                <td>x5</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item1</td>
-                                <td>x1</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item2</td>
-                                <td>x2</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item3</td>
-                                <td>x5</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item1</td>
-                                <td>x1</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item2</td>
-                                <td>x2</td>
-                            </tr>
-                            <tr>
-                                <td class="w-75">item3</td>
-                                <td>x5</td>
-                            </tr>
                         </table>
                 </div>
 
-                <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 mx-sm-auto mx-md-4 bg-light text-start overflow-auto" style="height: 30%;">
+                <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 mx-sm-auto mx-md-4 bg-light text-start overflow-auto" style="height: 40%;">
                     <h6 class="mb-3 fw-bold text-center">รายชื่อผู้ได้รางวัล</h6>
                     <table class="table table-hover" id="rewardlist">
                         <tr>
@@ -90,7 +56,7 @@
             <!-- กล่องกลาง -->
             <div class="col-sm mx-auto">
                 <div class="col-sm-12 col-md-10 col-xl-8 border border-2 rounded-pill border-dark p-2 mx-auto bg-light">
-                    <h3 class="fw-bold">ห้อง : บูรพาชายชาตรี</h3>
+                    <h3 class="fw-bold" id="room"></h3>
                     <h4 class="fw-bold">Room ID : 0123456789</h4>
                 </div>
                 <img id="gachabox" class="my-3 w-75" src="img/wanwai_burapa.gif"><br>
@@ -136,7 +102,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="hostroom.css">
-    <script src="hostroom.js"></script>
+    <script src="hostroom.js"></>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <title>กาชาสอยดาว</title>
 </head>
