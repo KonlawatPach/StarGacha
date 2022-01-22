@@ -1,4 +1,30 @@
-//setInterval(function(){ location.reload(); }, 1000);
+db.collection("room").get().then(test =>{
+    test.docs.forEach(doc =>{
+        console.log(doc.data());
+    })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function rollgacha() {
     // document.getElementById("gachabox").style.backgroundImage = "url('http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa_speed.gif')";
     document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa_speed.gif";
