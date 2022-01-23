@@ -1,26 +1,44 @@
-db.collection("room").get().then(test =>{
-    test.docs.forEach(doc =>{
-        console.log(doc.data());
-    })
+// get data from firebase to display in hostroom.
+let usernumber = 0;
+
+
+db.collection("room").doc("0").onSnapshot((item) => {
+    if ($('#giftlist').text().length == 54) {       //giftlist
+        for(let g in item.data().gift){
+            $(`
+                <tr>
+                    <td class="w-75">`+ g +`</td>
+                    <td>x`+ item.data().gift[g] +`</td>
+                </tr>
+            `).appendTo( "#giftlist" );
+        }
+    }
+
+    $("#room").html("ห้อง : " + item.data().room);   //roomname
+                                                    //namelist
+    if (usernumber != item.data().name.length){
+        usernumber = item.data().name.length;
+        $("#namelist").html("");
+        for(let n in item.data().name){
+            db.collection("user").doc(item.data().name[n]).onSnapshot((user) => {
+                $(`
+                    <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
+                        <img class="rounded-circle" src="img/`+ item.data().name[n] +`.jpg" width="50rem">
+                        <h6 class="d-inline ms-2">`+ user.data().name +`</h6>
+                    </div>
+                `).appendTo( "#namelist" );
+            });
+        }
+    }
 });
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// const para = document.createElement("p");
+// const node = document.createTextNode("ห้อง : This is new.");
+// para.appendChild(node);
+// const element = document.getElementById("room");
+// element.appendChild(para);
 
 
 
