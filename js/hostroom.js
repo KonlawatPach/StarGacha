@@ -2,17 +2,21 @@
 getData();
 realTimeupdate();
 
+let d = "0";
 //Twotype Fetch Data Function
 function getData(){
-    db.collection("room").doc("0").get().then((item) => {  
+    let d = "0";
+    db.collection("room").doc(d).get().then((item) => {  
         addGiftlist(item.data().gift);
+        addKey(item.data().key);
     });
 }
 
 function realTimeupdate(){
-    db.collection("room").doc("0").onSnapshot((item) => {  
+    let d = "0";
+    db.collection("room").doc(d).onSnapshot((item) => {  
         addRoomname(item.data().room);
-        adduserlist(item)
+        adduserlist(item.data().name);
     });
 }
 
@@ -29,47 +33,51 @@ function addGiftlist(giftlist){
 }
 
 function addRoomname(roomname){ $("#room").html("ห้อง : " + roomname); }
+function addKey(key){ $("#room").html("Room ID : " + key); }
 
-function adduserlist(item){
+async function adduserlist(idlist){
     let usernumber = 0;
-    let useridlist = [];
-    let usernamelist = [];
-    let sortuserlist = [];
-    useridlist = item.data().name;
-    if (usernumber != useridlist.length){
-        usernumber = useridlist.length;
-        for(let userdata in useridlist){
-            db.collection("user").doc(useridlist[userdata]).get().then((user) => {      //add
-                usernamelist.push(user.data().name);
-                console.log(0)
-            });
-            
-        }
-        console.log(1)
-        // console.log(usernamelist)
-        sortidlist = usernamelist;
-        sortidlist.sort();
-        console.log(sortidlist)
-        
+    let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
+    let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
+    let temp;
 
-        $("#namelist").html("");
-        for(let userdata in useridlist){
-            db.collection("user").doc(useridlist[userdata]).onSnapshot((user) => {      //update
+    if (usernumber != idlist.length){       //ถ้ามีรายชื่อเพิ่มหรือลดจะอัพเดทใหม่ยกเครื่อง
+        usernumber = idlist.length;        
+
+        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).onSnapshot((users) => {
+            temp = sortName(users);
+            sortidlist = temp[0];
+            sortnamelist = temp[1];
+
+            $("#namelist").html("");
+            for(let i in sortidlist){
                 $(`
-                    <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ user.id +`">
-                        <img class="rounded-circle" src="img/`+ user.id +`.jpg" width="50rem">
-                        <h6 class="d-inline ms-2">`+ user.data().name +`</h6>
+                    <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
+                        <img class="rounded-circle" src="img/`+ sortidlist[i] +`.jpg" width="50rem">
+                        <h6 class="d-inline ms-2">`+ sortnamelist[i] +`</h6>
                     </div>
                 `).appendTo( "#namelist" );
-            });
-        }
+            }
+        });
     }
 }
 
-
-
-
-
+function sortName(users){
+    let useridlist = []
+    let usernamelist = []
+    let sortidlist = []
+    users.forEach((user) => {
+        useridlist.push(user.id);
+        usernamelist.push(user.data().name);
+    });
+    
+    let sortnamelist = [...usernamelist]
+    sortnamelist.sort();    //สร้าง namelist ที่เรียงแล้ว
+    for(let name of sortnamelist){
+        sortidlist.push(useridlist[usernamelist.indexOf(name)]);
+    }
+    return [sortidlist, sortnamelist];
+}
 
 
 //onEvent Function
