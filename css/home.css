@@ -11,25 +11,6 @@ body{
 				inset 10px -10px 10px rgba(0, 0, 0, 0.1);
 }
 
-.textcut{
-    overflow: hidden;
-    text-overflow: ellipsis;
-	word-break: break-all;
-}
-
-.hover{
-	background-color: white;
-	white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .hover:hover{
 	background-color: rgb(233, 233, 233);
-}
-
-@media only screen and (max-width: 576px) {
-	#left, #right{
-		display: none;
-	}
 }
