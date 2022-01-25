@@ -15,177 +15,84 @@
     <title>กาชาสอยดาว</title>
 </head>
     <body>
-        <div class="row mt-1 mt-sm-3 text-center">
-            <div class="border border-2 rounded-3 border-dark bg-light d-sm-none" id="leftslide">></div>
-            <!-- กล่องซ้าย -->
-            <div class="col-sm-3" id="left">
-                <div class="col-md-12 col-lg-10 col-xl-8 col-xxl-7 mx-auto">
-                    <a class="text-decoration-none" href="home.html" style="width: min-content;">
-                        <div class="border border-2 rounded-pill border-dark bg-light mx-auto p-1 text-center logo">
-                            <img class="rounded-circle border border-2 border-dark" src="img/burapa logo.png" width="50rem">
-                            <h5 class="d-inline fw-bold text-dark">กาชาสอยดาว</h5>
-                        </div>
-                    </a>
-                </div>
-                <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 mx-sm-1 mx-xl-4 ms-md-2 ms-xl-3 bg-light text-start" style="height: 40%;">
-                    <h6 class="mb-2 fw-bold text-center">รายการของรางวัล</h6>
-                    <div class="overflow-auto" style="height: 80%;">
-                        <table class="table table-hover textcut">
-                            <tbody id="giftlist">
-
-                            </tbody>
-                        </table>
+        <div class="container-fluid">
+            <button type="button" class="border border-0 rounded-3 border-dark d-lg-none hover float-start" style="width: 3rem; height: 3rem;" onclick="slideLeft()">>>></button>
+            <button type="button" class="border border-0 rounded-3 border-dark d-lg-none hover float-end" style="width: 3rem; height: 3rem;" onclick="slideRight()"><<<</button>
+            <div class="row mt-1 mt-sm-3 text-center">
+                <!-- กล่องซ้าย -->
+                <div class="col-sm-3 leftbar" id="left">
+                    <button type="button" class="border border-0 rounded-3 border-dark d-lg-none hover float-end mt-2 mt-lg-0" style="width: 3rem; height: 3rem;" onclick="slideCloseLeft()"><<<</button>
+                    <div class="col-8 col-lg-10 col-xl-8 col-xxl-7 mx-lg-auto">
+                        <a class="text-decoration-none" href="home.html" style="width: min-content;">
+                            <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
+                                <img class="rounded-circle border border-2 border-dark" src="img/burapa logo.png" width="50rem">
+                                <h5 class="d-inline fw-bold text-dark">กาชาสอยดาว</h5>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 mx-sm-1 mx-xl-4 ms-md-2 ms-xl-3 bg-light text-start" style="height: 40%;">
-                    <h6 class="mb-3 fw-bold text-center">รายชื่อผู้ได้รางวัล</h6>
-                    <div class="overflow-auto" style="height: 80%;">
-                        <table class="table table-hover" id="rewardlist">
+                    <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 bg-light text-start" style="height: 40%;">
+                        <h6 class="mb-2 fw-bold text-center">รายการของรางวัล</h6>
+                        <div class="overflow-auto" style="height: 80%;">
+                            <table class="table table-hover textcut">
                                 <tbody id="giftlist">
-                                    <tr>
-                                        <td>
-                                            <img class="border border-2 rounded-circle" src="img/0000000000.jpg" width="50rem">
-                                        </td>
-                                        <td style="width: 80%;">
-                                            <h6>Burapa Dora10direction</h6>
-                                            <h6 style="font-size: 80%;">สุ่มได้ คลิปหยกกินข้าว</h6>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-            </div>
-
-            <!-- กล่องกลาง -->
-            <div class="col-sm mx-auto mt-0">
-                <div class="col-sm-12 col-md-10 col-xl-8 border border-2 rounded-pill border-dark p-2 mx-auto bg-light">
-                    <h3 class="fw-bold" id="room"></h3>
-                    <h4 class="fw-bold">Room ID : 0123456789</h4>
-                </div>
-                <img id="gachabox" class="my-3 w-75" src="img/wanwai_burapa.gif"><br>
-                <button type="button" class="btn btn-light btn-lg" onclick="rollgacha()">สุ่มกาชา</button>
-                <h6 class="my-3">คุณมีสิทธิ์สุ่มได้อีก 3 ครั้ง</h6>
-            </div>
-
-            <!-- กล่องขวา -->
-            <div class="col-sm-3" id="right">
-                <div class="col-md-12 col-lg-10 col-xl-8 col-xxl-7 mx-auto">
-                    <a class="text-decoration-none" href="https://www.google.com/" >
-                        <div class="border border-2 rounded-pill border-dark p-1 hover">
-                            <img class="rounded-circle border border-2 border-dark" src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png" width="50rem">
-                            <h6 class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
+                            </table>
                         </div>
-                    </a>
+                    </div>
+
+                    <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 bg-light text-start" style="height: 40%;">
+                        <h6 class="mb-3 fw-bold text-center">รายชื่อผู้ได้รางวัล</h6>
+                        <div class="overflow-auto" style="height: 80%;">
+                            <table class="table table-hover" id="rewardlist">
+                                    <tbody id="giftlist">
+                                        <tr>
+                                            <td>
+                                                <img class="border border-2 rounded-circle" src="img/0000000000.jpg" width="50rem">
+                                            </td>
+                                            <td style="width: 80%;">
+                                                <h6>Burapa Dora10direction</h6>
+                                                <h6 style="font-size: 80%;">สุ่มได้ คลิปหยกกินข้าว</h6>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
                 </div>
-                <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-sm-0 px-xl-1 mx-sm-1 me-md-2 me-xl-3 bg-light h-50 overflow-auto">
-                    <h6 class="fw-bold mb-3">รายชื่อผู้เข้าร่วม</h6>
-                    <div class="overflow-auto" style="height: 80%;" id="namelist">
+
+                <!-- กล่องกลาง -->
+                <div class="col-sm mx-auto mt-0" id="center"> 
+                    <div class="col-sm-10 col-md-9 col-xl-8 border border-2 rounded-pill border-dark p-2 mx-auto bg-light">
+                        <h4 class="fw-bold d-none d-lg-block" id="roomlg"></h4>
+                        <h5 class="fw-bold d-none d-lg-block" id="keylg"></h5>
+                        <h5 class="fw-bold d-block d-lg-none" id="roomsm"></h5>
+                        <h6 class="fw-bold d-block d-lg-none" id="keysm"></h6>
+                    </div>
+                    <img id="gachabox" class="my-3 w-75" src="img/wanwai_burapa.gif"><br>
+                    <button type="button" class="btn btn-light btn-lg" onclick="rollgacha()">สุ่มกาชา</button>
+                    <h6 class="my-3">คุณมีสิทธิ์สุ่มได้อีก 3 ครั้ง</h6>
+                </div>
+
+                <!-- กล่องขวา -->
+                <div class="col-lg-3 rightbar" id="right">
+                    <button type="button" class="border border-0 rounded-3 border-dark d-lg-none hover float-start mt-2 me-3" style="width: 3rem; height: 3rem;" onclick="slideCloseRight()">>>></button>
+                    <div class="col col-lg-10 col-xl-9 col-xxl-8 mt-2 mt-lg-0 mx-lg-auto">
+                        <a class="text-decoration-none" href="https://www.google.com/" >
+                            <div class="border border-2 rounded-pill border-dark p-1 hover">
+                                <img class="rounded-circle border border-2 border-dark profile" src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png" width="50rem">
+                                <h6 class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-sm-0 px-xl-1 bg-light h-50 overflow-auto">
+                        <h6 class="fw-bold mb-3">รายชื่อผู้เข้าร่วม</h6>
+                        <div class="overflow-auto" style="height: 80%;" id="namelist">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
 </html>
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="hostroom.css">
-    <script src="hostroom.js"></>
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <title>กาชาสอยดาว</title>
-</head>
-<body>  
-    <div id="page">
-
-        <div id="left">
-            <a href="https://www.google.com/">
-                <table id="homebox">
-                    <tr>
-                        <td style="width: 30%;">
-                            <img id="icon" src="http://myweb.cmu.ac.th/konlawat_wong/picture/burapa%20logo.png">
-                        </td>
-                        <td style="width: 70%;">
-                            <div style="margin-bottom: 8%;">กาชาสอยดาว</div>
-                        </td>
-                    </tr>
-                </table>
-            </a>
-
-            <div class="box" id="rewards">
-                <h3 class="boxheader">รายชื่อผู้ได้รางวัล</h3>
-                <div class="rewardlist"></div>
-            </div>
-            <div class="box" id="namelists">
-                <h3 class="boxheader">รายชื่อผู้เข้าร่วม</h3>
-                <script>
-                    $.getJSON('namelist.json', function(data) {
-                        for (let i in data){
-                            // $( "<p>"+data[i].title+"</p>" ).appendTo( "#namelists" );
-                            $(`<a href="`+ data[i].picture +`">
-                                <table class="namelist">
-                                    <tr>
-                                        <td style="width: 54px;">
-                                            <img class="profilepicture" src="`+ data[i].picture +`">
-                                        </td>
-                                        <td>
-                                            <div class="profilename" style="margin-left: 10px;">`+ data[i].username +`</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </a>`).appendTo( "#namelists" );
-                        }
-                    });
-                    </script>
-            </div>
-        </div>
-
-        <div id="mid">
-            <div class="boxmiddle">
-                <h1 style="font-size: 30px;">ห้อง : บูรพาชายชาตรี</h1>
-                <h2 style="font-size: 20px;">Room ID : 0123456789</h2>
-            </div><br>
-            <img id="gachabox" src="http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif"><br>
-            <button type="button" onclick="rollgacha()">สุ่มกาชา</button>
-            <div>
-                <h3 id="count">คุณมีสิทธิ์สุ่มได้อีก 3 ครั้ง</h3>
-            </div>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-        </div>
-
-        <div id="right">
-            <a href="https://www.facebook.com/burapa.yok">
-                <table id="profileuserbox">
-                    <tr>
-                        <td style="width: 80%;">
-                            <div class="profilename">บูรพา ดอร่าสิบทิศ</div>
-                        </td>
-                        <td style="width: 20%;">
-                            <img class="profilepicture" src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.6435-9/105734607_2241275122684815_3954264246556265639_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeEjiaYW-55G00nG7j_kDbDSOj9mYMCa3dk6P2ZgwJrd2YLPOMHeDMpXsuBhWYh1Q3UuXng1ORKd4324CXhhXvOp&_nc_ohc=FcRtg7XKeYYAX-Cj328&_nc_ht=scontent.fbkk10-1.fna&oh=00_AT8jL_CpQ7uIRXgKPcfZpR9xGSTPd4q428OW38dKMrdn1w&oe=62032471">
-                        </td>
-                    </tr>
-                </table>
-            </a>
-            <div class="box" id="listitem">
-                <h3 class="boxheader">รายชื่อของรางวัล</h3>
-            </div>
-        </div>
-
-    </div>
-</body>
-</html> -->

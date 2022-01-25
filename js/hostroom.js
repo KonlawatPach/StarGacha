@@ -43,8 +43,14 @@ function addGiftlist(giftname, giftnum){
     }
 }
 
-function addRoomname(roomname){ $("#room").html("ห้อง : " + roomname); }
-function addKey(key){ $("#room").html("Room ID : " + key); }
+function addRoomname(roomname){ 
+    $("#roomlg").html("ห้อง : " + roomname); 
+    $("#roomsm").html("ห้อง : " + roomname); 
+}
+function addKey(key){
+    $("#keylg").html("Room ID : " + key);
+    $("#keysm").html("Room ID : " + key); 
+}
 
 async function adduserlist(idlist){
     let usernumber = 0;
@@ -123,5 +129,42 @@ function rollgacha() {
     
 }
 
-// https://jsonplaceholder.typicode.com/posts
-//https://datatables.net/examples/data_sources/js_array
+function slideLeft() {
+    document.getElementById("left").style.visibility = "visible";
+    document.getElementById("left").style.width = "320px";
+    document.getElementById("right").style.width = "0";
+    document.getElementById("right").style.visibility = "hidden";
+}
+  
+  
+function slideCloseLeft() {
+    document.getElementById("left").style.width = "0";
+    document.getElementById("left").style.visibility = "hidden";
+}
+
+function slideRight() {
+    document.getElementById("right").style.visibility = "visible";
+    document.getElementById("right").style.width = "320px";
+    document.getElementById("left").style.width = "0";
+    document.getElementById("left").style.visibility = "hidden";
+}
+  
+function slideCloseRight() {
+    document.getElementById("right").style.width = "0";
+    document.getElementById("right").style.visibility = "hidden";
+}
+
+window.addEventListener("resize", function() {
+    if ($(window).width() > 992) {
+        document.getElementById("left").style.visibility = "visible";
+        document.getElementById("right").style.visibility = "visible";
+        document.getElementById("right").style.width = "25%";
+        document.getElementById("left").style.width = "25%";
+    }
+    else{
+        document.getElementById("left").style.visibility = "hidden";
+        document.getElementById("right").style.visibility = "hidden";
+        document.getElementById("right").style.width = "0";
+        document.getElementById("left").style.width = "0";
+    }
+})

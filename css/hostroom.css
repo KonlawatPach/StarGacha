@@ -28,8 +28,39 @@ body{
 	background-color: rgb(233, 233, 233);
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 992px) {
 	#left, #right{
-		display: none;
+		visibility: hidden;
+	}
+/* https://www.w3schools.com/howto/howto_js_sidenav.asp */
+
+	.leftbar {
+		height: 100%;
+		width: 0%;
+		position: fixed;
+		z-index: 0;
+		top: 0;
+		left: 0;
+		background-color: rgb(160, 151, 224);
+		overflow-x: hidden;
+		padding-top: 3%;
+		transition: 0.5s;
+	}
+
+	.rightbar {
+		height: 100%;
+		width: 0%;
+		position: fixed;
+		z-index: 0;
+		top: 0;
+		right: 0;
+		background-color: rgb(160, 151, 224);
+		overflow-x: hidden;
+		padding-top: 3%;
+		transition: 0.5s;
+	}
+
+	.profile{
+		width: 38px;
 	}
 }
