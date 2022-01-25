@@ -27,7 +27,7 @@ function addGiftlist(giftname, giftnum){
         if(giftnum[g] == 0){
             $(`
                 <tr>
-                    <td class="w-75 text-secondary">`+ giftname[g] +`</td>
+                    <td class="text-secondary" style="width: 70%;">`+ giftname[g] +`</td>
                     <td class="text-secondary">x`+ giftnum[g] +`</td>
                 </tr>
             `).appendTo( "#giftlist" );
@@ -35,7 +35,7 @@ function addGiftlist(giftname, giftnum){
         else{
             $(`
                 <tr>
-                    <td class="w-75">`+ giftname[g] +`</td>
+                    <td style="width: 70%;">`+ giftname[g] +`</td>
                     <td>x`+ giftnum[g] +`</td>
                 </tr>
             `).appendTo( "#giftlist" );
