@@ -7,28 +7,39 @@ let d = "0";
 function getData(){
     let d = "0";
     db.collection("room").doc(d).get().then((item) => {  
-        addGiftlist(item.data().gift);
         addKey(item.data().key);
     });
 }
 
 function realTimeupdate(){
     let d = "0";
-    db.collection("room").doc(d).onSnapshot((item) => {  
+    db.collection("room").doc(d).onSnapshot((item) => {
+        addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
         adduserlist(item.data().name);
     });
 }
 
 //Unit Automatic Function
-function addGiftlist(giftlist){
-    for(let g in giftlist){
-        $(`
-            <tr>
-                <td class="w-75">`+ g +`</td>
-                <td>x`+ giftlist[g] +`</td>
-            </tr>
-        `).appendTo( "#giftlist" );
+function addGiftlist(giftname, giftnum){
+    $("#giftlist").html("");
+    for(let g in giftname){
+        if(giftnum[g] == 0){
+            $(`
+                <tr>
+                    <td class="w-75 text-secondary">`+ giftname[g] +`</td>
+                    <td class="text-secondary">x`+ giftnum[g] +`</td>
+                </tr>
+            `).appendTo( "#giftlist" );
+        }
+        else{
+            $(`
+                <tr>
+                    <td class="w-75">`+ giftname[g] +`</td>
+                    <td>x`+ giftnum[g] +`</td>
+                </tr>
+            `).appendTo( "#giftlist" );
+        }
     }
 }
 
