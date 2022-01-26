@@ -16,7 +16,7 @@ function realTimeupdate(){
     db.collection("room").doc(d).onSnapshot((item) => {
         addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
-        adduserlist(item.data().name);
+        adduserlist(item.data().name, item.data().admin);
     });
 }
 
@@ -52,7 +52,7 @@ function addKey(key){
     $("#keysm").html("Room ID : " + key); 
 }
 
-async function adduserlist(idlist){
+async function adduserlist(idlist, adminid){
     let usernumber = 0;
     let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
     let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
@@ -68,12 +68,22 @@ async function adduserlist(idlist){
 
             $("#namelist").html("");
             for(let i in sortidlist){
-                $(`
-                    <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                        <img class="rounded-circle" src="img/`+ sortidlist[i] +`.jpg" width="50rem">
-                        <h6 class="d-inline ms-2">`+ sortnamelist[i] +`</h6>
-                    </div>
-                `).appendTo( "#namelist" );
+                if(sortidlist[i] != adminid){
+                    $(`
+                        <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
+                            <img class="rounded-circle" src="img/`+ sortidlist[i] +`.jpg" width="50rem">
+                            <h6 class="d-inline ms-2">`+ sortnamelist[i]+`</h6>
+                        </div>
+                    `).appendTo( "#namelist" );
+                }
+                else{
+                    $(`
+                        <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
+                            <img class="rounded-circle" src="img/`+ sortidlist[i] +`.jpg" width="50rem">
+                            <h6 class="d-inline ms-2">👑 `+ sortnamelist[i]+`</h6>
+                        </div>
+                    `).appendTo( "#namelist" );
+                }
             }
         });
     }
