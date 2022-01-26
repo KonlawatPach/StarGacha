@@ -166,13 +166,19 @@ function rollgacha() {
     }
     setTimeout(function()
     {
-        document.body.style.backgroundColor = "slateblue";
-        const item = ["เกลือหมายเลข 1", "เกลือหมายเลข 2", "เกลือหมายเลข 3", "เกลือหมายเลข 4", "เกลือหมายเลข 5", "rickroll", "rickroll", "นายก็เกเรเหมือนกันนะเนี่ย"];
-        let num = Math.floor((Math.random()*10)%8);
-        alert("คุณได้รับ"+item[num]);
-        document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
-        if(num == 5 || num == 6){window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");}
-        if(num == 7){window.open("https://www.youtube.com/watch?v=xmrzbfkIfaM");}
+        db.collection("room").doc("0").get().then((item) => {
+            let randomlist = [];  
+            giftname = item.data().giftName;
+            giftnum = item.data().giftQuantity;
+            for(let i in giftname) for(let j = 0; j<giftnum[i]; j++) randomlist.push(giftname[i]);
+            console.log(randomlist);
+
+            document.body.style.backgroundColor = "slateblue";
+            let num = Math.floor((Math.random()*1000) % randomlist.length);
+            alert("คุณได้รับ " + randomlist[num]);
+            //บรรทัดที่ต้องไปลบจำนวนของขวัญในดาต้าเบส
+            document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+        });
     }, 2000)
     
 }
