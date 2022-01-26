@@ -17,6 +17,7 @@ function realTimeupdate(){
         addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
+        addReward(item.data().rewarduser, item.data().rewardgift);
     });
 }
 
@@ -52,7 +53,7 @@ function addKey(key){
     $("#keysm").html("Room ID : " + key); 
 }
 
-async function adduserlist(idlist, adminid){
+function adduserlist(idlist, adminid){
     let usernumber = 0;
     let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
     let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
@@ -106,10 +107,47 @@ function sortName(users){
     return [sortidlist, sortnamelist];
 }
 
+function addReward(rewardiduser, rewardgift){
+    let rewardnumber = 0;
+    if (rewardnumber != rewardiduser.length){       //ถ้ามีคนได้รางวัลเพิ่มจะอัพเดทใหม่ยกเครื่อง
+        rewardnumber = rewardiduser.length;
+
+        var uniqueuser = [];                       //ลด Big-O ด้วยการโหลดแค่รายชื่อคนที่สุ่มไปแล้วและไม่ซ้ำ
+        $.each(rewardiduser, function(i, name){
+            if($.inArray(name, uniqueuser) === -1) uniqueuser.push(name);
+        });
+
+        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", uniqueuser).onSnapshot((users) => {
+            let uniquenameuser = [];
+            let rewardnameuser = [];
+            
+            users.forEach((user) => {
+                uniquenameuser.push(user.data().name);
+            });
+            for(let id of rewardiduser){
+                rewardnameuser.push(uniquenameuser[uniqueuser.indexOf(id)]);
+            }
+            
+            $("#rewardlist").html("");
+            for(let i in rewardnameuser){
+                $(`
+                    <tr>
+                        <td class="pe-0 me-0">
+                            <img class="border border-2 rounded-circle m-0" src="img/`+ rewardiduser[i] +`.jpg" width="50rem">
+                        </td>
+                        <td class="text-start mx-0 px-0">
+                            <h6 style="font-size: 80%;">`+ rewardnameuser[i] +`</h6>
+                            <h6 style="font-size: 70%;">สุ่มได้ `+ rewardgift[i] +`</h6>
+                        </td>
+                    </tr>
+                `).appendTo( "#rewardlist" );
+            }
+        });
+    }
+}
 
 //onEvent Function
 function rollgacha() {
-    // document.getElementById("gachabox").style.backgroundImage = "url('http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa_speed.gif')";
     document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa_speed.gif";
 
     for (let i = 0; i < 1600; i+=200) {
