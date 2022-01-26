@@ -171,7 +171,6 @@ function rollgacha() {
             giftname = item.data().giftName;
             giftnum = item.data().giftQuantity;
             for(let i in giftname) for(let j = 0; j<giftnum[i]; j++) randomlist.push(giftname[i]);
-            console.log(randomlist);
 
             document.body.style.backgroundColor = "slateblue";
             let num = Math.floor((Math.random()*1000) % randomlist.length);

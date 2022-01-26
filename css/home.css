@@ -11,6 +11,29 @@ body{
 				inset 10px -10px 10px rgba(0, 0, 0, 0.1);
 }
 
+.hover{
+	background-color: white;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .hover:hover{
 	background-color: rgb(233, 233, 233);
+}
+
+.header-left{
+	position: fixed;
+	left: 1%;
+	top: 1%;
+}
+
+.header-right{
+	position: fixed;
+	right: 1%;
+	top: 1%;
+}
+
+.box{
+	background-color: rgb(227, 224, 241);
 }
