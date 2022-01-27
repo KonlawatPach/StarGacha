@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
+/* .container-fluid{
+	background-color: tan;
+	font-family: 'Prompt', sans-serif;
+	height: 100%;
+} */
+
+.container{
+	background-color: aquamarine;
+	font-family: 'Prompt', sans-serif;
+	height: 100%;
+}
+
+.col-sm-4 label, .textarea{
+	float: none;
+	display: inline-block;
+	vertical-align: middle;
+}
+.form-label2  label{
+    float: left
+    }
+.form-label2 span {
+    display: block;
+    overflow: hidden;
+    padding: 0 4px 0 6px
+}
+.form-label2  input[type=text]{
+    width: 300px;
+    height: 100px;
+}
