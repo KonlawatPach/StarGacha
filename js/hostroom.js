@@ -2,6 +2,7 @@
 getData();
 realTimeupdate();
 
+var check = false;
 let d = "0";
 //Twotype Fetch Data Function
 function getData(){
@@ -18,6 +19,7 @@ function realTimeupdate(){
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
         addReward(item.data().rewarduser, item.data().rewardgift);
+        check = item.data().already;
     });
 }
 
@@ -147,10 +149,10 @@ function addReward(rewardiduser, rewardgift){
 }
 
 //onEvent Function
-function rollgacha() {
+async function rollgacha() {
     document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa_speed.gif";
-
-    for (let i = 0; i < 1600; i+=200) {
+    var reward;
+    for (let i = 0; i < 1400; i+=200) {
 
     setTimeout(function()
     {
@@ -164,32 +166,41 @@ function rollgacha() {
     }, i)
 
     }
-    setTimeout(function()
-    {
-        db.collection("room").doc("0").get().then((item) => {
-            let randomlist = [];  
-            giftname = item.data().giftName;
-            giftnum = item.data().giftQuantity;
-            for(let i in giftname) for(let j = 0; j<giftnum[i]; j++) randomlist.push(giftname[i]);
-
-            if(randomlist!=0){
-                document.body.style.backgroundColor = "slateblue";
-                let num = Math.floor((Math.random()*1000) % randomlist.length);
-                alert("คุณได้รับ " + randomlist[num]);
-                let newgiftnum = [...giftnum];
-                newgiftnum[giftname.indexOf(randomlist[num])] -= 1;
-                db.collection("room").doc("0").update({     //ลบจำนวนของขวัญในดาต้าเบส
-                    giftQuantity: newgiftnum
-                });
-                document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
-            }else{
-                alert("บูรพาคุงไม่มีของขวัญจะให้คุณ");
-                document.body.style.backgroundColor = "slateblue";
-                document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
-            }
+    setTimeout(async function()
+    {  
+        var sfDocRef = db.collection("room").doc("0");
+            db.runTransaction((transaction) => {
+            return transaction.get(sfDocRef).then((item) => {
+                if (!item.exists) {
+                    throw "Document does not exist!";
+                }
+                let randomlist = [];  
+                giftname = item.data().giftName;
+                giftnum = item.data().giftQuantity;
+                for(let i in giftname) for(let j = 0; j<giftnum[i]; j++) randomlist.push(giftname[i]);
+                if(randomlist!=0){
+                    document.body.style.backgroundColor = "slateblue";
+                    let num = Math.floor((Math.random()*1000) % randomlist.length);
+                    reward = "คุณได้รับ " + randomlist[num];
+                    let newgiftnum = [...giftnum];
+                    newgiftnum[giftname.indexOf(randomlist[num])] -= 1;
+                    transaction.update(sfDocRef, { giftQuantity: newgiftnum });
+                    document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+                    
+                }
+                else{
+                    db.collection("room").doc("0").update({ already : true });
+                    reward = "บูรพาคุงไม่มีของขวัญจะให้คุณ";
+                    document.body.style.backgroundColor = "slateblue";
+                    document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+                }
+            });
+        }).then(() => {
+            console.log(reward);
+        }).catch((error) => {
+            console.log("Transaction failed: ", error);
         });
-    }, 2000)
-    
+    },2000)
 }
 
 function slideLeft() {
