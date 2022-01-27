@@ -172,11 +172,21 @@ function rollgacha() {
             giftnum = item.data().giftQuantity;
             for(let i in giftname) for(let j = 0; j<giftnum[i]; j++) randomlist.push(giftname[i]);
 
-            document.body.style.backgroundColor = "slateblue";
-            let num = Math.floor((Math.random()*1000) % randomlist.length);
-            alert("คุณได้รับ " + randomlist[num]);
-            //บรรทัดที่ต้องไปลบจำนวนของขวัญในดาต้าเบส
-            document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+            if(randomlist!=0){
+                document.body.style.backgroundColor = "slateblue";
+                let num = Math.floor((Math.random()*1000) % randomlist.length);
+                alert("คุณได้รับ " + randomlist[num]);
+                let newgiftnum = [...giftnum];
+                newgiftnum[giftname.indexOf(randomlist[num])] -= 1;
+                db.collection("room").doc("0").update({     //ลบจำนวนของขวัญในดาต้าเบส
+                    giftQuantity: newgiftnum
+                });
+                document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+            }else{
+                alert("บูรพาคุงไม่มีของขวัญจะให้คุณ");
+                document.body.style.backgroundColor = "slateblue";
+                document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+            }
         });
     }, 2000)
     
