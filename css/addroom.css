@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 
-/* .container-fluid{
-	background-color: tan;
-	font-family: 'Prompt', sans-serif;
-	height: 100%;
-} */
 
-.container{
-	background-color: aquamarine;
+.container-fluid{
+	background-color: slateblue;
 	font-family: 'Prompt', sans-serif;
-	height: 100%;
+	height: auto;
 }
+
+.container-sm{
+	background-color: white;
+}
+
+#bottom{
+	background-color: white;
+}
+
 
 .col-sm-4 label, .textarea{
 	float: none;
@@ -29,3 +33,4 @@
     width: 300px;
     height: 100px;
 }
+

@@ -13,8 +13,8 @@
 </head>
     <body>
         <!-- ช่วงบน -->
-        <div class="container-fluid mt-3 ">
-          <div class="row header mt-3">
+        <div class="container-fluid  ">
+          <div class="row header ">
             <div class="col-2">
                 <a class="text-decoration-none" href="home.html" style="width: min-content;">
                     <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
@@ -26,19 +26,19 @@
             <h1 class="fw-bold col-8 text-center text-light">เปิดห้องจับของขวัญ</h1>
             <div class="col-2">
                 <a class="text-decoration-none" href="#" >
-                    <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
+                    <div class="border border-2 rounded-pill border-dark bg-light p-1 hover" style="width: fit-content;">
                         <img class="rounded-circle border border-2 border-dark" src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png" width="50rem">
-                        <h6 class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
+                        <h5 class="fw-bold text-dark d-inline">Testnoi Hello</h5>
                     </div>
                 </a>
             </div>
-        </div>
+          
+        
 
-          <div class="container" >
-            
+          <div class="container-sm d-flex justify-content-center " >
          
           <!-- ชื่อห้อง -->
-          <div class="row g-md-5 ">
+          <div class="d-flex justify-content-center ">
             <div class="col-sm-3">
               <div class="form-label ">
                 <label for="inputRoomname" class="form-label  ">ชื่อห้อง</label>
@@ -48,28 +48,26 @@
               <!-- จำนวนผู้เข้าร่วมสูงสุด -->
               <div class="col-sm-auto">
                 <div class = "col-sm-auto">
-                    <label for="inputParticipant" class="form-label ">จำนวนผู้เข้าร่วมสูงสุด</label>
+                    <label for="inputParticipant" class="form-label col-md-6 ">จำนวนผู้เข้าร่วมสูงสุด</label>
                     <input type="number" min="1" max="100" step="1" value="1">                  
                 </div>
               </div>
-
+              
               <!-- จำนวนการสุ่มเริ่มต้น -->
-              <div class="cols-sm">
-
-                <div class = "col-md-auto ">
-                    <label for="inputRollcount" class="form-label col-md-5">จำนวนการสุ่มเริ่มต้น</label>
+              <div class="col-sm-auto">
+                <div class = "col-sm-auto ">
+                    <label for="inputRollcount" class="form-label col-md-6">จำนวนการสุ่มเริ่มต้น</label>
                     <input type="number" min="1" max="100" step="1" value="1">
                 </div>
-
               </div>
 
-            </div>
+          </div>
 
               <!-- คำอธิบาย -->
               <div class="col-sm-auto">
                 <div class="form-label2">
                   <label for="inputRoomdes" class="form-label ">คำอธิบาย</label>
-                  <span><input type="text" class="form-text lg- " id="inputRoomdes"></span>
+                  <span><input type="text" class="form-text lg- " id="inputRoomdes" ></span>
                 </div>
               </div>
                 <!-- <div class="col-sm-auto">
@@ -80,108 +78,132 @@
                 </div> -->
               
                 <!-- อัพโหลดรูป -->
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">รูปห้อง</label>
-                  <input class="form-control" type="file" id="formFile">
+                
+             </div>
+                    <div class="justify-content-lg-center ">
+                      <div class="form-label2 ">
+                        
+                        <h6 class="mx-4">รูปห้อง</h6>
+                          <div >
+                          
+                          <label>
+                            <img class = " border-dark" src="img/hong.png" width="100px">
+                            <input type="file" name="roomfile" style="display:none">
+                            <br>
+                            <br>
+                          <label>
+              
+                      <!-- เงื่อนไขของห้อง -->
+                      <div  class="form-check form-switch  ">
+                        <input class="form-check-input  " type="checkbox" role ="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">เข้าร่วมอัตโนมัติ</label>
+                      </div>
+    
+                      <div  class=" form-check form-switch">
+                        <input class="form-check-input  " type="checkbox" role ="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">สถานะห้อง</label>
+                      </div>
+                  
+                  </div>
                 </div>
-              
-
-              
-
-          
-
-          </div>
+            
+              </div>
         
+            </div>
+            <hr>
 
-              
-                
-                <!-- เงื่อนไขของห้อง -->
-                <div  id="block_container">
-
-                    <div  class="form-check form-switch">
-                      <input class="form-check-input " type="checkbox" role ="switch" id="flexSwitchCheckDefault">
-                      <label class="form-check-label " for="flexSwitchCheckDefault">เข้าร่วมอัตโนมัติ</label>
-                      
-                    </div>
-
-                    <div  class=" form-check form-switch">
-                      <input class="form-check-input  " type="checkbox" role ="switch" id="flexSwitchCheckDefault">
-                      <label class="form-check-label  " for="flexSwitchCheckDefault">สถานะห้อง</label>
-                    </div>
-               
-                </div>
-                
 
          
 
 
             <!-- ส่วนล่าง -->
-            <div class="container">
-              <div class="bm-2">
+
+            
+            <div class="container-fluid" id = "bottom">
+              <div class="bm-3">
                 <div class="text-center">
-                    <h5 class="fw-bold" id="inputPull">ระบุของขวัญในกล่องสุ่ม</h5>
+                    <h5 class="fw-bold" id="inputGacha">ระบุของขวัญในกล่องสุ่ม</h5>
+                    <br>
                 </div>
               </div>
 
-              <div class="row g-3 align-items-center">
-                <div class="col-auto">
+              <!-- ใส่จำนวนของขวัญ -->
+              <div class="d-flex justify-content-center ">
+                <div class="text-center">
                   <label for="inputGift" class="col-form-label">ชิ้นที่ 1 </label>
+                  &nbsp;
                   <input type="gift" id="inputGift" class="form-control-sm" >
-                  
+                  &nbsp;&nbsp;
                   <label for="inputRollcount" class="form-label">จำนวน</label>
+                  &nbsp;
                   <input type="number" min="1" max="100" step="1" value="1">
                 </div>
               </div>
+              <hr>
 
-              <div class="row g-3 align-items-center">
+              <div class="d-flex justify-content-center">
                 <div class="col-auto">
                   <label for="inputGift" class="col-form-label">ชิ้นที่ 2 </label>
+                  &nbsp;
                   <input type="gift" id="inputGift" class="form-control-sm" >
-                  
+                  &nbsp;&nbsp;
                   <label for="inputRollcount" class="form-label">จำนวน</label>
+                  &nbsp;
                   <input type="number" min="1" max="100" step="1" value="1">
                 </div>
               </div>
-
-              <div class="row g-3 align-items-center">
+              <hr>
+              
+              <div class="d-flex justify-content-center">
                 <div class="col-auto">
                   <label for="inputGift" class="col-form-label">ชิ้นที่ 3 </label>
+                  &nbsp;
                   <input type="gift" id="inputGift" class="form-control-sm" >
-                  
+                  &nbsp;&nbsp;
                   <label for="inputRollcount" class="form-label">จำนวน</label>
+                  &nbsp;
                   <input type="number" min="1" max="100" step="1" value="1">
                 </div>
               </div>
+              <hr>
 
-              <div class="row g-3 align-items-center">
+              <div class="d-flex justify-content-center">
                 <div class="col-auto">
                   <label for="inputGift" class="col-form-label">ชิ้นที่ 4 </label>
+                  &nbsp;
                   <input type="gift" id="inputGift" class="form-control-sm" >
-                  
+                  &nbsp;&nbsp;
                   <label for="inputRollcount" class="form-label">จำนวน</label>
+                  &nbsp;
                   <input type="number" min="1" max="100" step="1" value="1">
                 </div>
               </div>
+              <hr>
 
-              <div class="row g-3 align-items-center">
+              <div class="d-flex justify-content-center">
                 <div class="col-auto">
                   <label for="inputGift" class="col-form-label">ชิ้นที่ 5 </label>
+                  &nbsp;
                   <input type="gift" id="inputGift" class="form-control-sm" >
-                  
+                  &nbsp;&nbsp;
                   <label for="inputRollcount" class="form-label">จำนวน</label>
+                  &nbsp;
                   <input type="number" min="1" max="100" step="1" value="1">
                 </div>
               </div>
+              <hr>
            
-            </div>
-
+           
+              <!-- ยืนยัน,ยกเลิก -->
             <div class="text-center">
-              <button type="submit" class=" btn btn-outline-dark ">ยืนยัน</button>
+              <button type="submit" class=" btn btn-outline-dark  ">ยืนยัน</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="submit" class=" btn btn-outline-dark ">ยกเลิก</button>
             </div>
          
           </div>
         </div>  
+      </div>
     </body>
 </html>
 
