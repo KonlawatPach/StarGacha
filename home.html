@@ -18,8 +18,8 @@
     <body>
         <div class="container-fluid">       
             <!-- header -->
-            <div class="row header">
-                <div class="col-2 d-inline header-left">
+            <div class="row mt-3">
+                <div class="col-2">
                     <a class="text-decoration-none" href="home.html" style="width: min-content;">
                         <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
                             <img class="rounded-circle border border-2 border-dark" src="img/burapa logo.png" width="50rem">
@@ -27,7 +27,8 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-2 d-inline header-right">
+                <h1 class="col-8 fw-bold text-center text-light" style="font-family: 'Itim', cursive; font-size: 360%; letter-spacing: 2px;">กาชาสอยดาว</h1>
+                <div class="col-2">
                     <a class="text-decoration-none" href="#" >
                         <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
                             <img class="rounded-circle border border-2 border-dark" src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png" width="50rem">
@@ -42,7 +43,7 @@
                 <!-- head in box -->
                 <div class="row">   
                     <div class="col">
-                        <h1 class="fw-bold text-center my-3">ยินดีต้อนรับบูรพา</h1>
+                        <h1 class="fw-bold text-center mt-2 mb-3" style="font-family: 'Itim', cursive;">ยินดีต้อนรับบูรพา</h1>
                     </div>
                 </div>
 
@@ -64,16 +65,16 @@
                                     <tbody id="makeroom">
                                         <tr class="border border-1 border-dark mx-auto mt-1 p-1 text-start hover">
                                             <td class="pe-0 me-0">
-                                                <img class="border border-2 rounded-circle m-0" src="img/0.jpg" width="100rem">
+                                                <img class="border border-2 rounded-circle m-0" src="img/1.jpg" width="100rem">
                                             </td>
                                             <td class="text-start">
-                                                <h6 class="fw-bold">ห้อง ออกศึกเกเร</h6>
+                                                <h6 class="fw-bold">ห้อง บูรพาชายชาตรี</h6>
                                                 <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
-                                                <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 1/100 คน</h6>
-                                                <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 20/20 ชิ้น</h6>
+                                                <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 3/100 คน</h6>
+                                                <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
                                             </td>
                                             <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Join Room</button><br>
+                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="document.location='hostroom.html'">Join Room</button><br>
                                                 <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
                                                 <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
                                             </td>
@@ -86,19 +87,19 @@
                             <h5>ห้องที่คุณเคยเข้าร่วม</h5>
                             <div class="overflow-auto" style="height: 80%;">
                                 <table class="table table-hover mx-auto">
-                                    <tbody id="makeroom">
+                                    <tbody id="joinroom">
                                         <tr class="border border-1 border-dark mx-auto mt-1 p-1 text-start hover">
                                             <td class="pe-0 me-0">
-                                                <img class="border border-2 rounded-circle m-0" src="img/1.jpg" width="100rem">
+                                                <img class="border border-2 rounded-circle m-0" src="img/0.jpg" width="100rem">
                                             </td>
                                             <td class="text-start">
-                                                <h6 class="fw-bold">ห้อง บูรพาชายชาตรี</h6>
+                                                <h6 class="fw-bold">ห้อง ออกศึกข้านึกแต่รบ</h6>
                                                 <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
-                                                <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 3/100 คน</h6>
-                                                <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
+                                                <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 1/100 คน</h6>
+                                                <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 20/20 ชิ้น</h6>
                                             </td>
                                             <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="document.location='hostroom.html'">Join Room</button><br>
+                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Join Room</button><br>
                                                 <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
                                                 <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
                                             </td>

@@ -2,7 +2,6 @@
 getData();
 realTimeupdate();
 
-var check = false;
 let d = "0";
 //Twotype Fetch Data Function
 function getData(){
@@ -19,7 +18,6 @@ function realTimeupdate(){
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
         addReward(item.data().rewarduser, item.data().rewardgift);
-        check = item.data().already;
     });
 }
 
@@ -181,7 +179,7 @@ async function rollgacha() {
                 if(randomlist!=0){
                     document.body.style.backgroundColor = "slateblue";
                     let num = Math.floor((Math.random()*1000) % randomlist.length);
-                    reward = "คุณได้รับ " + randomlist[num];
+                    reward = "ยินดีด้วย คุณได้รับ " + randomlist[num];
                     let newgiftnum = [...giftnum];
                     newgiftnum[giftname.indexOf(randomlist[num])] -= 1;
                     transaction.update(sfDocRef, { giftQuantity: newgiftnum });
@@ -189,7 +187,6 @@ async function rollgacha() {
                     
                 }
                 else{
-                    db.collection("room").doc("0").update({ already : true });
                     reward = "บูรพาคุงไม่มีของขวัญจะให้คุณ";
                     document.body.style.backgroundColor = "slateblue";
                     document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
@@ -197,6 +194,9 @@ async function rollgacha() {
             });
         }).then(() => {
             console.log(reward);
+            document.getElementById("myModal").style.display = "block";
+            $("#getreward").html(reward);
+            $("#modalcontent").slideDown(500);
         }).catch((error) => {
             console.log("Transaction failed: ", error);
         });
@@ -242,3 +242,8 @@ window.addEventListener("resize", function() {
         document.getElementById("left").style.width = "0";
     }
 })
+
+function closeModel(){
+    $("#modalcontent").slideUp()
+    document.getElementById("myModal").style.display = "none";
+}
