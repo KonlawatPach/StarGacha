@@ -3,6 +3,7 @@ getData();
 realTimeupdate();
 
 let d = "0";
+var storageRef = firebase.storage().ref();
 //Twotype Fetch Data Function
 function getData(){
     let d = "0";
@@ -58,21 +59,30 @@ function adduserlist(idlist, adminid){
     let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
     let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
     let temp;
+    let pictureurl = [];
 
     if (usernumber != idlist.length){       //ถ้ามีรายชื่อเพิ่มหรือลดจะอัพเดทใหม่ยกเครื่อง
         usernumber = idlist.length;        
 
-        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).onSnapshot((users) => {
+        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).onSnapshot(async (users) => {
             temp = sortName(users);
             sortidlist = temp[0];
             sortnamelist = temp[1];
+
+            pictureurl = [];
+            for(let i in sortidlist){
+            var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
+                await userRef.getDownloadURL().then(function(url) {
+                    pictureurl.push(url);
+                });
+            }
 
             $("#namelist").html("");
             for(let i in sortidlist){
                 if(sortidlist[i] != adminid){
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                            <img class="rounded-circle" src="img/`+ sortidlist[i] +`.jpg" width="50rem">
+                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem">
                             <h6 class="d-inline ms-2">`+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );
@@ -80,7 +90,7 @@ function adduserlist(idlist, adminid){
                 else{
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                            <img class="rounded-circle" src="img/`+ sortidlist[i] +`.jpg" width="50rem">
+                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem">
                             <h6 class="d-inline ms-2">👑 `+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );
@@ -112,20 +122,25 @@ function addReward(rewardiduser, rewardgift){
     if (rewardnumber != rewardiduser.length){       //ถ้ามีคนได้รางวัลเพิ่มจะอัพเดทใหม่ยกเครื่อง
         rewardnumber = rewardiduser.length;
 
-        var uniqueuser = [];                       //ลด Big-O ด้วยการโหลดแค่รายชื่อคนที่สุ่มไปแล้วและไม่ซ้ำ
+        var uniqueuser = [];                       //ลด Big-O ด้วยการโหลดแค่ id คนที่สุ่มไปแล้วและไม่ซ้ำ
         $.each(rewardiduser, function(i, name){
             if($.inArray(name, uniqueuser) === -1) uniqueuser.push(name);
         });
 
-        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", uniqueuser).onSnapshot((users) => {
+        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", uniqueuser).onSnapshot(async (users) => {
             let uniquenameuser = [];
             let rewardnameuser = [];
+            let pictureurl = [];
             
             users.forEach((user) => {
                 uniquenameuser.push(user.data().name);
             });
             for(let id of rewardiduser){
                 rewardnameuser.push(uniquenameuser[uniqueuser.indexOf(id)]);
+                var userRef = storageRef.child('userImage/'+ id +'.jpg');
+                await userRef.getDownloadURL().then(function(url) {
+                    pictureurl.push(url);
+                });
             }
             
             $("#rewardlist").html("");
@@ -133,7 +148,7 @@ function addReward(rewardiduser, rewardgift){
                 $(`
                     <tr>
                         <td class="pe-0 me-0">
-                            <img class="border border-2 rounded-circle m-0" src="img/`+ rewardiduser[i] +`.jpg" width="50rem">
+                            <img class="border border-2 rounded-circle m-0" src="`+ pictureurl[i] +`" width="50rem">
                         </td>
                         <td class="text-start mx-0 px-0">
                             <h6 style="font-size: 80%;">`+ rewardnameuser[i] +`</h6>
@@ -148,7 +163,7 @@ function addReward(rewardiduser, rewardgift){
 
 //onEvent Function
 async function rollgacha() {
-    document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa_speed.gif";
+    document.getElementById("gachabox").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa_speed.gif?alt=media&token=da9a5c77-f42e-49ba-9980-44b374b66b9a";
     var reward;
     for (let i = 0; i < 1400; i+=200) {
 
@@ -183,7 +198,7 @@ async function rollgacha() {
                     let newgiftnum = [...giftnum];
                     newgiftnum[giftname.indexOf(randomlist[num])] -= 1;
                     transaction.update(sfDocRef, { giftQuantity: newgiftnum });
-                    document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+                    document.getElementById("gachabox").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa.gif?alt=media&token=b4882689-594e-4162-866c-51ce8b6abf84";
                     
                 }
                 else{
