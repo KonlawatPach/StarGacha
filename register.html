@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/firebase.js"></script>
     <link rel="stylesheet" href="css/register.css">
@@ -26,16 +27,16 @@
         </label>
         <div class="text-start mx-1 mx-sm-3 mx-md-5">
           <h3 class="h5 mt-3 mb-1">Email : </h3>
-          <input class="textbox mt-0 mb-4" type="email"><br>
+          <input class="textbox mt-0 mb-4" type="email" id="email"><br>
           <h3 class="h5 mb-1">ชื่อผู้ใช้ : </h3>
-          <input class="textbox mt-0 mb-4" type="text"><br>
+          <input class="textbox mt-0 mb-4" type="text" id="name"><br>
           <h3 class="h5 mb-1">รหัสผ่าน : </h3>
-          <input class="textbox mt-0 mb-4" type="password"><br>
+          <input class="textbox mt-0 mb-4" type="password" id="password"><br>
           <h3 class="h5 mb-1">ยืนยันรหัสผ่าน : </h3>
-          <input class="textbox mt-0 mb-4" type="password"><br>
+          <input class="textbox mt-0 mb-4" type="password" id="confirmpassword"><br>
         </div>
         <div class="mt-2 mb-2">
-          <button class="btn btn-lg border-dark mx-2 fw-bold regisbutton" type="button" onclick="document.location='index.html'">สร้างบัญชี</button>
+          <button class="btn btn-lg border-dark mx-2 fw-bold regisbutton" type="button" onclick="addUser()">สร้างบัญชี</button>
           <button class="btn btn-lg border-dark mx-2 fw-bold regisbutton" type="button" onclick="document.location='index.html'">ยกเลิก</button>
         </div>
       </div>

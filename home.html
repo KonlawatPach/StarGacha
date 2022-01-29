@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/firebase.js"></script>
     <script src="js/home.js"></script>
@@ -32,12 +33,19 @@
                 <div class="col-2">
                     <a class="text-decoration-none" href="editprofile.html" >
                         <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
-                            <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem">
-                            <h6 class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
+                            <img id="imgProfile" class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem">
+                            <h6 id="Displayname" class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
                         </div>
                     </a>
                 </div>
             </div>
+            <script>
+                firebase.auth().onAuthStateChanged((user) => {
+                    console.log(user.photoURL)
+                    document.getElementById("Displayname").textContent = user.displayName;
+                    document.getElementById("imgProfile").src = user.photoURL;
+                });
+            </script>
 
             <div id="myModal" class="modal">
                 <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontent" id="modalcontent">

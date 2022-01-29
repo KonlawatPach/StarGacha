@@ -10,6 +10,7 @@
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
       <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
       <script src="js/firebase.js"></script>
       <script src="js/index.js"></script>
@@ -23,11 +24,11 @@
       <div class="container rounded-3 bg-light p-4">
         <img class="border border-3 border-dark rounded-circle mb-1" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028" width="180rem" height="180rem"><br>
         <h5 class="my-2 fw-bold">ล็อกอินเพื่อเข้าสู่ระบบ</h5>
-        <input class="textbox" type="email" placeholder="Email Address"><br>
-        <input class="textbox" type="password" placeholder="Password">
+        <input class="textbox" id="email" type="email" placeholder="Email Address"><br>
+        <input class="textbox" id="password" type="password" placeholder="Password">
         <div class="mt-2 mt-sm-4">
-          <button class="btn btn-lg border-dark py-2 px-0 mx-2 fw-bold login" type="button" onclick="clearInput(), document.location='home.html'">เข้าสู่ระบบ</button>
-          <button class="btn btn-lg border-dark py-2 px-0 mx-2 fw-bold register" type="button" onclick="clearInput(), document.location='register.html'">สมัครบัญชี</button>
+          <button class="btn btn-lg border-dark py-2 px-0 mx-2 fw-bold login" type="button" onclick="checkUser(), clearInput()">เข้าสู่ระบบ</button>
+          <button class="btn btn-lg border-dark py-2 px-0 mx-2 fw-bold register" type="button" onclick="document.location='register.html'">สมัครบัญชี</button>
           <br><br>
           <a href="#" class="text-decoration-none">ลืมรหัสผ่าน?</a>
         </div>
