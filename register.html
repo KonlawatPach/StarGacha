@@ -11,7 +11,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/firebase.js"></script>
-    <script src="js/register.js"></script>
     <link rel="stylesheet" href="css/register.css">
     <title>กาชาสอยดาว</title>
   </head>
@@ -19,27 +18,28 @@
     <div class="container-fluid text-center mt-3 mt-sm-2">
       <h1 class="fw-bold text-light mb-0" style="font-family: 'Itim', cursive;">จับสลากสอยดาว</h1>
       <h5 class="mb-4 text-light" style="font-family: 'Itim', cursive;">จับฉลากเพื่อส่งต่อของ ให้แก่คนที่คุณรัก</h5>
-      <div class="container rounded-3 bg-light p-4">
-        <h3 class="mt-1 mb-2 fw-bold">สมัครบัญชี กาชาสอยดาว</h3>
-        <input class="textbox" type="email" placeholder="Email Address"><br>
-        <input class="textbox" type="password" placeholder="Password">
-        <div class="mt-2 mt-sm-4">
-          <button class="btn btn-lg border-dark mx-2 fw-bold login" type="button" onclick="clearInput(), document.location='home.html'">Login</button>
-          <button class="btn btn-lg border-dark mx-2 fw-bold register" type="button" onclick="clearInput(), document.location='register.html'">Register</button>
+      <div class="container rounded-3 bg-light p-2">
+        <h3 class="mt-1 fw-bold">สมัครบัญชีผู้ใช้</h3>
+        <label class="mt-3" style="cursor: pointer;">
+          <img id="image" class="border border-5 border" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/addpicture.png?alt=media&token=ed974d0e-dd9c-4ac8-8b64-cee76f771d3b" width="200px" height="200px" style="object-fit: cover;">
+          <input id="selectimage" class="d-none" type="file">
+        </label>
+        <div class="text-start mx-1 mx-sm-3 mx-md-5">
+          <h3 class="h5 mt-3 mb-1">Email : </h3>
+          <input class="textbox mt-0 mb-4" type="email"><br>
+          <h3 class="h5 mb-1">ชื่อผู้ใช้ : </h3>
+          <input class="textbox mt-0 mb-4" type="text"><br>
+          <h3 class="h5 mb-1">รหัสผ่าน : </h3>
+          <input class="textbox mt-0 mb-4" type="password"><br>
+          <h3 class="h5 mb-1">ยืนยันรหัสผ่าน : </h3>
+          <input class="textbox mt-0 mb-4" type="password"><br>
+        </div>
+        <div class="mt-2 mb-2">
+          <button class="btn btn-lg border-dark mx-2 fw-bold regisbutton" type="button" onclick="document.location='index.html'">สร้างบัญชี</button>
+          <button class="btn btn-lg border-dark mx-2 fw-bold regisbutton" type="button" onclick="document.location='index.html'">ยกเลิก</button>
         </div>
       </div>
     </div>
-    <!-- <form class = "container">
-      <h2>สมัครเข้าสู่ระบบ</h2>
-      <input class="textbox" type="text" placeholder="Username">
-      <input class="textbox" type="password" placeholder="Password">
-      <input class="textbox" type="password" placeholder="Confirm Password">
-      <input class="textbox" type="Email" placeholder="Gmail">
-      <div class="mt-3"> 
-      <button class="btn-submit" type="button" onclick="document.location='index.html'">Create Account</button>
-      <button class="btn-submit" type="button" onclick="document.location='index.html'">Cancel</button>
-      </div>
-      </form>
-    </div>    -->
   </body>
+  <script src="js/register.js"></script>
 </html>

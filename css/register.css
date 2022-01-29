@@ -9,7 +9,7 @@ body{
 
 input {
   height: 50px;
-  width: 60%;
+  width: 100%;
   margin: 10px 0;
   padding: 0 10px;
   outline: none;
@@ -22,18 +22,8 @@ input {
   border-radius: 4px;
 }
 
-input:hover, input:focus{
-  background-color: #ffffff;
-  width: 70%;
-  color: #000000;
-}
-
-.login, .register{
-  background-color: rgb(189, 198, 240);
-}
-
-.login:hover, .register:hover{
-  background-color: rgb(149, 160, 211);
+input:focus{
+  background-color: #ffffff ;
 }
 
 h1{
@@ -41,21 +31,26 @@ h1{
 }
 
 .container{
-  width: 50%;
+  width: 40%;
 }
 
-button{
+.regisbutton{
+  background-color: rgb(189, 198, 240);
   width: 25%;
+}
+
+.regisbutton:hover{
+  background-color: rgb(149, 160, 211);
 }
 
 
 @media only screen and (max-width: 992px) {
-	.container {
-		width: 66%;
-	}
+  .container{
+    width: 70%;
+  }
 
-  button{
-    width: 30%;
+  .regisbutton{
+    width: 36%;
   }
 }
 
@@ -73,14 +68,8 @@ button{
     height: 120px;
   }
 
-  input{
-    width: 96%;
-  }
-  input:hover{
-    width: 100%;
-  }
-
-  button{
+  .regisbutton{
     width: 42%;
+    font-size: 16px;
   }
 }
