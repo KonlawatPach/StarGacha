@@ -1,20 +1,26 @@
+//////////////////////////////////////////////////////////////////
+var roomid =  sessionStorage.getItem("roomid");                 //
+//////////////////////////////////////////////////////////////////
+
 // get data from firebase to display in hostroom.
+var storageRef = firebase.storage().ref();  
 getData();
 realTimeupdate();
 
-let d = "0";
-var storageRef = firebase.storage().ref();
 //Twotype Fetch Data Function
 function getData(){
-    let d = "0";
-    db.collection("room").doc(d).get().then((item) => {  
-        addKey(item.data().key);
-    });
+    try {
+        db.collection("room").doc(roomid).get().then((item) => {  
+            addKey(item.id);
+        });
+    } catch (error) {
+        document.location='home.html';
+    }
+    
 }
 
 function realTimeupdate(){
-    let d = "0";
-    db.collection("room").doc(d).onSnapshot((item) => {
+    db.collection("room").doc(roomid).onSnapshot((item) => {
         addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
@@ -25,15 +31,9 @@ function realTimeupdate(){
 //Unit Automatic Function
 function addGiftlist(giftname, giftnum){
     $("#giftlist").html("");
+    let noitem = []; 
     for(let g in giftname){
-        if(giftnum[g] == 0){
-            $(`
-                <tr>
-                    <td class="text-secondary" style="width: 70%;">`+ giftname[g] +`</td>
-                    <td class="text-secondary">x`+ giftnum[g] +`</td>
-                </tr>
-            `).appendTo( "#giftlist" );
-        }
+        if(giftnum[g] == 0) noitem.push(giftname[g]);
         else{
             $(`
                 <tr>
@@ -42,6 +42,14 @@ function addGiftlist(giftname, giftnum){
                 </tr>
             `).appendTo( "#giftlist" );
         }
+    }
+    for(let n in noitem){
+        $(`
+            <tr>
+                <td class="text-secondary" style="width: 70%;">`+ giftname[n] +`</td>
+                <td class="text-secondary">x0</td>
+            </tr>
+        `).appendTo( "#giftlist" );
     }
 }
 
@@ -163,6 +171,7 @@ function addReward(rewardiduser, rewardgift){
 
 //onEvent Function
 async function rollgacha() {
+    document.getElementById("rollgacha").disabled = true;
     document.getElementById("gachabox").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa_speed.gif?alt=media&token=da9a5c77-f42e-49ba-9980-44b374b66b9a";
     var reward;
     for (let i = 0; i < 1400; i+=200) {
@@ -181,7 +190,7 @@ async function rollgacha() {
     }
     setTimeout(async function()
     {  
-        var sfDocRef = db.collection("room").doc("0");
+        var sfDocRef = db.collection("room").doc(roomid);
             db.runTransaction((transaction) => {
             return transaction.get(sfDocRef).then((item) => {
                 if (!item.exists) {
@@ -208,10 +217,10 @@ async function rollgacha() {
                 }
             });
         }).then(() => {
-            console.log(reward);
             document.getElementById("myModal").style.display = "block";
             $("#getreward").html(reward);
             $("#modalcontent").slideDown(500);
+            document.getElementById("rollgacha").disabled = false;
         }).catch((error) => {
             console.log("Transaction failed: ", error);
         });

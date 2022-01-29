@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -22,7 +23,7 @@
                 <div class="col-2">
                     <a class="text-decoration-none" href="home.html" style="width: min-content;">
                         <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
-                            <img class="rounded-circle border border-2 border-dark" src="img/burapa logo.png" width="50rem">
+                            <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028" width="50rem">
                             <h5 class="d-inline fw-bold text-dark">กาชาสอยดาว</h5>
                         </div>
                     </a>
@@ -31,10 +32,19 @@
                 <div class="col-2">
                     <a class="text-decoration-none" href="editprofile.html" >
                         <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
-                            <img class="rounded-circle border border-2 border-dark" src="https://www.finearts.cmu.ac.th/wp-content/uploads/2021/07/blank-profile-picture-973460_1280-1.png" width="50rem">
+                            <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem">
                             <h6 class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
                         </div>
                     </a>
+                </div>
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontent" id="modalcontent">
+                    <h5 class="mt-3 fw-bold">โปรดระบุรหัสห้อง</h5><br>
+                    <input type="text" class="form-control" placeholder="รหัสห้อง" aria-label="roomid" aria-describedby="basic-addon">
+                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" style="width: 10rem; height: 3rem;" onclick="">ค้นหาห้อง</button>
+                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" style="width: 10rem; height: 3rem;" onclick="closeModel()">ยกเลิก</button>
                 </div>
             </div>
 
@@ -51,9 +61,9 @@
                 <div class="row">
                     <!-- leftbox -->
                     <div class="col bg-light border-dark border border-2 rounded-3 mx-lg-3 my-lg-3 h-100">
-                        <img src="img/manageroom.png" class="mt-3" width="30%" height="auto"><br>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/manageroom.png?alt=media&token=fa5d0839-b9db-405d-9c2a-0cc5a9051804" class="mt-3" width="30%" height="auto"><br>
                         <button class="mt-3 btn btn-secondary btn-lg w-50" onclick="document.location='addroom.html'">Create Room</button><br>
-                        <button class="my-4 btn btn-secondary btn-lg w-50" onclick="">Join Room</button>
+                        <button class="my-4 btn btn-secondary btn-lg w-50" onclick="joinModel()">Join Room</button>
                     </div>
 
                     <!-- rightbox -->
@@ -65,7 +75,7 @@
                                     <tbody id="makeroom">
                                         <tr class="border border-1 border-dark mx-auto mt-1 p-1 text-start hover">
                                             <td class="pe-0 me-0">
-                                                <img class="border border-2 rounded-circle m-0" src="img/1.jpg" width="100rem">
+                                                <img class="border border-2 rounded-circle m-0" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F0.jpg?alt=media&token=a4ac8d28-5b75-4c95-85de-f7a0036e68aa" width="100rem">
                                             </td>
                                             <td class="text-start">
                                                 <h6 class="fw-bold">ห้อง บูรพาชายชาตรี</h6>
@@ -74,7 +84,7 @@
                                                 <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
                                             </td>
                                             <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="document.location='hostroom.html'">Join Room</button><br>
+                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID0() ,document.location='hostroom.html'">Join Room</button><br>
                                                 <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
                                                 <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
                                             </td>
@@ -90,16 +100,16 @@
                                     <tbody id="joinroom">
                                         <tr class="border border-1 border-dark mx-auto mt-1 p-1 text-start hover">
                                             <td class="pe-0 me-0">
-                                                <img class="border border-2 rounded-circle m-0" src="img/0.jpg" width="100rem">
+                                                <img class="border border-2 rounded-circle m-0" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F1.gif?alt=media&token=efba2989-e397-422c-b044-f082601859f5" width="100rem" height="100rem">
                                             </td>
                                             <td class="text-start">
-                                                <h6 class="fw-bold">ห้อง ออกศึกข้านึกแต่รบ</h6>
+                                                <h6 class="fw-bold">ห้อง สามสหายไล่รถ</h6>
                                                 <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
                                                 <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 1/100 คน</h6>
                                                 <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 20/20 ชิ้น</h6>
                                             </td>
                                             <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Join Room</button><br>
+                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID1(), document.location='hostroom.html'">Join Room</button><br>
                                                 <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
                                                 <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
                                             </td>
@@ -109,11 +119,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    <!-- <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
                         <input type="file" class="form-control" id="inputGroupFile01">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg" onclick="send()" >Large button</button>
+                    <button type="submit" class="btn btn-primary btn-lg" onclick="send()" >Large button</button> -->
                 </div>
             </div>
         </div>
