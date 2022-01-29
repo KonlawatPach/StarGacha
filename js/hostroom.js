@@ -46,7 +46,7 @@ function addGiftlist(giftname, giftnum){
     for(let n in noitem){
         $(`
             <tr>
-                <td class="text-secondary" style="width: 70%;">`+ giftname[n] +`</td>
+                <td class="text-secondary" style="width: 70%;">`+ noitem[n] +`</td>
                 <td class="text-secondary">x0</td>
             </tr>
         `).appendTo( "#giftlist" );

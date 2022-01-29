@@ -1,73 +1,86 @@
-*{
-  font-family: 'Itim', cursive;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body{
-  height: 100vh;
-  width: 100%;
-  background-color : #6863D4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-form.container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-h2 {
-  font-size: 70px;
-  margin: 20px;
-  color: #000000;
-  font-weight: 500;
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300&display=swap');
 
+body{
+	background-image: url("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/background.png?alt=media&token=1d27b417-d2fd-4878-84f2-0a0f61b1d43a");
+	background-size: cover;
+	font-family: 'Prompt', sans-serif;
+	height: 100%;
 }
+
 input {
-  border: none;
   height: 50px;
-  width: 250px;
+  width: 60%;
   margin: 10px 0;
   padding: 0 10px;
-  font-size: 1rem;
   outline: none;
   text-align: center;
   border-radius: 5px;
   transition: .5s;
-  cursor: text;
-}
-.textbox{
-  height: 50px;
-  width: 380px;
   color: #000000;
-  background: #dcdcdc ;
+  background-color: #eeeeee ;
   border: 1px solid black;
   border-radius: 4px;
 }
-.textbox:hover,
-.textbox:focus{
-  background-color: #fffafa;
-  width: 350px;
+
+input:hover, input:focus{
+  background-color: #ffffff;
+  width: 70%;
   color: #000000;
 }
-.btn-submit{
-  height: 50px;
-  width: 200px;
-  background: #696969;
-  color: #fff;
+
+.login, .register{
+  background-color: rgb(189, 198, 240);
 }
-.btn-submit:hover {
-  color: #000000;
-  background: #fffafa;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+
+.login:hover, .register:hover{
+  background-color: rgb(149, 160, 211);
 }
-.bank{
-  border-radius: 20px;
-  height: 80vh;
-  width: 80%;
-  background-color : #fffafa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+h1{
+  font-size: 400%;
+}
+
+.container{
+  width: 50%;
+}
+
+button{
+  width: 25%;
+}
+
+
+@media only screen and (max-width: 992px) {
+	.container {
+		width: 66%;
+	}
+
+  button{
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+	.container{
+    width: 90%;
+  }
+
+  h1{
+    font-size: 300%;
+  }
+
+  img{
+    width: 120px;
+    height: 120px;
+  }
+
+  input{
+    width: 96%;
+  }
+  input:hover{
+    width: 100%;
+  }
+
+  button{
+    width: 42%;
+  }
 }
