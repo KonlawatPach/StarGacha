@@ -83,9 +83,11 @@ function adduserlist(idlist, adminid){
 
             pictureurl = [];
             for(let i in sortidlist){
-            var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
+                var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
                 await userRef.getDownloadURL().then(function(url) {
                     pictureurl.push(url);
+                }).catch((error) => {
+                    pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
                 });
             }
 
@@ -94,7 +96,7 @@ function adduserlist(idlist, adminid){
                 if(sortidlist[i] != adminid){
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem">
+                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem">
                             <h6 class="d-inline ms-2">`+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );
@@ -102,7 +104,7 @@ function adduserlist(idlist, adminid){
                 else{
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem">
+                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem">
                             <h6 class="d-inline ms-2">👑 `+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );

@@ -14,7 +14,6 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/firebase.js"></script>
     <!-- <script src="js/logincheck.js"></script> -->
-    <script src="js/home.js"></script>
     <link rel="stylesheet" href="css/home.css">
     <title>กาชาสอยดาว</title>
 </head>
@@ -85,7 +84,7 @@
                                         <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
                                     </div>
                                     <div class="col-3">
-                                        <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID0()">Join Room</button><br>
+                                        <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID('0')">Join Room</button><br>
                                         <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Open Room</button><br>
                                         <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Delete Room</button>
                                     </div>
@@ -105,7 +104,7 @@
                                             <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
                                         </div>
                                         <div class="col-3">
-                                            <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID1()">Join Room</button><br>
+                                            <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID('1')">Join Room</button><br>
                                             <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Open Room</button><br>
                                             <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Delete Room</button>
                                         </div>
@@ -117,11 +116,6 @@
                 </div>
             </div>
         </div>
-        <script>
-            firebase.auth().onAuthStateChanged((user) => {
-                document.getElementById("Displayname").textContent = user.displayName;
-                document.getElementById("imgProfile").src = user.photoURL;
-            });
-        </script>
+        <script src="js/home.js"></script>
     </body>
 </html>
