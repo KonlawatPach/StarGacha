@@ -10,22 +10,14 @@ function closeModel(){
     document.getElementById("myModal").style.display = "none";
 }
 
-function send(){
-    var ref = firebase.storage().ref();
-    var file = document.querySelector("#inputGroupFile01").files[0]
-    var name = file.name
-    const metadata = {
-        contentType:file.type
-    }
-    const task = ref.child(name).put(file, metadata)
-}
-
 function sendRoomID0(){
     var roomid = "0";
     sessionStorage.setItem("roomid", roomid);
+    document.location='gacharoom.html'
 }
 
 function sendRoomID1(){
     var roomid = "1";
     sessionStorage.setItem("roomid", roomid);
+    document.location='gacharoom.html'
 }

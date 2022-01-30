@@ -3,7 +3,10 @@ var roomid =  sessionStorage.getItem("roomid");                 //
 //////////////////////////////////////////////////////////////////
 
 // get data from firebase to display in hostroom.
-var storageRef = firebase.storage().ref();  
+var storageRef = firebase.storage().ref();
+var Cerrentuser;
+firebase.auth().onAuthStateChanged((user) => {Cerrentuser = user});
+
 getData();
 realTimeupdate();
 
@@ -21,6 +24,7 @@ function getData(){
 
 function realTimeupdate(){
     db.collection("room").doc(roomid).onSnapshot((item) => {
+        // checkname(item.data().name);//////////////////////////////////////////////////////////อย่าลืมมาเปิดตอนใช้งานจริงด้วย
         addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
@@ -166,6 +170,12 @@ function addReward(rewardiduser, rewardgift){
                 `).appendTo( "#rewardlist" );
             }
         });
+    }
+}
+
+function checkname(member){
+    if(!member.includes(Cerrentuser.uid)) {
+        document.location='home.html';
     }
 }
 

@@ -13,6 +13,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/firebase.js"></script>
+    <!-- <script src="js/logincheck.js"></script> -->
     <script src="js/home.js"></script>
     <link rel="stylesheet" href="css/home.css">
     <title>กาชาสอยดาว</title>
@@ -24,7 +25,7 @@
                 <div class="col-2">
                     <a class="text-decoration-none" href="home.html" style="width: min-content;">
                         <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
-                            <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028" width="50rem">
+                            <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028" width="50rem" height="50rem">
                             <h5 class="d-inline fw-bold text-dark">กาชาสอยดาว</h5>
                         </div>
                     </a>
@@ -33,19 +34,12 @@
                 <div class="col-2">
                     <a class="text-decoration-none" href="editprofile.html" >
                         <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
-                            <img id="imgProfile" class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem">
+                            <img id="imgProfile" class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem" height="50rem">
                             <h6 id="Displayname" class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
                         </div>
                     </a>
                 </div>
             </div>
-            <script>
-                firebase.auth().onAuthStateChanged((user) => {
-                    console.log(user.photoURL)
-                    document.getElementById("Displayname").textContent = user.displayName;
-                    document.getElementById("imgProfile").src = user.photoURL;
-                });
-            </script>
 
             <div id="myModal" class="modal">
                 <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontent" id="modalcontent">
@@ -92,7 +86,7 @@
                                                 <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
                                             </td>
                                             <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID0() ,document.location='hostroom.html'">Join Room</button><br>
+                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID0()">Join Room</button><br>
                                                 <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
                                                 <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
                                             </td>
@@ -117,7 +111,7 @@
                                                 <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 20/20 ชิ้น</h6>
                                             </td>
                                             <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID1(), document.location='hostroom.html'">Join Room</button><br>
+                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID1()">Join Room</button><br>
                                                 <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
                                                 <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
                                             </td>
@@ -127,13 +121,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                        <input type="file" class="form-control" id="inputGroupFile01">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg" onclick="send()" >Large button</button> -->
                 </div>
             </div>
         </div>
+        <script>
+            firebase.auth().onAuthStateChanged((user) => {
+                document.getElementById("Displayname").textContent = user.displayName;
+                document.getElementById("imgProfile").src = user.photoURL;
+            });
+        </script>
     </body>
 </html>

@@ -3,7 +3,6 @@ function clearInput(){
     document.getElementById("password").value = "";
 }
 
-
 function checkUser(){
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
