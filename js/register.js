@@ -26,6 +26,11 @@ function addUser(){
                 else{
                     path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c";
                 }
+                await db.collection("user").doc(user.uid).set({
+                    name: name,
+                    makeroom:[],
+                    joinroom:[]
+                })
                 user.updateProfile({
                     email: email,
                     password: password,

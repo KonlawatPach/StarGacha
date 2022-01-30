@@ -43,15 +43,17 @@
 
             <div id="myModal" class="modal">
                 <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontent" id="modalcontent">
-                    <h5 class="mt-3 fw-bold">โปรดระบุรหัสห้อง</h5><br>
-                    <input type="text" class="form-control" placeholder="รหัสห้อง" aria-label="roomid" aria-describedby="basic-addon">
-                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" style="width: 10rem; height: 3rem;" onclick="">ค้นหาห้อง</button>
+                    <h5 class="mt-3 mb-1 fw-bold">โปรดระบุรหัสห้อง</h5><br>
+                    <input type="text" class="form-control w-75 mx-auto mb-0" placeholder="รหัสห้อง" id="roomid" aria-describedby="basic-addon"><br>
+                    <h6 class="text-danger" id="noroom">ไม่พบห้องดังกล่าว</h6>
+                    <div class="col-11 mx-auto mt-0" id="displayroom"></div>
+                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" style="width: 10rem; height: 3rem;" onclick="findRoom()">ค้นหาห้อง</button>
                     <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" style="width: 10rem; height: 3rem;" onclick="closeModel()">ยกเลิก</button>
                 </div>
             </div>
 
             <!-- body -->
-            <div class="container box border-dark border border-1 rounded-3 mt-4 text-center">
+            <div class="container box border-dark border border-1 rounded-3 mt-2 text-center" style="height: 36rem;">
                 <!-- head in box -->
                 <div class="row">   
                     <div class="col">
@@ -60,7 +62,7 @@
                 </div>
 
                 <!-- body in box -->
-                <div class="row">
+                <div class="row h-75">
                     <!-- leftbox -->
                     <div class="col bg-light border-dark border border-2 rounded-3 mx-lg-3 my-lg-3 h-100">
                         <img src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/manageroom.png?alt=media&token=fa5d0839-b9db-405d-9c2a-0cc5a9051804" class="mt-3" width="30%" height="auto"><br>
@@ -70,54 +72,45 @@
 
                     <!-- rightbox -->
                     <div class="col my-lg-3">
-                        <div class="col bg-light border-dark border border-2 rounded-3 p-lg-2 me-lg-3 h-50">
+                        <div class="col bg-light border-dark border border-2 rounded-3 p-lg-2 me-lg-3 overflow-auto" style="height: 50%;">
                             <h5>ห้องที่คุณสร้าง</h5>
-                            <div class="overflow-auto" style="height: 80%;">
-                                <table class="table table-hover mx-auto">
-                                    <tbody id="makeroom">
-                                        <tr class="border border-1 border-dark mx-auto mt-1 p-1 text-start hover">
-                                            <td class="pe-0 me-0">
-                                                <img class="border border-2 rounded-circle m-0" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F0.jpg?alt=media&token=a4ac8d28-5b75-4c95-85de-f7a0036e68aa" width="100rem" height="100rem">
-                                            </td>
-                                            <td class="text-start">
-                                                <h6 class="fw-bold">ห้อง บูรพาชายชาตรี</h6>
-                                                <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
-                                                <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 3/100 คน</h6>
-                                                <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
-                                            </td>
-                                            <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID0()">Join Room</button><br>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
-                                                <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="mx-auto overflow-auto px-1 px-lg-2" style="height: 80%;" id="makeroom">
+                                <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
+                                    <img class="col-3 rounded-circle px-0 img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F0.jpg?alt=media&token=a4ac8d28-5b75-4c95-85de-f7a0036e68aa" style="width: 6.2rem; height: 6.2rem;">
+                                    <div class="col-1"></div>
+                                    <div class="col-5">
+                                        <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง บูรพาชายชาตรี</h6>
+                                        <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
+                                        <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 3/100 คน</h6>
+                                        <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID0()">Join Room</button><br>
+                                        <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Open Room</button><br>
+                                        <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Delete Room</button>
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
-                        <div class="col bg-light border-dark border border-2 rounded-3 p-lg-2 me-lg-3 mt-1 h-50">
-                            <h5>ห้องที่คุณเคยเข้าร่วม</h5>
-                            <div class="overflow-auto" style="height: 80%;">
-                                <table class="table table-hover mx-auto">
-                                    <tbody id="joinroom">
-                                        <tr class="border border-1 border-dark mx-auto mt-1 p-1 text-start hover">
-                                            <td class="pe-0 me-0">
-                                                <img class="border border-2 rounded-circle m-0" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F1.gif?alt=media&token=efba2989-e397-422c-b044-f082601859f5" width="100rem" height="100rem">
-                                            </td>
-                                            <td class="text-start">
-                                                <h6 class="fw-bold">ห้อง สามสหายไล่รถ</h6>
-                                                <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
-                                                <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 1/100 คน</h6>
-                                                <h6 style="font-size: 90%;">จำนวนของที่เหลือ : 20/20 ชิ้น</h6>
-                                            </td>
-                                            <td>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="sendRoomID1()">Join Room</button><br>
-                                                <button class="mb-1 btn btn-secondary btn-sm w-100" onclick="">Open Room</button><br>
-                                                <button class="mb-0 btn btn-secondary btn-sm w-100" onclick="">Delete Room</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="col bg-light border-dark border border-2 rounded-3 p-lg-2 me-lg-3 mt-1 overflow-auto" style="height: 49%;">
+                            <h5>ห้องที่คุณเคยเข้าร่วมล่าสุด</h5>
+                                <div class="mx-auto overflow-auto px-1 px-lg-2" style="height: 80%;" id="joinroom">
+                                    <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
+                                        <img class="col-3 rounded-circle px-0 img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F0.jpg?alt=media&token=a4ac8d28-5b75-4c95-85de-f7a0036e68aa" style="width: 6.2rem; height: 6.2rem;">
+                                        <div class="col-1"></div>
+                                        <div class="col-5">
+                                            <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง สามสหายไล่รถ</h6>
+                                            <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
+                                            <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 3/100 คน</h6>
+                                            <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID1()">Join Room</button><br>
+                                            <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Open Room</button><br>
+                                            <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Delete Room</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
