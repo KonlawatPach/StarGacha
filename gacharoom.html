@@ -14,7 +14,6 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/firebase.js"></script>
     <!-- <script src="js/logincheck.js"></script> -->
-    <script src="js/gacharoom.js"></script>
     <link rel="stylesheet" href="css/gacharoom.css">
     <title>กาชาสอยดาว</title>
 </head>
@@ -30,7 +29,7 @@
             </div>
             <div class="row mt-1 mt-sm-3 text-center">
                 <!-- กล่องซ้าย -->
-                <div class="col-sm-3 leftbar" id="left">
+                <div class="col-sm-3 leftbar" id="left" style="height: 650px;">
                     <button type="button" class="border border-0 rounded-3 border-dark d-lg-none hover float-end mt-2 mt-lg-0" style="width: 3rem; height: 3rem;" onclick="slideCloseLeft()"><<<</button>
                     <div class="col-8 col-lg-10 col-xl-8 col-xxl-7 mx-lg-auto">
                         <a class="text-decoration-none" href="home.html" style="width: min-content;">
@@ -50,7 +49,6 @@
                             </table>
                         </div>
                     </div>
-
                     <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-md-2 px-xl-4 bg-light text-start" style="height: 40%;">
                         <h6 class="mb-3 fw-bold text-center">รายชื่อผู้ได้รางวัล</h6>
                         <div class="overflow-auto" style="height: 80%;">
@@ -61,9 +59,7 @@
                             </table>
                         </div>
                     </div>
-                    
                 </div>
-
                 <!-- กล่องกลาง -->
                 <div class="col-sm mx-auto mt-0" id="center"> 
                     <div class="col-sm-10 col-md-9 col-xl-8 border border-2 rounded-pill border-dark p-2 mx-auto bg-light">
@@ -74,33 +70,34 @@
                     </div>
                     <img id="gachabox" class="my-3 w-75" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa.gif?alt=media&token=b4882689-594e-4162-866c-51ce8b6abf84"><br>
                     <button type="button" class="btn btn-light btn-lg" onclick="rollgacha()" id="rollgacha">สุ่มกาชา</button>
-                    <h6 class="my-3 mt-5 mt-lg-4 border border-1 border-dark rounded-pill bg-light mx-auto p-1 px-5" style="width: fit-content;" id="count">คุณมีสิทธิ์สุ่มได้อีก 3 ครั้ง</h6>
+                    <h6 class="my-3 mt-5 mt-lg-4 border border-1 border-dark rounded-pill bg-light mx-auto p-1 px-5" style="width: fit-content;" id="count">คุณมีสิทธิ์สุ่มได้อีก 0 ครั้ง</h6>
                 </div>
 
                 <!-- กล่องขวา -->
-                <div class="col-lg-3 rightbar" id="right">
+                <div class="col-lg-3 rightbar" id="right" style="height: 650px;">
                     <button type="button" class="border border-0 rounded-3 border-dark d-lg-none hover float-start mt-2 me-3" style="width: 3rem; height: 3rem;" onclick="slideCloseRight()">>>></button>
                     <div class="col col-lg-10 col-xl-9 col-xxl-8 mt-2 mt-lg-0 mx-lg-auto">
                         <a class="text-decoration-none" href="editprofile.html" >
                             <div class="border border-2 rounded-pill border-dark p-1 hover">
                                 <img id="imgProfile" class="rounded-circle border border-2 border-dark profile" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem" height="50rem">
-                                <h6 id="Displayname" class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
+                                <h6 id="Displayname" class="fw-bold text-dark d-inline">Anonymous</h6>
                             </div>
                         </a>
                     </div>
-                    <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-sm-0 px-xl-1 bg-light h-50 overflow-auto">
+                    <div class="col border border-2 rounded-3 border-dark mt-3 p-2 px-sm-0 px-xl-1 bg-light h-75 overflow-auto">
                         <h6 class="fw-bold mb-3">รายชื่อผู้เข้าร่วม</h6>
-                        <div class="overflow-auto" style="height: 80%;" id="namelist">
+                        <div class="overflow-auto" style="height: 80%;" >
+                            <div id="wwaitlist">
+                                
+                            </div>
+                            <div id="namelist">
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            firebase.auth().onAuthStateChanged((user) => {
-                document.getElementById("Displayname").textContent = user.displayName;
-                document.getElementById("imgProfile").src = user.photoURL;
-            });
-        </script>
+        <script src="js/gacharoom.js"></script>
     </body>
 </html>

@@ -5,10 +5,15 @@ var roomid =  sessionStorage.getItem("roomid");                 //
 // get data from firebase to display in hostroom.
 var storageRef = firebase.storage().ref();
 var Cerrentuser;
-firebase.auth().onAuthStateChanged((user) => {Cerrentuser = user});
+firebase.auth().onAuthStateChanged((user) => {
+    Cerrentuser = user
+    document.getElementById("Displayname").textContent = user.displayName;
+    document.getElementById("imgProfile").src = user.photoURL;
+    getData();
+    realTimeupdate();
+});
 
-getData();
-realTimeupdate();
+
 
 //Twotype Fetch Data Function
 function getData(){
@@ -23,16 +28,75 @@ function getData(){
 }
 
 function realTimeupdate(){
-    db.collection("room").doc(roomid).onSnapshot((item) => {
+    db.collection("room").doc(roomid).onSnapshot(async (item) => {
         // checkname(item.data().name);//////////////////////////////////////////////////////////อย่าลืมมาเปิดตอนใช้งานจริงด้วย
         addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
         addReward(item.data().rewarduser, item.data().rewardgift);
+        addCount(item.data().name, item.data().count);
+        // if(await areAdmin()){addWaitlist(item.data().waitinglist);}
+        addWaitlist(item.data().waitinglist);
     });
 }
 
 //Unit Automatic Function
+async function areAdmin(){
+    let x;
+    await db.collection("room").doc(roomid).get().then((item) => {  
+        x = item.data().admin
+    });
+    return Cerrentuser.uid == x;
+}
+
+function addWaitlist(idlist){
+    let usernumber = 0;
+    let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
+    let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
+    let temp;
+    let pictureurl = [];
+    
+    if (idlist.length == 0){
+        $("#wwaitlist").html("");
+    }
+
+    if (usernumber != idlist.length){       //ถ้ามีรายชื่อเพิ่มหรือลดจะอัพเดทใหม่ยกเครื่อง
+        usernumber = idlist.length;
+        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).onSnapshot(async (users) => {
+            temp = sortName(users);
+            sortidlist = temp[0];
+            sortnamelist = temp[1];
+
+            pictureurl = [];
+            for(let i in sortidlist){
+                var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
+                await userRef.getDownloadURL().then(function(url) {
+                    pictureurl.push(url);
+                }).catch((error) => {
+                    pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
+                });
+            }
+            $("#wwaitlist").html("");
+            for(let i in sortidlist){
+                $(`
+                    <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
+                        <div class="row">
+                            <div class="col-7">
+                                <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px">
+                                <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
+                            </div>
+                            <div class="col-4 d-inline">
+                                <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="accept('`+ sortidlist[i] +`')">ยอมรับ</button><br>
+                                <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="deny('`+ sortidlist[i] +`')">ปฏิเสธ</button>
+                            </div>
+                        </div>
+                    </div>
+                `).appendTo( "#wwaitlist" );
+            }
+        })
+    }
+}
+
 function addGiftlist(giftname, giftnum){
     $("#giftlist").html("");
     let noitem = []; 
@@ -140,6 +204,8 @@ function addReward(rewardiduser, rewardgift){
         $.each(rewardiduser, function(i, name){
             if($.inArray(name, uniqueuser) === -1) uniqueuser.push(name);
         });
+        rewardiduser.reverse();
+        rewardgift.reverse();
 
         db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", uniqueuser).onSnapshot(async (users) => {
             let uniquenameuser = [];
@@ -154,6 +220,8 @@ function addReward(rewardiduser, rewardgift){
                 var userRef = storageRef.child('userImage/'+ id +'.jpg');
                 await userRef.getDownloadURL().then(function(url) {
                     pictureurl.push(url);
+                }).catch((error) => {
+                    pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
                 });
             }
             
@@ -162,7 +230,7 @@ function addReward(rewardiduser, rewardgift){
                 $(`
                     <tr>
                         <td class="pe-0 me-0">
-                            <img class="border border-2 rounded-circle m-0" src="`+ pictureurl[i] +`" width="50rem">
+                            <img class="border border-2 rounded-circle m-0" src="`+ pictureurl[i] +`" width="50rem" height="50rem">
                         </td>
                         <td class="text-start mx-0 px-0">
                             <h6 style="font-size: 80%;">`+ rewardnameuser[i] +`</h6>
@@ -179,6 +247,14 @@ function checkname(member){
     if(!member.includes(Cerrentuser.uid)) {
         document.location='home.html';
     }
+}
+
+function addCount(name, count){
+    document.getElementById("count").textContent = "คุณมีสิทธิ์สุ่มได้อีก " + count[name.indexOf(Cerrentuser.uid)] + " ครั้ง"; 
+}
+
+function getCount(name, count){
+    return count[name.indexOf(Cerrentuser.uid)]
 }
 
 //onEvent Function
@@ -205,30 +281,38 @@ async function rollgacha() {
         var sfDocRef = db.collection("room").doc(roomid);
             db.runTransaction((transaction) => {
             return transaction.get(sfDocRef).then((item) => {
-                if (!item.exists) {
-                    throw "Document does not exist!";
-                }
                 let randomlist = [];  
                 giftname = item.data().giftName;
                 giftnum = item.data().giftQuantity;
                 for(let i in giftname) for(let j = 0; j<giftnum[i]; j++) randomlist.push(giftname[i]);
-                if(randomlist!=0){
-                    document.body.style.backgroundColor = "slateblue";
+                if(randomlist != 0 && getCount(item.data().name, item.data().count)>0){
                     let num = Math.floor((Math.random()*1000) % randomlist.length);
                     reward = "ยินดีด้วย คุณได้รับ " + randomlist[num];
                     let newgiftnum = [...giftnum];
+                    let newcount = [...item.data().count];
+                    let newrewardgift = [...item.data().rewardgift];
+                    let newrewarduser = [...item.data().rewarduser];
                     newgiftnum[giftname.indexOf(randomlist[num])] -= 1;
-                    transaction.update(sfDocRef, { giftQuantity: newgiftnum });
-                    document.getElementById("gachabox").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa.gif?alt=media&token=b4882689-594e-4162-866c-51ce8b6abf84";
-                    
+                    newcount[item.data().name.indexOf(Cerrentuser.uid)] -= 1;
+                    newrewardgift.push(randomlist[num]);
+                    newrewarduser.push(Cerrentuser.uid);
+                    transaction.update(sfDocRef, {
+                        giftQuantity: newgiftnum,
+                        count: newcount,
+                        rewardgift: newrewardgift,
+                        rewarduser: newrewarduser
+                    });                    
+                }
+                else if(getCount(item.data().name, item.data().count)==0){
+                    reward = "บูรพาคุงไม่อยากให้คุณสุ่มอีกแล้ว";
                 }
                 else{
                     reward = "บูรพาคุงไม่มีของขวัญจะให้คุณ";
-                    document.body.style.backgroundColor = "slateblue";
-                    document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
                 }
             });
         }).then(() => {
+            document.body.style.backgroundColor = "slateblue";
+            document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
             document.getElementById("myModal").style.display = "block";
             $("#getreward").html(reward);
             $("#modalcontent").slideDown(500);
@@ -237,6 +321,58 @@ async function rollgacha() {
             console.log("Transaction failed: ", error);
         });
     },2000)
+}
+
+function accept(userid){
+    db.runTransaction((transaction) => {
+        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
+            let newname = [...item.data().name]
+            let newcount = [...item.data().count]
+            let newwaitinglist = [...item.data().waitinglist]
+            newname.push(userid)
+            let index = newwaitinglist.indexOf(userid);
+            if (index !== -1) newwaitinglist.splice(index, 1);
+            newcount.push(item.data().startcount)
+            transaction.update(db.collection("room").doc(roomid), {
+                name:newname,
+                count:newcount,
+                waitinglist: newwaitinglist
+            });
+        });
+    }).then(() => {
+        db.runTransaction((transaction) => {
+            return transaction.get(db.collection("user").doc(userid)).then((user) => {
+                let newwaitroom = [...user.data().joinroom]
+                let index = newwaitroom.indexOf(roomid);
+                if (index !== -1) newwaitroom.splice(index, 1);
+                newjoinroom.push(roomid)
+                transaction.update(db.collection("user").doc(userid), {
+                    joinroom: newjoinroom,
+                    waitroom: newwaitroom
+                });
+            });
+        })
+    });
+}
+
+function deny(userid){
+    db.runTransaction((transaction) => {
+        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
+            let newwaitinglist = [...item.data().waitinglist]
+            let index = newwaitinglist.indexOf(userid);
+            if (index !== -1) newwaitinglist.splice(index, 1);
+            transaction.update(db.collection("room").doc(roomid), { waitinglist: newwaitinglist });
+        });
+    }).then(() => {
+        db.runTransaction((transaction) => {
+            return transaction.get(db.collection("user").doc(userid)).then((user) => {
+                let newwaitroom = [...user.data().waitroom]
+                let index = newwaitroom.indexOf(roomid);
+                if (index !== -1) newwaitroom.splice(index, 1);
+                transaction.update(db.collection("user").doc(userid), { waitroom: newwaitroom });
+            });
+        })
+    });
 }
 
 function slideLeft() {

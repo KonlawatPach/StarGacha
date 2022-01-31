@@ -29,7 +29,8 @@ function addUser(){
                 await db.collection("user").doc(user.uid).set({
                     name: name,
                     makeroom:[],
-                    joinroom:[]
+                    joinroom:[],
+                    waitroom:[]
                 })
                 user.updateProfile({
                     email: email,
