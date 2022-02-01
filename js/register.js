@@ -30,7 +30,8 @@ function addUser(){
                     name: name,
                     makeroom:[],
                     joinroom:[],
-                    waitroom:[]
+                    waitroom:[],
+                    pic: path
                 })
                 user.updateProfile({
                     email: email,

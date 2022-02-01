@@ -29,14 +29,14 @@ function getData(){
 
 function realTimeupdate(){
     db.collection("room").doc(roomid).onSnapshot(async (item) => {
-        // checkname(item.data().name);//////////////////////////////////////////////////////////อย่าลืมมาเปิดตอนใช้งานจริงด้วย
+        checkname(item.data().name);//////////////////////////////////////////////////////////อย่าลืมมาเปิดตอนใช้งานจริงด้วย
         addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
         addReward(item.data().rewarduser, item.data().rewardgift);
         addCount(item.data().name, item.data().count);
-        // if(await areAdmin()){addWaitlist(item.data().waitinglist);}
-        addWaitlist(item.data().waitinglist);
+        if(await areAdmin()){addWaitlist(item.data().waitinglist);}
+        // addWaitlist(item.data().waitinglist);
     });
 }
 
@@ -54,7 +54,7 @@ function addWaitlist(idlist){
     let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
     let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
     let temp;
-    let pictureurl = [];
+    // let pictureurl = [];
     
     if (idlist.length == 0){
         $("#wwaitlist").html("");
@@ -66,16 +66,17 @@ function addWaitlist(idlist){
             temp = sortName(users);
             sortidlist = temp[0];
             sortnamelist = temp[1];
+            let pictureurl = temp[2];
 
-            pictureurl = [];
-            for(let i in sortidlist){
-                var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
-                await userRef.getDownloadURL().then(function(url) {
-                    pictureurl.push(url);
-                }).catch((error) => {
-                    pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
-                });
-            }
+            // pictureurl = [];
+            // for(let i in sortidlist){
+            //     var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
+            //     await userRef.getDownloadURL().then(function(url) {
+            //         pictureurl.push(url);
+            //     }).catch((error) => {
+            //         pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
+            //     });
+            // }
             $("#wwaitlist").html("");
             for(let i in sortidlist){
                 $(`
@@ -135,7 +136,7 @@ function adduserlist(idlist, adminid){
     let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
     let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
     let temp;
-    let pictureurl = [];
+    // let pictureurl = [];
 
     if (usernumber != idlist.length){       //ถ้ามีรายชื่อเพิ่มหรือลดจะอัพเดทใหม่ยกเครื่อง
         usernumber = idlist.length;        
@@ -144,16 +145,18 @@ function adduserlist(idlist, adminid){
             temp = sortName(users);
             sortidlist = temp[0];
             sortnamelist = temp[1];
+            let pictureurl = temp[2];
 
-            pictureurl = [];
-            for(let i in sortidlist){
-                var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
-                await userRef.getDownloadURL().then(function(url) {
-                    pictureurl.push(url);
-                }).catch((error) => {
-                    pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
-                });
-            }
+            // console.log(users.val())
+            // let pictureurl = [];
+            // for(let i in sortidlist){
+                // var userRef = storageRef.child('userImage/'+sortidlist[i]+'.jpg');
+                // await userRef.getDownloadURL().then(function(url) {
+                //     pictureurl.push(url);
+                // }).catch((error) => {
+                //     pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
+                // });
+            // }
 
             $("#namelist").html("");
             for(let i in sortidlist){
@@ -182,17 +185,21 @@ function sortName(users){
     let useridlist = []
     let usernamelist = []
     let sortidlist = []
+    let pictureurl = []
+    let sortpictureurl = []
     users.forEach((user) => {
         useridlist.push(user.id);
         usernamelist.push(user.data().name);
+        pictureurl.push(user.data().pic)
     });
     
     let sortnamelist = [...usernamelist]
     sortnamelist.sort();    //สร้าง namelist ที่เรียงแล้ว
     for(let name of sortnamelist){
         sortidlist.push(useridlist[usernamelist.indexOf(name)]);
+        sortpictureurl.push(pictureurl[usernamelist.indexOf(name)]);
     }
-    return [sortidlist, sortnamelist];
+    return [sortidlist, sortnamelist, sortpictureurl];
 }
 
 function addReward(rewardiduser, rewardgift){
@@ -209,20 +216,24 @@ function addReward(rewardiduser, rewardgift){
             let uniqueiduser = [];
             let uniquenameuser = [];
             let rewardnameuser = [];
+            let uniquepictureurl = [];
             let pictureurl = [];
+
             
             users.forEach((user) => {
                 uniqueiduser.push(user.id);
                 uniquenameuser.push(user.data().name);
+                uniquepictureurl.push(user.data().pic);
             });
             for(let id of rewardiduser){
                 rewardnameuser.push(uniquenameuser[uniqueiduser.indexOf(id)]);
-                var userRef = storageRef.child('userImage/'+ id +'.jpg');
-                await userRef.getDownloadURL().then(function(url) {
-                    pictureurl.push(url);
-                }).catch((error) => {
-                    pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
-                });
+                pictureurl.push(uniquepictureurl[uniqueiduser.indexOf(id)]);
+            //     var userRef = storageRef.child('userImage/'+ id +'.jpg');
+            //     await userRef.getDownloadURL().then(function(url) {
+            //         pictureurl.push(url);
+            //     }).catch((error) => {
+            //         pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
+                // });
             }
 
             $("#rewardlist").html("");
