@@ -204,19 +204,19 @@ function addReward(rewardiduser, rewardgift){
         $.each(rewardiduser, function(i, name){
             if($.inArray(name, uniqueuser) === -1) uniqueuser.push(name);
         });
-        rewardiduser.reverse();
-        rewardgift.reverse();
 
         db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", uniqueuser).onSnapshot(async (users) => {
+            let uniqueiduser = [];
             let uniquenameuser = [];
             let rewardnameuser = [];
             let pictureurl = [];
             
             users.forEach((user) => {
+                uniqueiduser.push(user.id);
                 uniquenameuser.push(user.data().name);
             });
             for(let id of rewardiduser){
-                rewardnameuser.push(uniquenameuser[uniqueuser.indexOf(id)]);
+                rewardnameuser.push(uniquenameuser[uniqueiduser.indexOf(id)]);
                 var userRef = storageRef.child('userImage/'+ id +'.jpg');
                 await userRef.getDownloadURL().then(function(url) {
                     pictureurl.push(url);
@@ -224,9 +224,9 @@ function addReward(rewardiduser, rewardgift){
                     pictureurl.push("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c");
                 });
             }
-            
+
             $("#rewardlist").html("");
-            for(let i in rewardnameuser){
+            for(let i = rewardiduser.length-1; i>=0; i--){
                 $(`
                     <tr>
                         <td class="pe-0 me-0">
@@ -312,7 +312,7 @@ async function rollgacha() {
             });
         }).then(() => {
             document.body.style.backgroundColor = "slateblue";
-            document.getElementById("gachabox").src = "http://myweb.cmu.ac.th/konlawat_wong/picture/wanwai_burapa.gif";
+            document.getElementById("gachabox").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa.gif?alt=media&token=b4882689-594e-4162-866c-51ce8b6abf84";
             document.getElementById("myModal").style.display = "block";
             $("#getreward").html(reward);
             $("#modalcontent").slideDown(500);
