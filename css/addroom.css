@@ -1,19 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
-
-
-.container-fluid{
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300&display=swap');
+body {
+	background-image: url("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/background.png?alt=media&token=1d27b417-d2fd-4878-84f2-0a0f61b1d43a");
+	background-size: cover;
 	background-color: slateblue;
 	font-family: 'Prompt', sans-serif;
-	height: auto;
+	height: 100%;
 }
 
-.container-sm{
-	background-color: white;
-}
-
-#bottom{
-	background-color: white;
-}
 
 
 .col-sm-4 label, .textarea{
