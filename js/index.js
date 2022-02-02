@@ -1,3 +1,8 @@
+let randomlist = ["จับฉลากเพื่อส่งต่อของ ให้แก่คนที่คุณรัก", "สอยดาวได้ของ สอยคุณได้อะไร", "กาชาสอยดาวมีโอกาสได้ของทุกชิ้นเท่ากัน", "สอยได้แต่ดาว สอยใจคุณไม่ได้", "มีของหลายอย่างสินะ มาลุ้นกันดีกว่า"]
+$("#subHead").html(randomlist[Math.floor((Math.random()*10)%5)]);
+
+
+
 function clearInput(){
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";

@@ -3,6 +3,9 @@ document.getElementById("selectimage").onchange = evt => {
     document.getElementById("image").src = URL.createObjectURL(file)
 }
 
+let randomlist = ["จับฉลากเพื่อส่งต่อของ ให้แก่คนที่คุณรัก", "ทนอีกหน่อยนะ คุณจะได้สุ่มกาชาแล้ว", "กาชาสอยดาวมีโอกาสได้ของทุกชิ้นเท่ากัน", "สอยได้แต่ดาว สอยใจคุณไม่ได้", "มีของหลายอย่างสินะ มาลุ้นกันดีกว่า"]
+$("#subHead").html(randomlist[Math.floor((Math.random()*10)%5)]);
+
 function addUser(){
     var path;
     var email = document.getElementById("email").value;
