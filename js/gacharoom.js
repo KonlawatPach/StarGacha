@@ -325,7 +325,8 @@ function accept(userid){
     }).then(() => {
         db.runTransaction((transaction) => {
             return transaction.get(db.collection("user").doc(userid)).then((user) => {
-                let newwaitroom = [...user.data().joinroom]
+                let newwaitroom = [...user.data().waitroom]
+                let newjoinroom = [...user.data().joinroom]
                 let index = newwaitroom.indexOf(roomid);
                 if (index !== -1) newwaitroom.splice(index, 1);
                 newjoinroom.push(roomid)
