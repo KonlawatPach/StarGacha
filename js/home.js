@@ -46,8 +46,8 @@ function loadUserData(){
                     </div>
                     <div class="col-3">
                         <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
-                        <button class="mb-1 btn btn-secondary rounded-pill disabled w-100 p-0" style="height: 1.8rem;" onclick="">ปิดห้อง</button><br>
-                        <button class="mb-0 btn btn-secondary rounded-pill disabled w-100 p-0" style="height: 1.8rem;" onclick="">ลบห้องออก</button>
+                        <button class="mb-1 btn btn-secondary rounded-pill disabled w-100 p-0" style="height: 1.8rem;" onclick="closeRoom(`+ makeroom[m].id +`)">ปิดห้อง</button><br>
+                        <button class="mb-0 btn btn-secondary rounded-pill disabled w-100 p-0" style="height: 1.8rem;" onclick="closeRoom(`+ makeroom[m].id +`)">ลบห้องออก</button>
                     </div>
                 </div>
             `).appendTo( "#makeroom" );
@@ -127,8 +127,7 @@ function findRoom(){
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
                             <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="width: 6.2rem; height: 6.2rem;">
-                            <div class="col-1"></div>
-                            <div class="col-5">
+                            <div class="col-6">
                                 <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🌎`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
                                 <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ item.data().name.length + `/` + item.data().maxname +` คน</h6>
@@ -144,8 +143,7 @@ function findRoom(){
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
                             <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="width: 6.2rem; height: 6.2rem;">
-                            <div class="col-1"></div>
-                            <div class="col-5">
+                            <div class="col-6">
                                 <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
                                 <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ item.data().name.length + `/` + item.data().maxname +` คน</h6>
@@ -160,8 +158,7 @@ function findRoom(){
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
                             <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="width: 6.2rem; height: 6.2rem;">
-                            <div class="col-1"></div>
-                            <div class="col-5">
+                            <div class="col-6">
                                 <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
                                 <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ item.data().name.length + `/` + item.data().maxname +` คน</h6>
@@ -176,8 +173,7 @@ function findRoom(){
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
                             <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="width: 6.2rem; height: 6.2rem;">
-                            <div class="col-1"></div>
-                            <div class="col-5">
+                            <div class="col-6">
                                 <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
                                 <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ item.data().name.length + `/` + item.data().maxname +` คน</h6>

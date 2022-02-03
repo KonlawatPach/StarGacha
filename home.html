@@ -20,7 +20,7 @@
     <body>
         <div class="container-fluid">       
             <!-- header -->
-            <div class="row mt-3">
+            <!-- <div class="row mt-3">
                 <div class="col-2">
                     <a class="text-decoration-none" href="home.html" style="width: min-content;">
                         <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
@@ -38,7 +38,7 @@
                         </div>
                     </a>
                 </div>
-            </div>
+            </div> -->
 
             <div id="myModal" class="modal">
                 <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontent" id="modalcontent">
@@ -52,63 +52,50 @@
             </div>
 
             <!-- body -->
-            <div class="container box border-dark border border-1 rounded-3 mt-2 text-center" style="height: 36rem;">
+            <div class="container box border-dark border border-1 rounded-3 mt-2 text-center">
                 <!-- head in box -->
-                <div class="row">   
+                <div class="row mx-auto">   
                     <div class="col">
                         <h1 class="fw-bold text-center mt-2 mb-3" id="head" style="font-family: 'Itim', cursive;">ยินดีต้อนรับ</h1>
                     </div>
                 </div>
 
                 <!-- body in box -->
-                <div class="row h-75">
+                <div class="row mx-auto" style="height: 84%;">
                     <!-- leftbox -->
-                    <div class="col bg-light border-dark border border-2 rounded-3 mx-lg-3 my-lg-3 h-100">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/manageroom.png?alt=media&token=fa5d0839-b9db-405d-9c2a-0cc5a9051804" class="mt-3" width="30%" height="auto"><br>
-                        <button class="mt-3 btn btn-secondary btn-lg w-50" onclick="document.location='addroom.html'">สร้างห้องใหม่</button><br>
-                        <button class="my-4 btn btn-secondary btn-lg w-50" onclick="joinModel()">ค้นหาห้อง</button>
+                    <div class="col-md-6 my-md-3 px-0 ps-md-2 pe-md-1" id="left">
+                        <div class="col-12 bg-light border-dark border border-2 rounded-3 h-100">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/manageroom.png?alt=media&token=fa5d0839-b9db-405d-9c2a-0cc5a9051804" class="mt-3 mt-md-5" width="150rem" height="160rem"><br>
+                            <button class="mt-2 mt-md-3 btn btn-secondary btn-lg w-50" onclick="document.location='addroom.html'">สร้างห้องใหม่</button><br>
+                            <button class="mt-2 mt-md-4 mb-4 btn btn-secondary btn-lg w-50" onclick="joinModel()">ค้นหาห้อง</button>
+                        </div>
                     </div>
 
                     <!-- rightbox -->
-                    <div class="col my-lg-3 h-100">
-                        <div class="col bg-light border-dark border border-2 rounded-3 p-lg-2 me-lg-3 overflow-auto" style="height: 50%;">
+                    <div class="col-md-6 my-md-3 px-0 ps-md-1 pe-md-2" id="right">
+                        <div class="col-12 bg-light border-dark border border-2 rounded-3 p-lg-2 overflow-auto" style="height: 50%;">
                             <h5>ห้องที่คุณสร้าง</h5>
-                            <div class="mx-auto overflow-auto px-1 px-lg-2" style="height: 80%;" id="makeroom">
-                                <!-- <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
-                                    <img class="col-3 rounded-circle px-0 img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F0.jpg?alt=media&token=a4ac8d28-5b75-4c95-85de-f7a0036e68aa" style="width: 6.2rem; height: 6.2rem;">
-                                    <div class="col-1"></div>
-                                    <div class="col-5">
+                            <div class="mx-auto overflow-auto px-1 px-xl-2 roomlist" style="height: 80%;" id="makeroom">
+                                <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
+                                    <img class="col-3 rounded-circle px-0 img-fluid" src="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp">
+                                    <div class="col-6">
                                         <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง บูรพาชายชาตรี</h6>
                                         <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
-                                        <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 3/100 คน</h6>
-                                        <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
+                                        <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 9/40 คน</h6>
+                                        <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 95/40 ชิ้น</h6>
                                     </div>
                                     <div class="col-3">
-                                        <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID('0')">Join Room</button><br>
-                                        <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Open Room</button><br>
-                                        <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Delete Room</button>
+                                        <button class="mb-1 btn btn-secondary rounded-pill firstbtn w-100 p-0 " onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
+                                        <button class="mb-1 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ปิดห้อง</button><br>
+                                        <button class="mb-0 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ลบห้องออก</button>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
-                        <div class="col bg-light border-dark border border-2 rounded-3 p-lg-2 me-lg-3 mt-1" style="height: 49%;">
+                        <div class="col-12 bg-light border-dark border border-2 rounded-3 p-lg-2 mt-1" style="height: 49%;">
                             <h5>ห้องที่คุณเข้าร่วม</h5>
                                 <div class="mx-auto px-1 px-lg-2 overflow-auto" style="height: 80%;" id="joinroom">
-                                    <!-- <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
-                                        <img class="col-3 rounded-circle px-0 img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/roomImage%2F0.jpg?alt=media&token=a4ac8d28-5b75-4c95-85de-f7a0036e68aa" style="width: 6.2rem; height: 6.2rem;">
-                                        <div class="col-1"></div>
-                                        <div class="col-5">
-                                            <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง สามสหายไล่รถ</h6>
-                                            <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
-                                            <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 3/100 คน</h6>
-                                            <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 3/40 ชิ้น</h6>
-                                        </div>
-                                        <div class="col-3">
-                                            <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="sendRoomID('1')">Join Room</button><br>
-                                            <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Open Room</button><br>
-                                            <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.8rem;" onclick="">Delete Room</button>
-                                        </div>
-                                    </div> -->
+
                                 </div>
                             </div>
                         </div>
@@ -116,6 +103,6 @@
                 </div>
             </div>
         </div>
-        <script src="js/home.js"></script>
+        <!-- <script src="js/home.js"></script> -->
     </body>
 </html>
