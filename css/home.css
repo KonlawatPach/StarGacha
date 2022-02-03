@@ -57,6 +57,11 @@ body{
 	transition: 0.5s;
 }
 
+.modalcontent button{
+	width: 10rem;
+	height: 3rem;
+}
+
 ::-webkit-scrollbar {
 	width: 5px;
 }
@@ -101,6 +106,19 @@ body{
 
 h5{
 	margin-top: 4px;
+}
+
+#displayroom button{
+	height: 84%;
+}
+
+#displayroom img{
+	height: 6.4rem;
+	width: 6.4rem;
+}
+
+.joinbtn{
+	height: 2.5rem;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -148,7 +166,7 @@ h5{
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 766px) {
 	.modalcontent {
 		width: 86%;
 	}
@@ -173,10 +191,30 @@ h5{
 	}
 }
 
+@media only screen and (max-width: 524px) {
+	#displayroom img{
+		height: 5rem;
+		width: 5rem;
+	}
+
+	#displayroom{
+		line-height: 1;
+		font-size: 55%;
+	}
+
+	#displayroom button{
+		width: 100%;
+	}
+}
+
 
 @media only screen and (max-width: 474px) {
 	.modalcontent {
-		width: 90%;
+		width: 99%;
+	}
+
+	.modalcontent button{
+		width: 8rem;
 	}
 
 	#left button{
@@ -191,6 +229,10 @@ h5{
 		height: 40%;
 	}
 
+	#right{
+		height: 69%;
+	}
+
 	.roomlist .firstbtn{
 		margin-top: 4px;
 	}
@@ -201,7 +243,7 @@ h5{
 	}
 
 	.roomlist{
-		font-size: 60%;
+		font-size: 55%;
 	}
 
 	.roomlist h6{
@@ -212,5 +254,13 @@ h5{
 		height: 1rem;
 		font-size: 6px;
 		margin-left: 10px;
+	}
+
+	#head{
+		font-size: 150%;
+	}
+
+	#send{
+		font-size: 120%;
 	}
 }

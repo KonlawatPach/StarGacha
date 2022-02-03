@@ -51,6 +51,14 @@ body{
 	background-color: rgb(233, 233, 233);
 }
 
+.btnhover{
+	margin-top: 20px;
+	background-color: rgb(255, 255, 255);
+}
+
+.btnhover:hover{
+	background-color: rgb(205, 202, 233);
+}
 
 .modal {
 	display: none;

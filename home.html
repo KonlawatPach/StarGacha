@@ -20,8 +20,8 @@
     <body>
         <div class="container-fluid">       
             <!-- header -->
-            <!-- <div class="row mt-3">
-                <div class="col-2">
+            <div class="row mt-3">
+                <!-- <div class="col-2">
                     <a class="text-decoration-none" href="home.html" style="width: min-content;">
                         <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
                             <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028" width="50rem" height="50rem">
@@ -29,7 +29,7 @@
                         </div>
                     </a>
                 </div>
-                <h1 class="col-8 fw-bold text-center text-light" style="font-family: 'Itim', cursive; font-size: 360%; letter-spacing: 2px;">กาชาสอยดาว</h1>
+                <h1 class="col-8 fw-bold text-center text-light" style="font-family: 'Itim', cursive; font-size: 360%; letter-spacing: 2px;">กาชาสอยดาว</h1> -->
                 <div class="col-2">
                     <a class="text-decoration-none" href="editprofile.html" >
                         <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
@@ -38,16 +38,16 @@
                         </div>
                     </a>
                 </div>
-            </div> -->
+            </div>
 
             <div id="myModal" class="modal">
                 <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontent" id="modalcontent">
                     <h5 class="mt-3 mb-1 fw-bold">โปรดระบุรหัสห้อง</h5><br>
                     <input type="text" class="form-control w-75 mx-auto mb-0" placeholder="รหัสห้อง" id="roomid" aria-describedby="basic-addon"><br>
                     <h6 class="text-danger" id="noroom">ไม่พบห้องดังกล่าว</h6>
-                    <div class="col-11 mx-auto mt-0" id="displayroom"></div>
-                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" style="width: 10rem; height: 3rem;" onclick="findRoom()">ค้นหาห้อง</button>
-                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" style="width: 10rem; height: 3rem;" onclick="closeModel()">ยกเลิก</button>
+                    <div class="col-12 col-sm-11 mx-auto mt-0" id="displayroom"></div>
+                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" onclick="findRoom()">ค้นหาห้อง</button>
+                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" onclick="closeModel()">ยกเลิก</button>
                 </div>
             </div>
 
@@ -85,14 +85,14 @@
                                         <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 95/40 ชิ้น</h6>
                                     </div>
                                     <div class="col-3">
-                                        <button class="mb-1 btn btn-secondary rounded-pill firstbtn w-100 p-0 " onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
+                                        <button class="mb-1 btn btn-secondary rounded-pill firstbtn w-100 p-0" onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
                                         <button class="mb-1 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ปิดห้อง</button><br>
                                         <button class="mb-0 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ลบห้องออก</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 bg-light border-dark border border-2 rounded-3 p-lg-2 mt-1" style="height: 49%;">
+                        <div class="col-12 bg-light border-dark border border-2 rounded-3 p-lg-2 mt-1 roomlist" style="height: 49%;">
                             <h5>ห้องที่คุณเข้าร่วม</h5>
                                 <div class="mx-auto px-1 px-lg-2 overflow-auto" style="height: 80%;" id="joinroom">
 
@@ -103,6 +103,6 @@
                 </div>
             </div>
         </div>
-        <!-- <script src="js/home.js"></script> -->
+        <script src="js/home.js"></script>
     </body>
 </html>
