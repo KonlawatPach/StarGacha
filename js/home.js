@@ -1,4 +1,5 @@
 var cerrentuserid;
+var deleteroomid;
 firebase.auth().onAuthStateChanged((user) => {
     cerrentuserid = user.uid;
     document.getElementById("Displayname").textContent = user.displayName;
@@ -32,24 +33,44 @@ function loadUserData(){
         $("#makeroom").html("");
         for(let m = makeroom.length-1; m>=0; m--){            //makelist
             let status;
-            if(makeroom[m].data().status) status = "เปิด"
-            else status = "ปิด"
-            $(`
-                <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
-                    <img class="col-3 rounded-circle px-0 img-fluid" src="` + makeroom[m].data().picture + `">
-                    <div class="col-6">
-                        <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง `+ makeroom[m].data().room +`</h6>
-                        <h6 style="font-size: 90%;">สถานะห้อง : `+ status +`</h6>
-                        <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ makeroom[m].data().name.length + `/` + makeroom[m].data().maxname +` คน</h6>
-                        <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : `+ makeroom[m].data().giftQuantity.reduce((a, b) => a + b) + `/` + makeroom[m].data().allgiftnum +` ชิ้น</h6>
+            if(makeroom[m].data().status){
+                status = "เปิด";
+                $(`
+                    <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
+                        <img class="col-3 rounded-circle px-0 img-fluid" src="` + makeroom[m].data().picture + `">
+                        <div class="col-6">
+                            <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง `+ makeroom[m].data().room +`</h6>
+                            <h6 style="font-size: 90%;">สถานะห้อง : `+ status +`</h6>
+                            <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ makeroom[m].data().name.length + `/` + makeroom[m].data().maxname +` คน</h6>
+                            <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : `+ makeroom[m].data().giftQuantity.reduce((a, b) => a + b) + `/` + makeroom[m].data().allgiftnum +` ชิ้น</h6>
+                        </div>
+                        <div class="col-3">
+                            <button class="mb-1 btn btn-secondary rounded-pill firstbtn w-100 p-0" onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
+                            <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" onclick="closeRoom('`+ makeroom[m].id +`')">ปิดห้อง</button><br>
+                            <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" onclick="deleteRoom('`+ makeroom[m].id +`')">ลบห้องออก</button>
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <button class="mb-1 btn btn-secondary rounded-pill firstbtn w-100 p-0" onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
-                        <button class="mb-1 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ปิดห้อง</button><br>
-                        <button class="mb-0 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ลบห้องออก</button>
+                `).appendTo( "#makeroom" );
+            }
+            else{
+                status = "ปิด";
+                $(`
+                    <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
+                        <img class="col-3 rounded-circle px-0 img-fluid" src="` + makeroom[m].data().picture + `">
+                        <div class="col-6">
+                            <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง `+ makeroom[m].data().room +`</h6>
+                            <h6 style="font-size: 90%;">สถานะห้อง : `+ status +`</h6>
+                            <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ makeroom[m].data().name.length + `/` + makeroom[m].data().maxname +` คน</h6>
+                            <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : `+ makeroom[m].data().giftQuantity.reduce((a, b) => a + b) + `/` + makeroom[m].data().allgiftnum +` ชิ้น</h6>
+                        </div>
+                        <div class="col-3">
+                            <button class="mb-1 btn btn-secondary rounded-pill firstbtn w-100 p-0" onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
+                            <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0" onclick="openRoom('`+ makeroom[m].id +`')">เปิดห้อง</button><br>
+                            <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" onclick="deleteRoom('`+ makeroom[m].id +`')">ลบห้องออก</button>
+                        </div>
                     </div>
-                </div>
-            `).appendTo( "#makeroom" );
+                `).appendTo( "#makeroom" );
+            }
         }
 
         $("#joinroom").html("");
@@ -120,7 +141,10 @@ function findRoom(){
                 else status = "ปิด"
                 document.getElementById("displayroom").style.display = "block";
                 $("#displayroom").html("");
-                if(item.data().autoallow){      //รับอัตโนมัติ
+                if(!item.data().status){
+                    document.getElementById("noroom").style.display = "block";
+                }
+                else if(item.data().autoallow){      //รับอัตโนมัติ
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
                             <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
@@ -196,11 +220,11 @@ function findRoom(){
 function joinRoom(roomid){
     db.collection("room").doc(roomid).get().then((item) => {
         if(!item.data().name.includes(cerrentuserid)){
-            let newname = [...item.data().name]
-            let newcount = [...item.data().count]
-            newname.push(cerrentuserid)
-            newcount.push(item.data().startcount)
             db.runTransaction((transaction) => {
+                let newname = [...item.data().name]
+                let newcount = [...item.data().count]
+                newname.push(cerrentuserid)
+                newcount.push(item.data().startcount)
                 return transaction.get(db.collection("room").doc(roomid)).then((item) => {
                     transaction.update(db.collection("room").doc(roomid), {
                         name:newname,
@@ -209,11 +233,11 @@ function joinRoom(roomid){
                 });
             }).then(() => {
                 db.collection("user").doc(cerrentuserid).get().then((user) => {
-                    let newjoinroom = [...user.data().joinroom]
-                    let index = newjoinroom.indexOf(roomid);
-                    if (index !== -1) newjoinroom.splice(index, 1);
-                    newjoinroom.push(roomid)
                     db.runTransaction((transaction) => {
+                        let newjoinroom = [...user.data().joinroom]
+                        let index = newjoinroom.indexOf(roomid);
+                        if (index !== -1) newjoinroom.splice(index, 1);
+                        newjoinroom.push(roomid)
                         return transaction.get(db.collection("user").doc(cerrentuserid)).then((user) => {
                             transaction.update(db.collection("user").doc(cerrentuserid), { joinroom:newjoinroom });
                         });
@@ -249,17 +273,17 @@ function sendRoomID(roomid){
 function sendRequest(roomid){
     document.getElementById("send").disabled = true;
     db.collection("room").doc(roomid).get().then((item) => {
-        let newwaitinglist = [...item.data().waitinglist]
-        newwaitinglist.push(cerrentuserid)
         db.runTransaction((transaction) => {
+            let newwaitinglist = [...item.data().waitinglist]
+            newwaitinglist.push(cerrentuserid)
             return transaction.get(db.collection("room").doc(roomid)).then((item) => {
                 transaction.update(db.collection("room").doc(roomid), { waitinglist:newwaitinglist });
             });
         }).then(() => {
             db.collection("user").doc(cerrentuserid).get().then((user) => {
-                let newwaitroom = [...user.data().waitroom]
-                newwaitroom.push(roomid)
                 db.runTransaction((transaction) => {
+                    let newwaitroom = [...user.data().waitroom]
+                    newwaitroom.push(roomid)
                     return transaction.get(db.collection("user").doc(cerrentuserid)).then((user) => {
                         transaction.update(db.collection("user").doc(cerrentuserid), { waitroom:newwaitroom });
                     });
@@ -275,19 +299,19 @@ function sendRequest(roomid){
 function cancelWaiting(roomid){
     document.getElementById(roomid).disabled = true;
     db.collection("room").doc(roomid).get().then((item) => {
-        let newwaitinglist = [...item.data().waitinglist]
-        let index = newwaitinglist.indexOf(cerrentuserid);
-        if (index !== -1) newwaitinglist.splice(index, 1);
         db.runTransaction((transaction) => {
+            let newwaitinglist = [...item.data().waitinglist]
+            let index = newwaitinglist.indexOf(cerrentuserid);
+            if (index !== -1) newwaitinglist.splice(index, 1);
             return transaction.get(db.collection("room").doc(roomid)).then((item) => {
                 transaction.update(db.collection("room").doc(roomid), { waitinglist:newwaitinglist });
             });
         }).then(() => {
             db.collection("user").doc(cerrentuserid).get().then((user) => {
-                let newwaitroom = [...user.data().waitroom]
-                let index = newwaitroom.indexOf(roomid);
-                if (index !== -1) newwaitroom.splice(index, 1);
                 db.runTransaction((transaction) => {
+                    let newwaitroom = [...user.data().waitroom]
+                    let index = newwaitroom.indexOf(roomid);
+                    if (index !== -1) newwaitroom.splice(index, 1);
                     return transaction.get(db.collection("user").doc(cerrentuserid)).then((user) => {
                         transaction.update(db.collection("user").doc(cerrentuserid), { waitroom:newwaitroom });
                     });
@@ -301,10 +325,10 @@ function cancelWaiting(roomid){
 
 function deleteJoinRoom(roomid){
     db.collection("user").doc(cerrentuserid).get().then((user) => {
-        let newjoinroom = [...user.data().joinroom]
-        let index = newjoinroom.indexOf(roomid);
-        if (index !== -1) newjoinroom.splice(index, 1);
         db.runTransaction((transaction) => {
+            let newjoinroom = [...user.data().joinroom]
+            let index = newjoinroom.indexOf(roomid);
+            if (index !== -1) newjoinroom.splice(index, 1);
             return transaction.get(db.collection("user").doc(cerrentuserid)).then((user) => {
                 transaction.update(db.collection("user").doc(cerrentuserid), { joinroom:newjoinroom });
             });
@@ -312,4 +336,91 @@ function deleteJoinRoom(roomid){
             alert("ลบห้องออกจากการมองเห็นสำเร็จ")
         });
     });
+}
+
+function closeRoom(roomid){
+    db.runTransaction((transaction) => {
+        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
+            transaction.update(db.collection("room").doc(roomid), {
+                status: false
+            });
+        }).then(() => {
+            alert("ปิดห้องสำเร็จ")
+            loadUserData()
+        });
+    })
+}
+
+function openRoom(roomid){
+    db.runTransaction((transaction) => {
+        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
+            transaction.update(db.collection("room").doc(roomid), {
+                status: true
+            });
+        }).then(() => {
+            alert("เปิดห้องสำเร็จ")
+            loadUserData()
+        });
+    })
+}
+
+function deleteRoom(roomid){
+    db.collection("room").doc(roomid).get().then((room) => {
+        $("#deleteroomname").html("จะลบห้อง " + room.data().room + " จริงๆหยอ");
+    });
+    deleteroomid = roomid;
+    document.getElementById("myModaldelete").style.display = "block";
+    document.getElementById("modalcontentdelete").style.display = "none";
+    $("#modalcontentdelete").slideDown(200);
+}
+
+function deleteRoomID(){
+    ref.child('roomImage/'+ deleteroomid +'.jpg').delete().catch((error) => {
+        ref.child('roomImage/'+ deleteroomid +'.png').delete().catch((error) => {
+            ref.child('roomImage/'+ deleteroomid +'.gif').delete()
+        })
+    }).then(() => {
+        db.collection("room").doc(roomid).get().then(async (room) => {
+            for(let joinid of room.data().name){
+                await db.runTransaction((transaction) => {
+                    return transaction.get(db.collection("user").doc(joinid)).then((user) => {
+                        let newjoinroom = [...user.data().joinroom]
+                        let index = newjoinroom.indexOf(deleteroomid);
+                        if (index !== -1) newjoinroom.splice(index, 1);
+                        transaction.update(db.collection("user").doc(joinid), { joinroom:newjoinroom });
+                    });
+                });
+            }
+
+            for(let waitid of room.data().waitinglist){
+                await db.runTransaction((transaction) => {
+                    return transaction.get(db.collection("user").doc(waitid)).then((user) => {
+                        let newwaitroom = [...user.data().waitroom]
+                        let index = newwaitroom.indexOf(deleteroomid);
+                        if (index !== -1) newwaitroom.splice(index, 1);
+                        transaction.update(db.collection("user").doc(waitid), { waitroom:newwaitroom });
+                    });
+                });
+            }
+
+            db.runTransaction((transaction) => {
+                return transaction.get(db.collection("user").doc(cerrentuserid)).then((user) => {
+                    let newmakeroom = [...user.data().makeroom]
+                    let index = newmakeroom.indexOf(deleteroomid);
+                    if (index !== -1) newmakeroom.splice(index, 1);
+                    transaction.update(db.collection("user").doc(cerrentuserid), { makeroom:newmakeroom });
+                });
+            });
+        }).then(() => {
+            db.collection('room').doc(deleteroomid).delete().then(() => {
+                alert("ลบห้องสำเร็จ")
+                document.getElementById("myModaldelete").style.display = "none";
+            });
+        });
+    });
+}
+
+function closeModelDelete(){
+    $("#modalcontentdelete").slideUp()
+    document.getElementById("myModaldelete").style.display = "none";
 }

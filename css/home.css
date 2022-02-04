@@ -35,7 +35,7 @@ body{
 	background-color: rgb(227, 224, 241);
 }
 
-.modal {
+.modal, .modaldelete {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -48,7 +48,7 @@ body{
 	background-color: rgba(0,0,0,0.4);
 }
 
-.modalcontent {
+.modalcontent, .modalcontentdelete {
 	display: none;
 	background-color: #fefefe;
 	margin: 10% auto;
@@ -57,7 +57,7 @@ body{
 	transition: 0.5s;
 }
 
-.modalcontent button{
+.modalcontent button, .modalcontentdelete button{
 	width: 10rem;
 	height: 3rem;
 }
@@ -121,8 +121,24 @@ h5{
 	height: 2.5rem;
 }
 
+.header{
+	position: absolute;
+	z-index: 1;
+	left: 5%;
+	top: 10%;
+}
+
+.header h5,h6{
+	font-size: 120%;
+}
+
+.header img{
+	width: 3.5rem;
+	height: 3.5rem;
+}
+
 @media only screen and (max-width: 1200px) {
-	.modalcontent {
+	.modalcontent, .modalcontentdelete {
 		width: 60%;
 	}
 
@@ -132,7 +148,7 @@ h5{
 }
 
 @media only screen and (max-width: 992px) {
-	.modalcontent {
+	.modalcontent, .modalcontentdelete  {
 		width: 70%;
 	}
 
@@ -164,10 +180,20 @@ h5{
 	#right{
 		width: 56%;
 	}
+
+	.header h5,h6{
+		font-size: 80%;
+	}
+	
+	/* 1.4rem */
+	.header img{
+		width: 2.6rem;
+		height: 2.6rem;
+	}
 }
 
 @media only screen and (max-width: 766px) {
-	.modalcontent {
+	.modalcontent, .modalcontentdelete  {
 		width: 86%;
 	}
 
@@ -189,6 +215,15 @@ h5{
 		width: 100%;
 		height: 62%;
 	}
+
+	.header h5,h6{
+		font-size: 70%;
+	}
+	
+	.header img{
+		width: 1.5rem;
+		height: 1.5rem;
+	}
 }
 
 @media only screen and (max-width: 524px) {
@@ -209,11 +244,11 @@ h5{
 
 
 @media only screen and (max-width: 474px) {
-	.modalcontent {
+	.modalcontent, .modalcontentdelete  {
 		width: 99%;
 	}
 
-	.modalcontent button{
+	.modalcontent button, .modalcontentdelete button{
 		width: 8rem;
 	}
 
@@ -262,5 +297,14 @@ h5{
 
 	#send{
 		font-size: 120%;
+	}
+
+	.header h5,h6{
+		font-size: 60%;
+	}
+	
+	.header img{
+		width: 1.36rem;
+		height: 1.36rem;
 	}
 }

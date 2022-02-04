@@ -18,25 +18,28 @@
     <title>กาชาสอยดาว</title>
 </head>
     <body>
-        <div class="container-fluid">       
+        <div class="container-fluid mt-0 mt-md-3 px-0">       
             <!-- header -->
-            <div class="row mt-3">
-                <!-- <div class="col-2">
-                    <a class="text-decoration-none" href="home.html" style="width: min-content;">
-                        <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
-                            <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028" width="50rem" height="50rem">
-                            <h5 class="d-inline fw-bold text-dark">กาชาสอยดาว</h5>
-                        </div>
-                    </a>
-                </div>
-                <h1 class="col-8 fw-bold text-center text-light" style="font-family: 'Itim', cursive; font-size: 360%; letter-spacing: 2px;">กาชาสอยดาว</h1> -->
-                <div class="col-2">
-                    <a class="text-decoration-none" href="editprofile.html" >
-                        <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
-                            <img id="imgProfile" class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem" height="50rem">
-                            <h6 id="Displayname" class="fw-bold text-dark d-inline">Anonymous</h6>
-                        </div>
-                    </a>
+            <div class="px-0 d-block">
+                <h1 class="text-center text-light" style="font-family: 'Itim', cursive; font-size: 360%;">กาชาสอยดาว</h1>
+                <div class="row mx-auto header" style="width: 90%;">
+                    <div class="col-3 px-0 mx-0">
+                        <a class="text-decoration-none" href="home.html">
+                            <div class="row border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
+                                <img class="col-3 p-0 rounded-circle border border-1 border-dark img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028">
+                                <h5 class="col-9 mt-1 mt-md-2 mt-lg-3 fw-bold text-dark px-0 mx-0">กาชาสอยดาว</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 px-0 mx-0"></div>
+                    <div class="col-3 px-0 mx-0">
+                        <a class="text-decoration-none" href="editprofile.html">
+                            <div class="row border border-2 rounded-pill border-dark p-1 hover">
+                                <img id="imgProfile" class="col-3 p-0 rounded-circle border border-1 border-dark img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c">
+                                <h6 id="Displayname" class="col-9 mt-1 mt-md-2 mt-lg-3 fw-bold text-dark text-center textcut mx-0">Anonymous</h6>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -44,10 +47,18 @@
                 <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontent" id="modalcontent">
                     <h5 class="mt-3 mb-1 fw-bold">โปรดระบุรหัสห้อง</h5><br>
                     <input type="text" class="form-control w-75 mx-auto mb-0" placeholder="รหัสห้อง" id="roomid" aria-describedby="basic-addon"><br>
-                    <h6 class="text-danger" id="noroom">ไม่พบห้องดังกล่าว</h6>
+                    <h6 class="text-danger" id="noroom">ไม่พบห้องดังกล่าวหรือห้องกำลังปิดอยู่</h6>
                     <div class="col-12 col-sm-11 mx-auto mt-0" id="displayroom"></div>
                     <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" onclick="findRoom()">ค้นหาห้อง</button>
                     <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" onclick="closeModel()">ยกเลิก</button>
+                </div>
+            </div>
+
+            <div id="myModaldelete" class="modaldelete">
+                <div class="bg-light text-center border border-3 rounded-3 border-dark modalcontentdelete" id="modalcontentdelete">
+                    <h5 class="mt-3 mb-1 fw-bold" id="deleteroomname"></h5><br>
+                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto" onclick="deleteRoomID()">ลบเลย</button>
+                    <button type="button" class="border border-1 rounded-3 border-dark hover my-3 mx-auto"  onclick="closeModelDelete()">อย่าาา</button>
                 </div>
             </div>
 
@@ -56,7 +67,7 @@
                 <!-- head in box -->
                 <div class="row mx-auto">   
                     <div class="col">
-                        <h1 class="fw-bold text-center mt-2 mb-3" id="head" style="font-family: 'Itim', cursive;">ยินดีต้อนรับ</h1>
+                        <h1 class="fw-bold text-center mt-4 mt-md-2 mb-3" id="head" style="font-family: 'Itim', cursive;">ยินดีต้อนรับ</h1>
                     </div>
                 </div>
 
@@ -76,20 +87,6 @@
                         <div class="col-12 bg-light border-dark border border-2 rounded-3 p-lg-2 overflow-auto" style="height: 50%;">
                             <h5>ห้องที่คุณสร้าง</h5>
                             <div class="mx-auto overflow-auto px-1 px-xl-2 roomlist" style="height: 80%;" id="makeroom">
-                                <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
-                                    <img class="col-3 rounded-circle px-0 img-fluid" src="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp">
-                                    <div class="col-6">
-                                        <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง บูรพาชายชาตรี</h6>
-                                        <h6 style="font-size: 90%;">สถานะห้อง : เปิด</h6>
-                                        <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : 9/40 คน</h6>
-                                        <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : 95/40 ชิ้น</h6>
-                                    </div>
-                                    <div class="col-3">
-                                        <button class="mb-1 btn btn-secondary rounded-pill firstbtn w-100 p-0" onclick="sendRoomID('`+ makeroom[m].id +`')">เข้าร่วม</button><br>
-                                        <button class="mb-1 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ปิดห้อง</button><br>
-                                        <button class="mb-0 btn btn-secondary rounded-pill disabled w-100 p-0" onclick="closeRoom(`+ makeroom[m].id +`)">ลบห้องออก</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-12 bg-light border-dark border border-2 rounded-3 p-lg-2 mt-1 roomlist" style="height: 49%;">

@@ -28,25 +28,21 @@ function getData(){
 }
 
 function realTimeupdate(){
-    db.collection("room").doc(roomid).onSnapshot(async (item) => {
-        checkname(item.data().name);//////////////////////////////////////////////////////////อย่าลืมมาเปิดตอนใช้งานจริงด้วย
+    db.collection("room").doc(roomid).onSnapshot((item) => {
+        checkname(item.data().name);
         addGiftlist(item.data().giftName, item.data().giftQuantity);
         addRoomname(item.data().room);
         adduserlist(item.data().name, item.data().admin);
         addReward(item.data().rewarduser, item.data().rewardgift);
         addCount(item.data().name, item.data().count);
-        if(await areAdmin()){addWaitlist(item.data().waitinglist);}
+        if(areAdmin(item.data().admin)){addWaitlist(item.data().waitinglist);}
         // addWaitlist(item.data().waitinglist);
     });
 }
 
 //Unit Automatic Function
-async function areAdmin(){
-    let x;
-    await db.collection("room").doc(roomid).get().then((item) => {  
-        x = item.data().admin
-    });
-    return Cerrentuser.uid == x;
+function areAdmin(adminid){
+    return Cerrentuser.uid == adminid;
 }
 
 function addWaitlist(idlist){
@@ -54,38 +50,32 @@ function addWaitlist(idlist){
     let sortidlist = [];        //ข้อมูล ID ที่เรียงแล้ว
     let sortnamelist = [];      //ข้อมูลชื่อที่เรียงแล้ว
     let temp;
-    
     if (idlist.length == 0){
         $("#wwaitlist").html("");
     }
-
-    if (usernumber != idlist.length){       //ถ้ามีรายชื่อเพิ่มหรือลดจะอัพเดทใหม่ยกเครื่อง
-        usernumber = idlist.length;
-        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).onSnapshot(async (users) => {
-            temp = sortName(users);
-            sortidlist = temp[0];
-            sortnamelist = temp[1];
-            let pictureurl = temp[2];
-
-            $("#wwaitlist").html("");
-            for(let i in sortidlist){
-                $(`
-                    <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                        <div class="row">
-                            <div class="col-7">
-                                <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px">
-                                <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
-                            </div>
-                            <div class="col-4 d-inline">
-                                <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="accept('`+ sortidlist[i] +`')">ยอมรับ</button><br>
-                                <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="deny('`+ sortidlist[i] +`')">ปฏิเสธ</button>
-                            </div>
+    db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).get().then((users) => {
+        temp = sortName(users);
+        sortidlist = temp[0];
+        sortnamelist = temp[1];
+        let pictureurl = temp[2];
+        $("#wwaitlist").html("");
+        for(let i in sortidlist){
+            $(`
+                <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
+                    <div class="row">
+                        <div class="col-7">
+                            <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px">
+                            <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
+                        </div>
+                        <div class="col-4 d-inline">
+                            <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="accept('`+ sortidlist[i] +`')">ยอมรับ</button><br>
+                            <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="deny('`+ sortidlist[i] +`')">ปฏิเสธ</button>
                         </div>
                     </div>
-                `).appendTo( "#wwaitlist" );
-            }
-        })
-    }
+                </div>
+            `).appendTo( "#wwaitlist" );
+        }
+    })
 }
 
 function addGiftlist(giftname, giftnum){
@@ -128,7 +118,7 @@ function adduserlist(idlist, adminid){
     let temp;
 
     if (usernumber != idlist.length){       //ถ้ามีรายชื่อเพิ่มหรือลดจะอัพเดทใหม่ยกเครื่อง
-        usernumber = idlist.length;        
+        usernumber = idlist.length;       
 
         db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).onSnapshot(async (users) => {
             temp = sortName(users);
