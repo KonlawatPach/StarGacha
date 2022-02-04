@@ -125,7 +125,7 @@ h5{
 	position: absolute;
 	z-index: 1;
 	left: 5%;
-	top: 10%;
+	top: 60px;
 }
 
 .header h5,h6{
@@ -182,7 +182,7 @@ h5{
 	}
 
 	.header h5,h6{
-		font-size: 80%;
+		font-size: 95%;
 	}
 	
 	/* 1.4rem */
@@ -217,7 +217,7 @@ h5{
 	}
 
 	.header h5,h6{
-		font-size: 70%;
+		font-size: 90%;
 	}
 	
 	.header img{
@@ -297,6 +297,10 @@ h5{
 
 	#send{
 		font-size: 120%;
+	}
+
+	.header{
+		top: 65px;
 	}
 
 	.header h5,h6{
