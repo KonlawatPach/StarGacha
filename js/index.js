@@ -4,7 +4,6 @@ $("#subHead").html(randomlist[Math.floor((Math.random()*10)%5)]);
 
 
 function clearInput(){
-    document.getElementById("email").value = "";
     document.getElementById("password").value = "";
 }
 

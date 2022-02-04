@@ -1,6 +1,8 @@
 var cerrentuserid;
 var deleteroomid;
 firebase.auth().onAuthStateChanged((user) => {
+    sessionStorage.setItem("userid", user.uid);
+    sessionStorage.setItem("prev", 'home');
     cerrentuserid = user.uid;
     document.getElementById("Displayname").textContent = user.displayName;
     document.getElementById("imgProfile").src = user.photoURL;

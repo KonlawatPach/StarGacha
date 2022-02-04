@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300&display=swap');
+
+body{
+	background-image: url("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/background.png?alt=media&token=1d27b417-d2fd-4878-84f2-0a0f61b1d43a");
+	background-size: cover;
+	font-family: 'Prompt', sans-serif;
+	height: 100%;
+}
+
+.glass{
+    background-color: rgb(231, 236, 255);
+}
+
+h1{
+    font-size: 400%;
+}
+
+.container{
+    width: 40%;
+}
+
+.profilebutton{
+    background-color: rgb(189, 198, 240);
+    width: 40%;
+}
+
+.profilebutton:hover{
+    background-color: rgb(149, 160, 211);
+}
+
+#signout{
+    background-color: rgb(176, 149, 211);
+}
+
+#signout:hover{
+    background-color: rgb(164, 127, 212);
+}
+
+@media only screen and (max-width: 1100px) {
+    .container{
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .container{
+        width: 70%;
+    }
+
+    .profilebutton{
+        width: 36%;
+    }
+
+    .profilebutton{
+        width: 42%;
+        font-size: 16px;
+    }
+
+    .data h3{
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .container{
+        width: 90%;
+    }
+
+    h1{
+        font-size: 300%;
+    }
+
+    img{
+        width: 120px;
+        height: 120px;
+    }
+
+    .data h3{
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .data h3{
+        font-size: 14px;
+    }
+
+    .profilebutton{
+        width: 42%;
+        font-size: 12px;
+    }
+}

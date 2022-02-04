@@ -1,12 +1,14 @@
 //////////////////////////////////////////////////////////////////
 var roomid =  sessionStorage.getItem("roomid");                 //
 //////////////////////////////////////////////////////////////////
+sessionStorage.setItem("prev", 'gacharoom');
 
 // get data from firebase to display in hostroom.
 var storageRef = firebase.storage().ref();
 var Cerrentuser;
 firebase.auth().onAuthStateChanged((user) => {
     Cerrentuser = user
+    sessionStorage.setItem("userid", Cerrentuser.uid);
     document.getElementById("Displayname").textContent = user.displayName;
     document.getElementById("imgProfile").src = user.photoURL;
     getData();
@@ -64,7 +66,7 @@ function addWaitlist(idlist){
                 <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
                     <div class="row">
                         <div class="col-7">
-                            <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px">
+                            <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px" style="cursor: pointer;" onclick="seeProfile('`+ sortidlist[i] +`')>
                             <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
                         </div>
                         <div class="col-4 d-inline">
@@ -131,7 +133,7 @@ function adduserlist(idlist, adminid){
                 if(sortidlist[i] != adminid){
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem">
+                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem" style="cursor: pointer;" onclick="seeProfile('`+ sortidlist[i] +`')">
                             <h6 class="d-inline ms-2">`+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );
@@ -139,7 +141,7 @@ function adduserlist(idlist, adminid){
                 else{
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem">
+                        <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem" style="cursor: pointer;" onclick="seeProfile('`+ sortidlist[i] +`')">
                             <h6 class="d-inline ms-2">👑 `+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );
@@ -347,6 +349,11 @@ function deny(userid){
             });
         })
     });
+}
+
+function seeProfile(userid) {
+    sessionStorage.setItem("userid", userid);
+    document.location='viewprofile.html';
 }
 
 function slideLeft() {
