@@ -33,3 +33,42 @@ function ValidateEmail(mail){
     }
     return (false)
 }
+
+function setEmail(){
+    document.getElementById("myModal").style.display = "block";
+    document.getElementById("modalcontent").style.display = "none";
+    $("#modalcontent").slideDown(200);
+}
+
+function closeModel(){
+    $("#modalcontent").slideUp()
+    document.getElementById("myModal").style.display = "none";
+    document.getElementById("forgetemail").value = "";
+}
+
+function forgetPass(){
+    let forgetemail = document.getElementById("forgetemail").value;
+    document.getElementById("forgetsend").disabled = true;
+    if(ValidateEmail(forgetemail)){
+        firebase.auth().sendPasswordResetEmail(forgetemail).then(() => {
+            alert("ส่งอีเมลล์ยืนยันไปแล้ว")
+            document.getElementById("counter").style.display = "block";
+            var count = 60, timer = setInterval(function() {
+                $("#counter").html('ส่งอีเมลล์ยืนยันได้อีกครั้งใน ' + count-- +' วินาที');
+                if(count == 0){
+                    clearInterval(timer);
+                    document.getElementById("forgetsend").disabled = false;
+                    document.getElementById("counter").style.display = "none";
+                }
+            }, 1000);
+        })
+        .catch((error) => {
+            alert("ส่งอีเมลล์ยืนยันผิดพลาด")
+            document.getElementById("forgetsend").disabled = false;
+        });
+    }
+    else{
+        alert("You have entered an invalid email address!")
+        document.getElementById("forgetsend").disabled = false;
+    }
+}

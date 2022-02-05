@@ -48,6 +48,41 @@ button{
   width: 25%;
 }
 
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+
+.modalcontent {
+	display: none;
+	background-color: #fefefe;
+	margin: 5% auto;
+	padding: 5px;
+	width: 40%;
+	transition: 0.5s;
+}
+
+.modalcontent button{
+  background-color: #fefefe;
+  width: 10rem;
+  height: 3rem;
+}
+
+.modalcontent button:hover{
+  background-color: #e2e2e2;
+}
+
+#counter{
+  display: none;
+}
 
 @media only screen and (max-width: 992px) {
 	.container {
@@ -57,6 +92,10 @@ button{
   button{
     width: 30%;
   }
+
+  .modalcontent {
+		width: 60%;
+	}
 }
 
 @media only screen and (max-width: 576px) {
@@ -82,5 +121,14 @@ button{
 
   button{
     width: 42%;
+  }
+
+  .modalcontent {
+		width: 80%;
+	}
+
+  .modalcontent button{
+    width: 7.8rem;
+    height: 3rem;
   }
 }

@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="js/firebase.js"></script>
-    <!-- <script src="js/logincheck.js"></script> -->
-    <link rel="stylesheet" href="css/viewprofile.css">
-    <title>กาชาสอยดาว</title>
-</head>
-<body>
-    <div class="container-fluid text-center mt-3 mt-sm-2">
-        <h1 class="fw-bold text-light mb-3" style="font-family: 'Itim', cursive;">จับสลากสอยดาว</h1>
-        <div class="container rounded-3 p-2" style="background-color: rgb(156, 168, 180);">
-        <div class="mx-auto border-dark rounded-circle" style="height: 20px; width: 20px; background-color: slateblue;"></div>
-        <div class="bg-light rounded-3 p-2 m-2">
-            <h3 class="mt-1 fw-bold" id="headname">ข้อมูลผู้ใช้ของ </h3>
-            <img id="image" class="border border-5 border my-3" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="200px" height="200px" style="object-fit: cover;">
-            <div class="text-start mx-1 mx-sm-3 mx-md-4 mx-xxl-5 mt-3 data">
-                <h3 class="h5 mt-2" id="name" >ชื่อผู้ใช้ : </h3>
-                <h3 class="h5 mt-3" id="uid" >รหัสผู้ใช้ : </h3>
-                <h3 class="h5 mt-3" style="display: none;" id="email" >Email : </h3>
-            </div>
-            <div class="mt-5 mb-2">
-                <button class="btn btn-lg border-dark mx-2 fw-bold profilebutton" style="display: none;" id="config" type="button" onclick="document.location = 'editprofile.html'">แก้ไขบัญชีผู้ใช้</button>
-                <button class="btn btn-lg border-dark mx-2 fw-bold profilebutton" type="button" onclick="document.location = prev + '.html'">ย้อนกลับ</button><br>
-                <button class="btn btn-lg border-dark mx-auto fw-bold profilebutton mt-3" style="display: none;" id="signout" type="button" onclick="signOut()">ออกจากระบบ</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="js/firebase.js"></script>
+        <script src="js/logincheck.js"></script>
+        <link rel="stylesheet" href="css/viewprofile.css">
+        <title>กาชาสอยดาว</title>
+    </head>
+    <body>
+        <div class="container-fluid text-center mt-3 mt-sm-2">
+            <h1 class="fw-bold text-light mb-3" style="font-family: 'Itim', cursive;">จับสลากสอยดาว</h1>
+            <div class="container rounded-3 p-2" style="background-color: rgb(156, 168, 180);">
+            <div class="mx-auto border-dark rounded-circle" style="height: 20px; width: 20px; background-color: slateblue;"></div>
+            <div class="bg-light rounded-3 p-2 m-2">
+                <h3 class="mt-1 fw-bold" id="headname">ข้อมูลผู้ใช้ของ </h3>
+                <img id="image" class="border border-5 border my-3" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="200px" height="200px" style="object-fit: cover;">
+                <div class="text-start mx-1 mx-sm-3 mx-md-4 mx-xxl-5 mt-3 data">
+                    <h3 class="h5 mt-2" id="name" >ชื่อผู้ใช้ : </h3>
+                    <h3 class="h5 mt-3" id="uid" >รหัสผู้ใช้ : </h3>
+                    <h3 class="h5 mt-3" style="display: none;" id="email" >Email : </h3>
+                </div>
+                <div class="mt-5 mb-2">
+                    <button class="btn btn-lg border-dark mx-2 fw-bold profilebutton" style="display: none;" id="config" type="button" onclick="document.location = 'editprofile.html'">แก้ไขบัญชีผู้ใช้</button>
+                    <button class="btn btn-lg border-dark mx-2 fw-bold profilebutton" type="button" onclick="document.location = prev + '.html'">ย้อนกลับ</button><br>
+                    <button class="btn btn-lg border-dark mx-auto fw-bold profilebutton mt-3" style="display: none;" id="signout" type="button" onclick="signOut()">ออกจากระบบ</button>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="js/viewprofile.js"></script>
-</body>
+        <script src="js/viewprofile.js"></script>
+    </body>
 </html>

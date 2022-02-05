@@ -1,11 +1,6 @@
-// firebase.auth().onAuthStateChanged((user) => {
-//     console.log(user.photoURL)
-//     document.getElementById("Displayname").textContent = user.displayName;
-//     document.getElementById("imgProfile").src = user.photoURL;
-// });
-
+var changeProfile = false;
 firebase.auth().onAuthStateChanged((user) => {
-    if(!user){
+    if(!user && !changeProfile){
         document.location='index.html';
     }
 });

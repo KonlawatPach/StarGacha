@@ -368,7 +368,7 @@ function openRoom(roomid){
 
 function deleteRoom(roomid){
     db.collection("room").doc(roomid).get().then((room) => {
-        $("#deleteroomname").html("จะลบห้อง " + room.data().room + " จริงๆหยอ");
+        $("#deleteroomname").html("จะลบห้อง " + room.data().room + " จริงๆหรือไม่");
     });
     deleteroomid = roomid;
     document.getElementById("myModaldelete").style.display = "block";
