@@ -80,15 +80,29 @@ async function addRoom(){
     status: statusroom,
     waitinglist: []
   }).then((newroomid) => {
-    db.collection("user").doc(currentuserid).get().then((user)=> {
+      db.collection("user").doc(currentuserid).get().then((user)=> {
       let newmakeroom = [...user.data().makeroom]
       newmakeroom.push(newroomid.id)
       db.collection("user").doc(currentuserid).update({
-        makeroom: newmakeroom
-      }).then(() => {
-        alert("สร้างห้องเสร็จแล้วUSERโง่")
+      makeroom: newmakeroom
+      }).then(async () => {
+        if(file !== undefined){
+          var metadata = { contentType:file.type }
+          let img = ref.child("roomImage/" + newroomid.id + ".jpg")
+          await img.put(file, metadata)
+          await img.getDownloadURL().then(function(url) {
+              path = url;
+          });
+        }
+        else{
+          path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807";
+        } 
+        db.collection("room").doc(newroomid.id).update({
+          picture: path
+        }).then(() => {
+        alert("สร้างห้องเสร็จแล้ว User โง่")
         sessionStorage.setItem("roomid", newroomid.id);
-        document.location='gacharoom.html'
+        document.location='gacharoom.html'})
       })
     })
    
@@ -96,17 +110,7 @@ async function addRoom(){
   
   
   
-  /* if(file !== undefined){
-    var metadata = { contentType:file.type }
-    let img = ref.child("userImage/" + user.uid + ".jpg")
-    await img.put(file, metadata)
-    await img.getDownloadURL().then(function(url) {
-        path = url;
-    });
-  }
-  else{
-    path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807";
-  } */
+  
 }
 
   
