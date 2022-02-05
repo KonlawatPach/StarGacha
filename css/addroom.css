@@ -9,24 +9,6 @@ body {
 
 
 
-.col-sm-4 label, .textarea{
-	float: none;
-	display: inline-block;
-	vertical-align: middle;
-}
-.form-label2  label{
-    float: left
-    }
-.form-label2 span {
-    display: block;
-    overflow: hidden;
-    padding: 0 4px 0 6px
-}
-.form-label2  input[type=text]{
-    width: 300px;
-    height: 100px;
-}
-
 .logo{
 	box-shadow: inset -10px -10px 10px rgba(0, 0, 0, 0.1),
 				inset 10px -10px 10px rgba(0, 0, 0, 0.1);
@@ -50,3 +32,194 @@ body {
 }
 
 
+.header{
+	position: absolute;
+	z-index: 1;
+	left: 5%;
+	top: 40px;
+}
+
+.header h5,h6{
+	font-size: 120%;
+}
+
+.header img{
+	width: 3.5rem;
+	height: 3.5rem;
+}
+
+@media only screen and (max-width: 1200px) {
+	.modalcontent, .modalcontentdelete {
+		width: 60%;
+	}
+
+	.roomlist .firstbtn{
+		margin-top: 5px;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.modalcontent, .modalcontentdelete  {
+		width: 70%;
+	}
+
+	.roomlist .firstbtn{
+		margin-top: 4px;
+	}
+
+	.roomlist img{
+		height: 80px;
+		width: 80px;
+	}
+
+	.roomlist{
+		font-size: 80%;
+	}
+
+	.roomlist h6{
+		line-height: 1;
+	}
+
+	.roomlist button{
+		height: 1.3rem;
+		font-size: 10px;
+	}
+
+	#left{
+		width: 44%;
+	}
+	#right{
+		width: 56%;
+	}
+
+	.header h5,h6{
+		font-size: 95%;
+	}
+	
+	/* 1.4rem */
+	.header img{
+		width: 2.6rem;
+		height: 2.6rem;
+	}
+}
+
+@media only screen and (max-width: 766px) {
+	.modalcontent, .modalcontentdelete  {
+		width: 86%;
+	}
+
+	.container{
+		height: 900px;
+	}
+
+	.container .row{
+		width: 96%;
+	}
+
+	#left{
+		width: 100%;
+		height: 44%;
+		margin-bottom: 2%;
+	}
+
+	#right{
+		width: 100%;
+		height: 62%;
+	}
+
+	.header h5,h6{
+		font-size: 90%;
+	}
+	
+	.header img{
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+}
+
+@media only screen and (max-width: 524px) {
+	#displayroom img{
+		height: 5rem;
+		width: 5rem;
+	}
+
+	#displayroom{
+		line-height: 1;
+		font-size: 55%;
+	}
+
+	#displayroom button{
+		width: 100%;
+	}
+}
+
+
+@media only screen and (max-width: 474px) {
+	.modalcontent, .modalcontentdelete  {
+		width: 99%;
+	}
+
+	.modalcontent button, .modalcontentdelete button{
+		width: 8rem;
+	}
+
+	#left button{
+		font-size: 94%;
+	}
+
+	.container .row{
+		width: 100%;
+	}
+
+	#left{
+		height: 40%;
+	}
+
+	#right{
+		height: 69%;
+	}
+
+	.roomlist .firstbtn{
+		margin-top: 4px;
+	}
+
+	.roomlist img{
+		height: 65px;
+		width: 65px;
+	}
+
+	.roomlist{
+		font-size: 55%;
+	}
+
+	.roomlist h6{
+		line-height: 1;
+	}
+
+	.roomlist button{
+		height: 1rem;
+		font-size: 6px;
+		margin-left: 10px;
+	}
+
+	#head{
+		font-size: 150%;
+	}
+
+	#send{
+		font-size: 120%;
+	}
+
+	.header{
+		top: 65px;
+	}
+
+	.header h5,h6{
+		font-size: 60%;
+	}
+	
+	.header img{
+		width: 1.36rem;
+		height: 1.36rem;
+	}
+}

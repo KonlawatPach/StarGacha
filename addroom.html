@@ -6,79 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="js/firebase.js"></script>
+    <!-- <script src="js/logincheck.js"></script> -->
     <link rel="stylesheet" href="css/addroom.css">
     <title>กาชาสอยดาว</title>
-    
-    
   
 </head>
     <body>
         <!-- ช่วงบน -->
         <div class="container-fluid mt-3  ">
-          <div class="container">
+          <div class="px-0 d-block">
+            <h1 class="text-center text-light" style="font-family: 'Itim', cursive; font-size: 300%;">สร้างห้องจับของขวัญ</h1>
+            <div class="row mx-auto header" style="width: 90%;">
+                <div class="col-2 px-0 mx-0">
+                    <a class="text-decoration-none" href="home.html">
+                        <div class="row border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
+                            <img class="col-3 p-0 rounded-circle border border-1 border-dark img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028">
+                            <h5 class="col-9 mt-1 mt-md-2 mt-lg-3 fw-bold text-dark px-0 mx-0">กาชาสอยดาว</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-8 px-0 mx-0"></div>
+                <div class="col-2 px-0 mx-0">
+                    <a class="text-decoration-none" href="viewprofile.html">
+                        <div class="row border border-2 rounded-pill border-dark p-1 hover">
+                            <img id="imgProfile" class="col-3 p-0 rounded-circle border border-1 border-dark img-fluid" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" style="object-fit: cover;">
+                            <h6 id="Displayname" class="col-9 mt-1 mt-md-2 mt-lg-3 px-1 fw-bold text-dark text-center textcut mx-0">Anonymous</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
           
-          <div class="row header ">
-            <div class="col-2">
-                <a class="text-decoration-none" href="home.html" style="width: min-content;">
-                    <div class="border border-2 rounded-pill border-dark bg-light p-1 text-center logo">
-                        <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/burapa%20logo.png?alt=media&token=80221bd2-5579-4447-a2b1-d073fe9df028" width="50rem">
-                        <h5 class="d-inline fw-bold text-dark">กาชาสอยดาว</h5>
-                    </div>
-                </a>
-            </div>
-            <h1 class="col-8 fw-bold text-center text-light" style="font-family: 'Itim', cursive; font-size: 360%; letter-spacing: 2px;">เปิดห้องจับของขวัญ</h1>
-            <div class="col-2">
-                <a class="text-decoration-none" href="#" >
-                  <div class="border border-2 rounded-pill border-dark p-1 hover" style="width: fit-content;">
-                    <img class="rounded-circle border border-2 border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c" width="50rem">
-                    <h6 class="fw-bold text-dark d-inline">KingChisanu Seanrod</h6>
-                  </div>
-                </a>
-            </div>
-            
-        
 
           <div class="container-sm bg-light mt-3 p-3 border border-1 border-dark " style="width: 65%;" >
-          <div class="row">
-            <h5 class="fw-bold text-center mb-3" >ระบุข้อมูลของห้อง</h5>
-               <!-- ชื่อห้อง -->
-          
-            <div class="col-5 text-start">
-              <div class="form-label ">
-                <label for="inputRoomname" class="form-label  ">ชื่อห้อง</label>
-                <input type="roomname" class="form-text " id="roomName">
-              </div>
+            <div class="row">
+              <h5 class="fw-bold text-center mb-3" >ระบุข้อมูลของห้อง</h5>
+                
+                <!-- ชื่อห้อง -->
+              <div class="col-5 text-start">
+                <div class="form-label ">
+                  <label for="inputRoomname" class="form-label  ">ชื่อห้อง</label>
+                  <input type="roomname" class="form-text " id="roomName">
+                </div>
 
-              <!-- จำนวนผู้เข้าร่วมสูงสุด -->
-              <div class="col-sm-auto">
-                <div class = "col-sm-auto">
+                <!-- จำนวนผู้เข้าร่วมสูงสุด -->
+                <div class="col-sm-auto">
+                  <div class = "col-sm-auto">
                     <label for="inputParticipant" class=" col-form-label ">จำนวนผู้เข้าร่วมสูงสุด</label>
                     <input type="number" min="1" max="100" step="1" value="1" id = "maxParticipant">                  
+                  </div>
                 </div>
-              </div>
               
-              <!-- จำนวนการสุ่มเริ่มต้น -->
-              <div class="col-sm-auto">
-                <div class = "col-sm-auto ">
+                <!-- จำนวนการสุ่มเริ่มต้น -->
+                <div class="col-sm-auto">
+                  <div class = "col-sm-auto ">
                     <label for="inputRollcount" class="col-form-label mx-md-1  ">จำนวนการสุ่มเริ่มต้น</label>
                     <input type="number" min="1" max="100" step="1" value="1" id = "rollStart">
+                  </div>
                 </div>
-              </div>
 
-            </div>
+              </div>
    
-                   <!-- เงื่อนไขของห้อง -->
-                   <div class=" col-4 mt-5" >
-                    <div  class="form-check form-switch  ">
-                      <input class="form-check-input  " id = "autoAccept " type="checkbox" role ="switch" id="flexSwitchCheckDefault">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">เข้าร่วมอัตโนมัติ</label>
-                    </div>
+              <!-- เงื่อนไขของห้อง -->
+              <div class=" col-4 mt-5" >
+                  <div  class="form-check form-switch  ">
+                  <input class="form-check-input  " id = "autoJoin" type="checkbox" role ="switch" >
+                  <label class="form-check-label" for="flexSwitchCheckDefault">เข้าร่วมอัตโนมัติ</label>
+                  </div>
   
-                    <div  class=" form-check form-switch mt-3">
-                      <input class="form-check-input   " id = "statusRoom" type="checkbox" role ="switch" id="flexSwitchCheckDefault"  >
-                      <label class="form-check-label" for="flexSwitchCheckDefault">สถานะห้อง</label>
-                    </div>
+                  <div  class=" form-check form-switch mt-3">
+                    <input class="form-check-input   " id = "statusRoom" type="checkbox" role ="switch"   >
+                    <label class="form-check-label" for="flexSwitchCheckDefault">สามารถค้นหาห้องได้</label>
+                  </div>
                 
                 </div>
               
@@ -86,17 +93,17 @@
           
               <div class="form-label2 col-3">
                         
-                <h6 class="mx-4">รูปห้อง</h6>
-                    <label style="cursor:pointer;">
-                      <img class = " border-dark" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/addpicture.png?alt=media&token=ed974d0e-dd9c-4ac8-8b64-cee76f771d3b" width="100rem">
-                      <input type="file"  style="display:none" id = roomPicture>
+                <h6 class="mx-5">รูปห้อง</h6>
+            
+                <label class="mt-3" style="cursor: pointer;">                      
+                  <img id="image" class="border border-5 border" src="https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/addpicture.png?alt=media&token=ed974d0e-dd9c-4ac8-8b64-cee76f771d3b" width="150px" height="150px" style="object-fit: cover;">
+                      <input type="file"  style="display:none" id = "roomPicture">
                       <br>
                       <br>
                     <label>
               </div>
-
             <hr>
-          </div>
+            </div>
          
          
 
@@ -106,31 +113,17 @@
             <div class=" row">
               <div class="bm-3">
                 <div class="text-center">
-                    <h5 class="fw-bold" id="inputGift">ระบุของขวัญในกล่องสุ่ม</h5>
+                    <h5 class="fw-bold" >ระบุของขวัญในกล่องสุ่ม</h5>
                     <br>
                 </div>
               </div>
 
-              <!-- ใส่จำนวนของขวัญ -->
-           <!--    <div class="d-flex justify-content-center ">
-                <div class="text-center">
-                  <label for="inputGift" class="col-form-label">ชิ้นที่ 1 </label>
-                  &nbsp;
-                  <input type="gift" id="inputGift" class="form-control-sm" >
-                  &nbsp;&nbsp;
-                  <label for="inputRollcount" class="form-label">จำนวน</label>
-                  &nbsp;
-                  <input type="number" min="1" max="100" step="1" value="1">
-                
-                  <button type="submit" class=" btn btn-outline-dark  ">+</button>
-                  <button type="submit" class=" btn btn-outline-dark  ">-</button>
-                </div>
-              </div> -->
+           
 
               <table class="table table-hover mx-auto w-75  ">
                 <tbody id="giftlist" >
-                  <tr>
 
+                  <tr>
                     <td>
                       <label for="inputGift" class="col-form-label">ชิ้นที่ 1 </label>
                     </td>
@@ -140,7 +133,7 @@
                     <td>
                       <label for="inputRollcount" class="form-label">จำนวน</label>
                       &nbsp;
-                      <input type="number" min="1" max="100" step="1" value="1">
+                      <input type="number" id="giftQuantity1" min="1" max="100" step="1" value="1">
                     </td>
                     <td>
                       <button type="button" class=" btn btn-outline-white rounded-circle btn-success fw-bold ">+</button>
@@ -148,7 +141,6 @@
                     <td>
                       <button type="button" class=" btn btn-outline-white rounded-circle btn-danger fw-bold " >-</button>
                     </td>
-                  
                   </tr>
 
                   <tr>
@@ -161,7 +153,7 @@
                     <td>
                       <label for="inputRollcount" class="form-label">จำนวน</label>
                       &nbsp;
-                      <input type="number" min="1" max="100" step="1" value="1">
+                      <input type="number" id="giftQuantity2"  min="1" max="100" step="1" value="1">
                     </td>
                     <td>
                       <button type="button" class=" btn btn-outline-white rounded-circle btn-success fw-bold ">+</button>
@@ -171,68 +163,8 @@
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      <label for="inputGift" class="col-form-label">ชิ้นที่ 3 </label>
-                    </td>
-                    <td style="width: 50%;">
-                      <input type="gift" id="inputGift3" class="form-control-sm w-100"  >
-                    </td>
-                    <td>
-                      <label for="inputRollcount" class="form-label">จำนวน</label>
-                      &nbsp;
-                      <input type="number" min="1" max="100" step="1" value="1">
-                    </td>
-                    <td>
-                      <button type="button" class=" btn btn-outline-white rounded-circle btn-success fw-bold w-100  ">+</button>
-                    </td>
-                    <td>
-                      <button type="button" class=" btn btn-outline-white rounded-circle btn-danger fw-bold " >-</button>
-                    </td>
-                  </tr>
+                
 
-                  <tr>
-                    <td>
-                      <label for="inputGift" class="col-form-label">ชิ้นที่ 4 </label>
-                    </td>
-                    <td style="width: 50%;">
-                      <input type="gift" id="inputGift4" class="form-control-sm w-100"  >
-                    </td>
-                    <td>
-                      <label for="inputRollcount" class="form-label">จำนวน</label>
-                      &nbsp;
-                      <input type="number" min="1" max="100" step="1" value="1">
-                    </td>
-                    <td>
-                      <button type="button" class=" btn btn-outline-white rounded-circle btn-success fw-bold ">+</button>
-                    </td>
-                    <td>
-                      <button type="button" class=" btn btn-outline-white rounded-circle btn-danger fw-bold " >-</button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <label for="inputGift" class="col-form-label">ชิ้นที่ 5 </label>
-                    </td>
-                    <td style="width: 50%;">
-                      <input type="gift" id="inputGift5" class="form-control-sm w-100"  >
-                    </td>
-                    <td>
-                      <label for="inputRollcount" class="form-label">จำนวน</label>
-                      &nbsp;
-                      <input type="number" min="1" max="100" step="1" value="1">
-                    </td>
-                    <td>
-                      <button type="button" class=" btn btn-outline-white rounded-circle btn-success fw-bold ">+</button>
-                    </td>
-                    <td>
-                      <button type="button" class=" btn btn-outline-white rounded-circle btn-danger fw-bold " >-</button>
-                    </td>
-                  </tr>
-
-                    
-                  </tr>
                 </tbody>
             </table>
               
@@ -240,19 +172,18 @@
        
            
            
-              <!-- ยืนยัน,ยกเลิก -->
-            <div class="text-center">
-              <button type="submit" class=" btn btn-outline-dark  ">ยืนยัน</button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button type="submit" class=" btn btn-outline-dark ">ยกเลิก</button>
+                <!-- ยืนยัน,ยกเลิก -->
+              <div class="text-center">
+                <button type="submit" id="submit" class=" btn btn-outline-dark " onclick="addRoom()">ยืนยัน</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class=" btn btn-outline-dark " onclick="document.location='home.html'">ยกเลิก</button>
+              </div>
+          
             </div>
-          </div>
-           
-            
-         
           </div>
         </div>  
       </div>
+    <script src="js/addroom.js"></script>
     </body>
 </html>
 
