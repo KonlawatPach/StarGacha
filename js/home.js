@@ -382,7 +382,7 @@ function deleteRoomID(){
             ref.child('roomImage/'+ deleteroomid +'.gif').delete()
         })
     }).then(() => {
-        db.collection("room").doc(roomid).get().then(async (room) => {
+        db.collection("room").doc(deleteroomid).get().then(async (room) => {
             for(let joinid of room.data().name){
                 await db.runTransaction((transaction) => {
                     return transaction.get(db.collection("user").doc(joinid)).then((user) => {

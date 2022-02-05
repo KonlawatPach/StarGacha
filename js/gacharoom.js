@@ -55,29 +55,31 @@ function addWaitlist(idlist){
     if (idlist.length == 0){
         $("#wwaitlist").html("");
     }
-    db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).get().then((users) => {
-        temp = sortName(users);
-        sortidlist = temp[0];
-        sortnamelist = temp[1];
-        let pictureurl = temp[2];
-        $("#wwaitlist").html("");
-        for(let i in sortidlist){
-            $(`
-                <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                    <div class="row">
-                        <div class="col-7">
-                            <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px" style="cursor: pointer; object-fit: cover;" onclick="seeProfile('`+ sortidlist[i] +`')>
-                            <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
-                        </div>
-                        <div class="col-4 d-inline">
-                            <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="accept('`+ sortidlist[i] +`')">ยอมรับ</button><br>
-                            <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="deny('`+ sortidlist[i] +`')">ปฏิเสธ</button>
+    else{
+        db.collection("user").where( firebase.firestore.FieldPath.documentId(), "in", idlist).get().then((users) => {
+            temp = sortName(users);
+            sortidlist = temp[0];
+            sortnamelist = temp[1];
+            let pictureurl = temp[2];
+            $("#wwaitlist").html("");
+            for(let i in sortidlist){
+                $(`
+                    <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
+                        <div class="row">
+                            <div class="col-7">
+                                <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px" style="cursor: pointer; object-fit: cover;" onclick="seeProfile('`+ sortidlist[i] +`')>
+                                <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
+                            </div>
+                            <div class="col-4 d-inline">
+                                <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="accept('`+ sortidlist[i] +`')">ยอมรับ</button><br>
+                                <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="deny('`+ sortidlist[i] +`')">ปฏิเสธ</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).appendTo( "#wwaitlist" );
-        }
-    })
+                `).appendTo( "#wwaitlist" );
+            }
+        })
+    }
 }
 
 function addGiftlist(giftname, giftnum){
