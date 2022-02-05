@@ -66,7 +66,7 @@ function addWaitlist(idlist){
                 <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
                     <div class="row">
                         <div class="col-7">
-                            <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px" style="cursor: pointer;" onclick="seeProfile('`+ sortidlist[i] +`')>
+                            <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px" style="cursor: pointer; object-fit: cover;" onclick="seeProfile('`+ sortidlist[i] +`')>
                             <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
                         </div>
                         <div class="col-4 d-inline">
@@ -133,7 +133,7 @@ function adduserlist(idlist, adminid){
                 if(sortidlist[i] != adminid){
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem" style="cursor: pointer;" onclick="seeProfile('`+ sortidlist[i] +`')">
+                            <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem" style="cursor: pointer; object-fit: cover;" onclick="seeProfile('`+ sortidlist[i] +`')">
                             <h6 class="d-inline ms-2">`+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );
@@ -141,7 +141,7 @@ function adduserlist(idlist, adminid){
                 else{
                     $(`
                         <div class="col-11 border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                        <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem" style="cursor: pointer;" onclick="seeProfile('`+ sortidlist[i] +`')">
+                        <img class="rounded-circle" src="`+ pictureurl[i] +`" width="50rem" height="50rem" style="cursor: pointer; object-fit: cover;" onclick="seeProfile('`+ sortidlist[i] +`')">
                             <h6 class="d-inline ms-2">👑 `+ sortnamelist[i]+`</h6>
                         </div>
                     `).appendTo( "#namelist" );
@@ -205,7 +205,7 @@ function addReward(rewardiduser, rewardgift){
                 $(`
                     <tr>
                         <td class="pe-0 me-0">
-                            <img class="border border-2 rounded-circle m-0" src="`+ pictureurl[i] +`" width="50rem" height="50rem">
+                            <img class="border border-2 rounded-circle m-0" src="`+ pictureurl[i] +`" width="50rem" height="50rem" style="object-fit: cover;">
                         </td>
                         <td class="text-start mx-0 px-0">
                             <h6 style="font-size: 80%;">`+ rewardnameuser[i] +`</h6>
