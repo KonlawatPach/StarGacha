@@ -146,6 +146,40 @@ function findRoom(){
                 if(!item.data().status){
                     document.getElementById("noroom").style.display = "block";
                 }
+                else if(item.data().name.length >= item.data().maxname){
+                    if(item.data().autoallow){
+                        $(`
+                            <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
+                                <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                                <div class="col-6 ps-1 ps-sm-2 pe-0">
+                                    <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🌎`+`</h6>
+                                    <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
+                                    <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ item.data().name.length + `/` + item.data().maxname +` คน</h6>
+                                    <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : `+ item.data().giftQuantity.reduce((a, b) => a + b) + `/` + item.data().allgiftnum + ` ชิ้น</h6>
+                                </div>
+                                <div class="col-3 ms-auto ps-0 pe-2">
+                                    <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0 mt-2" id="send" disabled onclick="">สมาชิกเต็มแล้ว</button><br>
+                                </div>
+                            </div>
+                        `).appendTo( "#displayroom" );
+                    }
+                    else{
+                        $(`
+                            <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
+                                <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                                <div class="col-6 ps-1 ps-sm-2 pe-0">
+                                    <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
+                                    <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
+                                    <h6 style="font-size: 90%;">จำนวนผู้เข้าร่วม : `+ item.data().name.length + `/` + item.data().maxname +` คน</h6>
+                                    <h6 class="mb-0" style="font-size: 90%;">จำนวนของที่เหลือ : `+ item.data().giftQuantity.reduce((a, b) => a + b) + `/` + item.data().allgiftnum + ` ชิ้น</h6>
+                                </div>
+                                <div class="col-3 ms-auto ps-0 pe-2">
+                                    <button class="mb-1 btn btn-secondary rounded-pill w-100 p-0 mt-2" id="send" disabled onclick="">สมาชิกเต็มแล้ว</button><br>
+                                </div>
+                            </div>
+                        `).appendTo( "#displayroom" );
+                    }
+                }
                 else if(item.data().autoallow){      //รับอัตโนมัติ
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
