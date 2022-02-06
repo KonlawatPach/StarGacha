@@ -135,20 +135,28 @@ function DeleteAcc(){
     $("#modalcontentdelete").slideDown(200);
 }
 
-function acceptDel(){
+async function acceptDel(){
     changeProfile = true;
     let delemail = document.getElementById("delemail").value;
     let delpassword = document.getElementById("delpassword").value;
     if(cerrentuser.email == delemail){
-        firebase.auth().signInWithEmailAndPassword(delemail, delpassword).then((userCredential) => {
-            firebase.auth().currentUser.delete().then(() => {
-                alert("ลบบัญชีสำเร็จ")
-                document.location = 'viewprofile.html';
-            }).catch((error) => {
-                alert("")
-            });
+        firebase.auth().signInWithEmailAndPassword(delemail, delpassword).then(async (userCredential) => {
+            //makeroomdelete
+            db.collection("user").doc(cerrentuser.uid).get().then(async (user) => {
+                for(let delroom of user.data().makeroom){
+                    await deleteAllMakeroom(delroom);
+                }
+            }).then(() => {
+                // auth delete
+                firebase.auth().currentUser.delete().then(() => {
+                    alert("ลบบัญชีสำเร็จ")
+                    document.location = 'viewprofile.html';
+                }).catch((error) => {
+                    alert(error)
+                });
+            })
         }).catch((error) => {
-            alert("กรอกรหัสผ่านหรืออีเมลล์ของท่านผิด")
+            alert(error)
         });
     }else{
         alert("กรอกรหัสผ่านหรืออีเมลล์ของท่านผิด")
@@ -156,7 +164,51 @@ function acceptDel(){
     
 }
 
-function closeModelDelete(){
+function closeModelDelete(delroom){
     $("#modalcontentdelete").slideUp()
     document.getElementById("myModaldelete").style.display = "none";
+}
+
+function deleteAllMakeroom(deleteroomid){
+    return ref.child('roomImage/'+ deleteroomid +'.jpg').delete().catch((error) => {
+        ref.child('roomImage/'+ deleteroomid +'.png').delete().catch((error) => {
+            ref.child('roomImage/'+ deleteroomid +'.gif').delete()
+        })
+    }).then(() => {
+        return db.collection("room").doc(deleteroomid).get().then(async (room) => {
+
+            for(let joinid of room.data().name){
+                await db.runTransaction((transaction) => {
+                    return transaction.get(db.collection("user").doc(joinid)).then((user) => {
+                        let newjoinroom = [...user.data().joinroom]
+                        let index = newjoinroom.indexOf(deleteroomid);
+                        if (index !== -1) newjoinroom.splice(index, 1);
+                        transaction.update(db.collection("user").doc(joinid), { joinroom:newjoinroom });
+                    });
+                });
+            }
+
+            for(let waitid of room.data().waitinglist){
+                await db.runTransaction((transaction) => {
+                    return transaction.get(db.collection("user").doc(waitid)).then((user) => {
+                        let newwaitroom = [...user.data().waitroom]
+                        let index = newwaitroom.indexOf(deleteroomid);
+                        if (index !== -1) newwaitroom.splice(index, 1);
+                        transaction.update(db.collection("user").doc(waitid), { waitroom:newwaitroom });
+                    });
+                });
+            }
+
+            await db.runTransaction((transaction) => {
+                return transaction.get(db.collection("user").doc(cerrentuser.uid)).then((user) => {
+                    let newmakeroom = [...user.data().makeroom]
+                    let index = newmakeroom.indexOf(deleteroomid);
+                    if (index !== -1) newmakeroom.splice(index, 1);
+                    transaction.update(db.collection("user").doc(cerrentuser.uid), { makeroom:newmakeroom });
+                });
+            });
+        }).then(async () => {
+            await db.collection('room').doc(deleteroomid).delete();
+        });
+    });
 }

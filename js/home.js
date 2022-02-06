@@ -249,6 +249,9 @@ function joinRoom(roomid){
                 });
             });
         }
+        else if(item.data().admin == cerrentuserid){
+            sendRoomID(roomid);
+        }
         else{
             db.collection("user").doc(cerrentuserid).get().then((user) => {
                 let newjoinroom = [...user.data().joinroom]
