@@ -39,7 +39,7 @@ function loadUserData(){
                 status = "เปิด";
                 $(`
                     <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
-                        <img class="col-3 rounded-circle px-0 img-fluid" src="` + makeroom[m].data().picture + `">
+                        <img class="col-3 rounded-circle px-0 img-fluid" src="` + makeroom[m].data().picture + `" style="object-fit: cover;">
                         <div class="col-6">
                             <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง `+ makeroom[m].data().room +`</h6>
                             <h6 style="font-size: 90%;">สถานะห้อง : `+ status +`</h6>
@@ -58,7 +58,7 @@ function loadUserData(){
                 status = "ปิด";
                 $(`
                     <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
-                        <img class="col-3 rounded-circle px-0 img-fluid" src="` + makeroom[m].data().picture + `">
+                        <img class="col-3 rounded-circle px-0 img-fluid" src="` + makeroom[m].data().picture + `" style="object-fit: cover;">
                         <div class="col-6">
                             <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง `+ makeroom[m].data().room +`</h6>
                             <h6 style="font-size: 90%;">สถานะห้อง : `+ status +`</h6>
@@ -83,7 +83,7 @@ function loadUserData(){
             if(areWaiting[j]){          //waitinglist
                 $(`
                 <div class="row border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover">
-                    <img class="col-3 rounded-circle px-0 img-fluid" src="` + joinroom[j].data().picture + `" style=" -webkit-filter: grayscale(70%); filter: grayscale(70%);">
+                    <img class="col-3 rounded-circle px-0 img-fluid" src="` + joinroom[j].data().picture + `" style="-webkit-filter: grayscale(70%); filter: grayscale(70%); object-fit: cover;">
                     <div class="col-6">
                         <h6 class="fw-bold text-secondary mt-1 textcut" style="font-size: 100%;">ห้อง `+ joinroom[j].data().room +`</h6>
                         <h6 class="text-secondary" style="font-size: 90%;">สถานะห้อง : `+ status +`</h6>
@@ -98,7 +98,7 @@ function loadUserData(){
             }else{                        //joinlist
                 $(`
                 <div class="row border border-1 rounded-pill border-dark mx-auto mt-1 p-1 text-start hover">
-                    <img class="col-3 rounded-circle px-0 img-fluid" src="` + joinroom[j].data().picture + `">
+                    <img class="col-3 rounded-circle px-0 img-fluid" src="` + joinroom[j].data().picture + `" style="object-fit: cover;">
                     <div class="col-6">
                         <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง `+ joinroom[j].data().room +`</h6>
                         <h6 style="font-size: 90%;">สถานะห้อง : `+ status +`</h6>
@@ -150,7 +150,7 @@ function findRoom(){
                     if(item.data().autoallow){
                         $(`
                             <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
-                                <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                                <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="object-fit: cover;">
                                 <div class="col-6 ps-1 ps-sm-2 pe-0">
                                     <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🌎`+`</h6>
                                     <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
@@ -166,7 +166,7 @@ function findRoom(){
                     else{
                         $(`
                             <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
-                                <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                                <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="object-fit: cover;">
                                 <div class="col-6 ps-1 ps-sm-2 pe-0">
                                     <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
                                     <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
@@ -183,7 +183,7 @@ function findRoom(){
                 else if(item.data().autoallow){      //รับอัตโนมัติ
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
-                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="object-fit: cover;">
                             <div class="col-6 ps-1 ps-sm-2 pe-0">
                                 <h6 class="fw-bold mt-2 mt-sm-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🌎`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
@@ -199,7 +199,7 @@ function findRoom(){
                 else if(item.data().name.includes(cerrentuserid)){      //ห้องปิด|เคยเข้าร่วมแล้ว
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
-                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="object-fit: cover;">
                             <div class="col-6 ps-1 ps-sm-2 pe-0">
                                 <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
@@ -214,7 +214,7 @@ function findRoom(){
                 }else if(item.data().waitinglist.includes(cerrentuserid)){      //ห้องปิด|ส่งคำขอไปแล้ว
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
-                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="object-fit: cover;">
                             <div class="col-6 ps-1 ps-sm-2 pe-0">
                                 <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>
@@ -229,7 +229,7 @@ function findRoom(){
                 }else{                                                          //ห้องปิด|ส่งคำขอครั้งแรก
                     $(`
                         <div class="row border border-1 rounded-pill border-dark mx-auto mt-0 p-1 text-start">
-                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`">
+                            <img class="col-3 rounded-circle px-0 img-fluid" src="`+ item.data().picture +`" style="object-fit: cover;">
                             <div class="col-6 ps-1 ps-sm-2 pe-0">
                                 <h6 class="fw-bold mt-1 textcut" style="font-size: 100%;">ห้อง : `+ item.data().room +` 🔒`+`</h6>
                                 <h6 style="font-size: 90%;">สถานะ : `+ status +`</h6>

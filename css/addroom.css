@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300&display=swap');
+
 body {
 	background-image: url("https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/background.png?alt=media&token=1d27b417-d2fd-4878-84f2-0a0f61b1d43a");
 	background-size: cover;
@@ -7,7 +8,9 @@ body {
 	height: 100%;
 }
 
-
+#head{
+	font-size: 300%;
+}
 
 .logo{
 	box-shadow: inset -10px -10px 10px rgba(0, 0, 0, 0.1),
@@ -31,12 +34,11 @@ body {
 	background-color: rgb(233, 233, 233);
 }
 
-
 .header{
 	position: absolute;
 	z-index: 1;
-	left: 5%;
-	top: 40px;
+	left: 4%;
+	top: 60px;
 }
 
 .header h5,h6{
@@ -48,55 +50,27 @@ body {
 	height: 3.5rem;
 }
 
-@media only screen and (max-width: 1200px) {
-	.modalcontent, .modalcontentdelete {
-		width: 60%;
-	}
+.container{
+	width: 65%;
+}
 
-	.roomlist .firstbtn{
-		margin-top: 5px;
+@media only screen and (max-width: 1200px) {
+	.container{
+		width: 80%;
 	}
 }
 
+
 @media only screen and (max-width: 992px) {
-	.modalcontent, .modalcontentdelete  {
-		width: 70%;
+	.header{
+		top: 80px;
 	}
-
-	.roomlist .firstbtn{
-		margin-top: 4px;
-	}
-
-	.roomlist img{
-		height: 80px;
-		width: 80px;
-	}
-
-	.roomlist{
-		font-size: 80%;
-	}
-
-	.roomlist h6{
-		line-height: 1;
-	}
-
-	.roomlist button{
-		height: 1.3rem;
-		font-size: 10px;
-	}
-
-	#left{
-		width: 44%;
-	}
-	#right{
-		width: 56%;
-	}
+	
 
 	.header h5,h6{
 		font-size: 95%;
 	}
 	
-	/* 1.4rem */
 	.header img{
 		width: 2.6rem;
 		height: 2.6rem;
@@ -104,29 +78,6 @@ body {
 }
 
 @media only screen and (max-width: 766px) {
-	.modalcontent, .modalcontentdelete  {
-		width: 86%;
-	}
-
-	.container{
-		height: 900px;
-	}
-
-	.container .row{
-		width: 96%;
-	}
-
-	#left{
-		width: 100%;
-		height: 44%;
-		margin-bottom: 2%;
-	}
-
-	#right{
-		width: 100%;
-		height: 62%;
-	}
-
 	.header h5,h6{
 		font-size: 90%;
 	}
@@ -137,81 +88,13 @@ body {
 	}
 }
 
-@media only screen and (max-width: 524px) {
-	#displayroom img{
-		height: 5rem;
-		width: 5rem;
-	}
-
-	#displayroom{
-		line-height: 1;
-		font-size: 55%;
-	}
-
-	#displayroom button{
-		width: 100%;
-	}
-}
-
-
-@media only screen and (max-width: 474px) {
-	.modalcontent, .modalcontentdelete  {
-		width: 99%;
-	}
-
-	.modalcontent button, .modalcontentdelete button{
-		width: 8rem;
-	}
-
-	#left button{
-		font-size: 94%;
-	}
-
-	.container .row{
-		width: 100%;
-	}
-
-	#left{
-		height: 40%;
-	}
-
-	#right{
-		height: 69%;
-	}
-
-	.roomlist .firstbtn{
-		margin-top: 4px;
-	}
-
-	.roomlist img{
-		height: 65px;
-		width: 65px;
-	}
-
-	.roomlist{
-		font-size: 55%;
-	}
-
-	.roomlist h6{
-		line-height: 1;
-	}
-
-	.roomlist button{
-		height: 1rem;
-		font-size: 6px;
-		margin-left: 10px;
-	}
-
+@media only screen and (max-width: 430px) {
 	#head{
-		font-size: 150%;
-	}
-
-	#send{
-		font-size: 120%;
+		font-size: 200%;
 	}
 
 	.header{
-		top: 65px;
+		top: 55px;
 	}
 
 	.header h5,h6{
@@ -221,5 +104,15 @@ body {
 	.header img{
 		width: 1.36rem;
 		height: 1.36rem;
+	}
+
+	.container{
+		width: 96%;
+		font-size: 90%;
+	}
+
+	.container img{
+		width: 150px;
+		height: 150px;
 	}
 }

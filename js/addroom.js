@@ -143,10 +143,10 @@ function addRow(i){
   $("#"+i).after(`
     <tr>
       <td>
-        <label for="inputGift" class="col-form-label rownumber"></label>
+        <label for="inputGift" class="mt-1 rownumber"></label>
       </td>
       <td style="width: 50%;">
-        <input type="gift" required class="form-control-sm w-100 inputGift">
+        <input type="gift" required class="w-100 inputGift">
       </td>
       <td>
         <input type="number" class="giftQuantity" min="1" required max="100" step="1" value="1">
