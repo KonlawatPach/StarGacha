@@ -15,6 +15,7 @@ function addUser(){
     var file = document.querySelector("#selectimage").files[0];
     if(ValidateEmail(email)){
         if(password == confirmpassword){
+            if(name == '') name = 'ผู้ใช้ที่ไม่มีชื่อ';
             document.getElementById("myModal").style.display = "block";
             firebase.auth().createUserWithEmailAndPassword(email, password).then(async (userCredential) => {
                 var user = userCredential.user;

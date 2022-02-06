@@ -46,7 +46,8 @@ async function saveChange(){
 
     //name
     var name = document.getElementById("name").value;
-
+    if(name == '') name = 'ผู้ใช้ที่ไม่มีชื่อ';
+    
     //password
     if(passwordChange){
         changeProfile = true;
