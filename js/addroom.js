@@ -5,9 +5,8 @@ firebase.auth().onAuthStateChanged((user) => {
     currentuserid = user.uid;
     document.getElementById("Displayname").textContent = user.displayName;
     document.getElementById("imgProfile").src = user.photoURL;
+    numberSort()
 });
-
-
 
 // ปุ่มเพิ่มลดเลข
 $(document).ready(function () {
@@ -52,23 +51,21 @@ document.getElementById("roomPicture").onchange = evt => {
 
 async function addRoom(){
   var path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807";
-  var  roomname = document.getElementById("roomName").value;
-  var  maxparticipant = document.getElementById("maxParticipant").value;
-  var  rollstart = document.getElementById("rollStart").value;
-  var  autojoin = document.getElementById("autoJoin").checked;
-  var  statusroom = document.getElementById("statusRoom").checked;
-  var  file = document.querySelector("#roomPicture").files[0];
-  var  inputgift1 = document.getElementById("inputGift1").value;
-  var  inputgift2 = document.getElementById("inputGift2").value;
-  var  giftquantity1 = document.getElementById("giftQuantity1").value;
-  var  giftquantity2 = document.getElementById("giftQuantity2").value;
+  var roomname = document.getElementById("roomName").value;
+  var maxparticipant = document.getElementById("maxParticipant").value;
+  var rollstart = document.getElementById("rollStart").value;
+  var autojoin = document.getElementById("autoJoin").checked;
+  var statusroom = document.getElementById("statusRoom").checked;
+  var file = document.querySelector("#roomPicture").files[0];
+  var inputgift = getGiftNameList();
+  var giftquantity = getGiftQuantityList();
   
   db.collection("room").add({
     admin: currentuserid,
-    allgiftnum: Number(giftquantity1) + Number(giftquantity2),
+    allgiftnum: giftquantity.reduce((a, b) => a + b),        // ทำรวม list
     count: [Number(rollstart)],
-    giftName: [inputgift1,inputgift2],
-    giftQuantity: [Number(giftquantity1),Number(giftquantity2)],
+    giftName: inputgift,                                // ทำ list
+    giftQuantity: giftquantity,      // ทำ list
     maxname: Number(maxparticipant), // จำนวนผู้เข้าร่วมทั้งหมด
     name: [currentuserid],
     picture: path,
@@ -79,16 +76,16 @@ async function addRoom(){
     autoallow: autojoin,
     status: statusroom,
     waitinglist: []
-  }).then((newroomid) => {
+  }).then((newroom) => {
       db.collection("user").doc(currentuserid).get().then((user)=> {
       let newmakeroom = [...user.data().makeroom]
-      newmakeroom.push(newroomid.id)
+      newmakeroom.push(newroom.id)
       db.collection("user").doc(currentuserid).update({
       makeroom: newmakeroom
       }).then(async () => {
         if(file !== undefined){
           var metadata = { contentType:file.type }
-          let img = ref.child("roomImage/" + newroomid.id + ".jpg")
+          let img = ref.child("roomImage/" + newroom.id + ".jpg")
           await img.put(file, metadata)
           await img.getDownloadURL().then(function(url) {
               path = url;
@@ -97,20 +94,79 @@ async function addRoom(){
         else{
           path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807";
         } 
-        db.collection("room").doc(newroomid.id).update({
+        db.collection("room").doc(newroom.id).update({
           picture: path
         }).then(() => {
-        alert("สร้างห้องเสร็จแล้ว User โง่")
-        sessionStorage.setItem("roomid", newroomid.id);
+        alert("สร้างห้องเรียบร้อยแล้ว")
+        sessionStorage.setItem("roomid", newroom.id);
         document.location='gacharoom.html'})
       })
     })
-   
   })
-  
-  
-  
-  
 }
 
-  
+function getGiftQuantityList(){
+  var giftQuantity = [];
+  var x = document.getElementsByClassName("giftQuantity");
+  for (let i = 0; i < x.length; i++) {
+    giftQuantity.push(Number(x[i].value));
+  }
+  return giftQuantity;
+}
+
+function getGiftNameList(){
+  var giftName = [];
+  var x = document.getElementsByClassName("inputGift");
+  for (let i = 0; i < x.length; i++) {
+    giftName.push(x[i].value);
+  }
+  return giftName;
+}
+
+
+
+function numberSort(){
+  var x = document.getElementsByTagName("tr");
+  for (let i = 1; i < x.length; i++) {
+    document.getElementsByClassName("delrow")[0].disabled = false;
+    document.getElementsByClassName("rownumber")[i-1].textContent = i;
+    document.getElementsByTagName("tr")[i].setAttribute( "id", i );
+    document.getElementsByClassName("addrow")[i-1].setAttribute( "onClick", "addRow("+ i +")" );
+    document.getElementsByClassName("delrow")[i-1].setAttribute( "onClick", "delRow("+ i +")" );
+  }
+  if(x.length == 2){
+    document.getElementsByClassName("delrow")[0].disabled = true;
+  }
+}
+
+function addRow(i){
+  $("#"+i).after(`
+    <tr>
+      <td>
+        <label for="inputGift" class="col-form-label rownumber"></label>
+      </td>
+      <td style="width: 50%;">
+        <input type="gift" required class="form-control-sm w-100 inputGift">
+      </td>
+      <td>
+        <input type="number" class="giftQuantity" min="1" required max="100" step="1" value="1">
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-white rounded-circle btn-success fw-bold addrow" onclick="addRow()">+</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-white rounded-circle btn-danger fw-bold delrow"  onclick="delRow()">-</button>
+      </td>
+    </tr>
+  `);
+  numberSort()
+}
+
+function delRow(i){
+  $("#"+i).remove()
+  numberSort()
+}
+
+$("#addroomform").submit(function(e) {
+  e.preventDefault();
+});
