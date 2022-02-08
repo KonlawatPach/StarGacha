@@ -65,12 +65,12 @@ function addWaitlist(idlist){
             for(let i in sortidlist){
                 $(`
                     <div class="col-11 border border-1 rounded-pill border-secondary mx-auto mt-1 p-1 text-start hover" id="`+ sortidlist[i] +`">
-                        <div class="row">
-                            <div class="col-7">
-                                <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%);" src="`+ pictureurl[i] +`" width="50px" height="50px" style="cursor: pointer; object-fit: cover;" onclick="seeProfile('`+ sortidlist[i] +`')>
-                                <h6 class="col-6 d-inline ms-2 mt-3 text-secondary">`+ sortnamelist[i]+`</h6>
+                        <div class="row px-2">
+                            <div class="col-8 py-0 text-warp textcut ps-1 pe-0">
+                                <img class="rounded-circle" style="-webkit-filter: grayscale(70%); filter: grayscale(70%); cursor: pointer; object-fit: cover;" src="`+ pictureurl[i] +`" width="50px" height="50px" onclick="seeProfile('`+ sortidlist[i] +`')">
+                                <h6 class="text-warp textcut d-inline ms-2 mx-0 text-secondary">`+ sortnamelist[i]+`</h6>
                             </div>
-                            <div class="col-4 d-inline">
+                            <div class="col-4 ms-auto">
                                 <button class="mt-1 mb-1 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="accept('`+ sortidlist[i] +`')">ยอมรับ</button><br>
                                 <button class="mb-0 btn btn-secondary rounded-pill w-100 p-0" style="height: 1.2rem; font-size: 60%;" onclick="deny('`+ sortidlist[i] +`')">ปฏิเสธ</button>
                             </div>
@@ -169,7 +169,10 @@ function sortName(users){
     sortnamelist.sort();    //สร้าง namelist ที่เรียงแล้ว
     for(let name of sortnamelist){
         sortidlist.push(useridlist[usernamelist.indexOf(name)]);
+        useridlist.splice(usernamelist.indexOf(name), 1);
         sortpictureurl.push(pictureurl[usernamelist.indexOf(name)]);
+        pictureurl.splice(usernamelist.indexOf(name), 1);
+        usernamelist.splice(usernamelist.indexOf(name), 1)
     }
     return [sortidlist, sortnamelist, sortpictureurl];
 }

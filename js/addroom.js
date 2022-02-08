@@ -59,7 +59,7 @@ async function addRoom(){
   var file = document.querySelector("#roomPicture").files[0];
   var inputgift = getGiftNameList();
   var giftquantity = getGiftQuantityList();
-  
+  document.getElementById("myModal").style.display = "block";
   db.collection("room").add({
     admin: currentuserid,
     allgiftnum: giftquantity.reduce((a, b) => a + b),        // ทำรวม list
@@ -97,6 +97,7 @@ async function addRoom(){
         db.collection("room").doc(newroom.id).update({
           picture: path
         }).then(() => {
+        document.getElementById("myModal").style.display = "none";
         alert("สร้างห้องเรียบร้อยแล้ว")
         sessionStorage.setItem("roomid", newroom.id);
         document.location='gacharoom.html'})
