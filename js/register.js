@@ -1,6 +1,11 @@
 document.getElementById("selectimage").onchange = evt => {
     const [file] = document.getElementById("selectimage").files
     document.getElementById("image").src = URL.createObjectURL(file)
+    if(!isImage(document.getElementById("selectimage").value)){
+        alert("โปรดใช้รูปภาพไฟล์นามสุกล .jpg, .png หรือ .gif")
+        document.getElementById("image").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/addpicture.png?alt=media&token=ed974d0e-dd9c-4ac8-8b64-cee76f771d3b";
+        document.getElementById("selectimage").value = null;
+    }
 }
 
 let randomlist = ["จับฉลากเพื่อส่งต่อของ ให้แก่คนที่คุณรัก", "ทนอีกหน่อยนะ คุณจะได้สุ่มกาชาแล้ว", "กาชาสอยดาวมีโอกาสได้ของทุกชิ้นเท่ากัน", "สอยได้แต่ดาว สอยใจคุณไม่ได้", "มีของหลายอย่างสินะ มาลุ้นกันดีกว่า"]
@@ -78,4 +83,21 @@ function send(){
         contentType:file.type
     }
     const task = ref.child(name).put(file, metadata)
+}
+
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+  }
+  
+function isImage(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+      case 'jpg':
+      case 'gif':
+      case 'bmp':
+      case 'png':
+        return true;
+    }
+    return false;
 }

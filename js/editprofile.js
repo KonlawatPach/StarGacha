@@ -15,7 +15,15 @@ firebase.auth().onAuthStateChanged((ceruser) => {
 document.getElementById("selectimage").onchange = evt => {
     const [file] = document.getElementById("selectimage").files
     document.getElementById("image").src = URL.createObjectURL(file)
-    nopic = false;
+    if(isImage(document.getElementById("selectimage").value)){
+        nopic = false;
+    }
+    else{
+        alert("โปรดใช้รูปภาพไฟล์นามสุกล .jpg, .png หรือ .gif")
+        document.getElementById("image").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c";
+        document.getElementById("selectimage").value = null;
+        nopic = true;
+    }
     pictureChange = true;
 }
 
@@ -212,4 +220,21 @@ function deleteAllMakeroom(deleteroomid){
             await db.collection('room').doc(deleteroomid).delete();
         });
     });
+}
+
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+}
+  
+function isImage(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+      case 'jpg':
+      case 'gif':
+      case 'bmp':
+      case 'png':
+        return true;
+    }
+    return false;
 }
