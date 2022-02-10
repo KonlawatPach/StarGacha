@@ -48,7 +48,7 @@ document.getElementById("roomPicture").onchange = evt => {
   const [file] = document.getElementById("roomPicture").files
   document.getElementById("image").src = URL.createObjectURL(file)
   if(!isImage(document.getElementById("roomPicture").value)){
-    alert("โปรดใช้รูปภาพไฟล์นามสุกล .jpg, .png หรือ .gif")
+    alert("โปรดใช้ไฟล์รูปภาพ ตัวอย่างเช่น .jpg, .png หรือ .gif")
     document.getElementById("image").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/addpicture.png?alt=media&token=ed974d0e-dd9c-4ac8-8b64-cee76f771d3b";
     document.getElementById("roomPicture").value = null;
   }
@@ -186,10 +186,15 @@ function isImage(filename) {
   var ext = getExtension(filename);
   switch (ext.toLowerCase()) {
     case 'jpg':
+    case 'jpeg':
+    case 'webp':
+    case 'svg':
+    case 'heic':
+    case 'heif':
     case 'gif':
     case 'bmp':
     case 'png':
-      return true;
+    return true;
   }
   return false;
 }

@@ -19,7 +19,7 @@ document.getElementById("selectimage").onchange = evt => {
         nopic = false;
     }
     else{
-        alert("โปรดใช้รูปภาพไฟล์นามสุกล .jpg, .png หรือ .gif")
+        alert("โปรดใช้ไฟล์รูปภาพ ตัวอย่างเช่น .jpg, .png หรือ .gif")
         document.getElementById("image").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/noprofile.png?alt=media&token=3e4fa5e8-7f96-4b74-848f-d2de186fcd0c";
         document.getElementById("selectimage").value = null;
         nopic = true;
@@ -230,10 +230,15 @@ function getExtension(filename) {
 function isImage(filename) {
     var ext = getExtension(filename);
     switch (ext.toLowerCase()) {
-      case 'jpg':
-      case 'gif':
-      case 'bmp':
-      case 'png':
+        case 'jpg':
+        case 'jpeg':
+        case 'webp':
+        case 'svg':
+        case 'heic':
+        case 'heif':
+        case 'gif':
+        case 'bmp':
+        case 'png':
         return true;
     }
     return false;

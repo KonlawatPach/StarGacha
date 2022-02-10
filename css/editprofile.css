@@ -26,6 +26,10 @@ input:focus{
   background-color: #ffffff ;
 }
 
+#changePasswordBtn{
+    font-size: 16px;
+}
+
 .modaldelete {
 	display: none;
 	position: fixed;
@@ -169,6 +173,10 @@ h1{
         font-size: 14px;
     }
 
+    #changePasswordBtn{
+        font-size: 12px;
+    }
+
     .modalcontentdelete  {
 		width: 99%;
 	}
@@ -178,7 +186,7 @@ h1{
 	}
 
     .profilebutton{
-        width: 42%;
+        width: 40%;
         font-size: 12px;
         padding-inline: 0;
     }
