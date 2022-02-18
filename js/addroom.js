@@ -1,4 +1,10 @@
 var currentuserid;
+var randomnoroom = ["https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807",
+                    "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic2.png?alt=media&token=970eb508-03fb-4ef1-9341-0bfc2bf8cf61",
+                    "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic3.png?alt=media&token=ecd75eef-45dd-4f96-bc80-e387ea1d8367", 
+                    "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic4.png?alt=media&token=143851b6-74b9-4a3f-bbf7-8914bbfa22e9", 
+                    "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic5.png?alt=media&token=1fe41c65-c5de-4cf6-ad21-532d8a8dabf6"]
+
 firebase.auth().onAuthStateChanged((user) => {
     sessionStorage.setItem("userid", user.uid);
     sessionStorage.setItem("prev", 'addroom');
@@ -97,7 +103,7 @@ async function addRoom(){
           });
         }
         else{
-          path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807";
+          path = randomnoroom[Math.floor((Math.random()*10)%5)];
         } 
         db.collection("room").doc(newroom.id).update({
           picture: path

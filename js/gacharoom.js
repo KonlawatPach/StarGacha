@@ -240,7 +240,7 @@ function getCount(name, count){
 //onEvent Function
 async function rollgacha() {
     document.getElementById("rollgacha").disabled = true;
-    document.getElementById("gachabox").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa_speed.gif?alt=media&token=da9a5c77-f42e-49ba-9980-44b374b66b9a";
+    document.getElementById("gachabox").src = "img/gift pop.gif";
     var reward;
     for (let i = 0; i < 1400; i+=200) {
 
@@ -284,15 +284,15 @@ async function rollgacha() {
                     });                    
                 }
                 else if(getCount(item.data().name, item.data().count)==0){
-                    reward = "บูรพาคุงไม่อยากให้คุณสุ่มอีกแล้ว";
+                    reward = "รอบการสุ่มของคุณหมดแล้ว";
                 }
                 else{
-                    reward = "บูรพาคุงไม่มีของขวัญจะให้คุณ";
+                    reward = "ของขวัญหมดแล้ว";
                 }
             });
         }).then(() => {
             document.body.style.backgroundColor = "slateblue";
-            document.getElementById("gachabox").src = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/wanwai_burapa.gif?alt=media&token=b4882689-594e-4162-866c-51ce8b6abf84";
+            document.getElementById("gachabox").src = "img/gift jump.gif";
             document.getElementById("myModal").style.display = "block";
             $("#getreward").html(reward);
             $("#modalcontent").slideDown(500);
@@ -300,7 +300,7 @@ async function rollgacha() {
         }).catch((error) => {
             console.log("Transaction failed: ", error);
         });
-    },2000)
+    },1500)
 }
 
 function accept(userid){
