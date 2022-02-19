@@ -8,6 +8,10 @@ body{
 	height: 100%;	
 }
 
+.midheadbox{
+	width: 80%;
+}
+
 ::-webkit-scrollbar {
 	width: 5px;
   }
@@ -144,6 +148,10 @@ body{
 
 	.modalcontent {
 		width: 80%;
+	}
+
+	.midheadbox{
+		width: 100%;
 	}
 
 	.gachabox{
