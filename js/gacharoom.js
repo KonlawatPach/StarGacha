@@ -241,7 +241,7 @@ function getCount(name, count){
 async function rollgacha() {
     document.getElementById("rollgacha").disabled = true;
     document.getElementById("gachabox").src = "img/gift pop.gif";
-    var reward;
+    $("#getreward").html('');
     for (let i = 0; i < 1400; i+=200) {
 
     setTimeout(function()
@@ -267,7 +267,10 @@ async function rollgacha() {
                 for(let i in giftname) for(let j = 0; j<giftnum[i]; j++) randomlist.push(giftname[i]);
                 if(randomlist != 0 && getCount(item.data().name, item.data().count)>0){
                     let num = Math.floor((Math.random()*1000) % randomlist.length);
-                    reward = "ยินดีด้วย คุณได้รับ " + randomlist[num];
+                    $(`
+                        <p style="font-size: 20px;">ยินดีด้วย คุณได้รับ</p>
+                        <p style="font-size: 18px;">`+ randomlist[num] +`</p>
+                    `).appendTo( "#getreward" );
                     let newgiftnum = [...giftnum];
                     let newcount = [...item.data().count];
                     let newrewardgift = [...item.data().rewardgift];
@@ -284,17 +287,16 @@ async function rollgacha() {
                     });                    
                 }
                 else if(getCount(item.data().name, item.data().count)==0){
-                    reward = "รอบการสุ่มของคุณหมดแล้ว";
+                    $("#getreward").html("รอบการสุ่มของคุณหมดแล้ว");
                 }
                 else{
-                    reward = "ของขวัญหมดแล้ว";
+                    $("#getreward").html("ของขวัญหมดแล้ว");
                 }
             });
         }).then(() => {
             document.body.style.backgroundColor = "slateblue";
             document.getElementById("gachabox").src = "img/gift jump.gif";
             document.getElementById("myModal").style.display = "block";
-            $("#getreward").html(reward);
             $("#modalcontent").slideDown(500);
             document.getElementById("rollgacha").disabled = false;
         }).catch((error) => {

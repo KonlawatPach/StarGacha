@@ -145,4 +145,12 @@ body{
 	.modalcontent {
 		width: 80%;
 	}
+
+	.gachabox{
+		width: 90%;
+	}
+
+	#count{
+		font-size: 60%;
+	}
 }

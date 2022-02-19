@@ -61,16 +61,16 @@
                     </div>
                 </div>
                 <!-- กล่องกลาง -->
-                <div class="col-sm mx-auto mt-0" id="center"> 
-                    <div class="col-sm-10 col-md-9 col-xl-8 border border-2 rounded-pill border-dark p-2 mx-auto bg-light">
-                        <h4 class="fw-bold d-none d-lg-block" id="roomlg"></h4>
-                        <h5 class="fw-bold d-none d-lg-block" id="keylg"></h5>
-                        <h5 class="fw-bold d-block d-lg-none" id="roomsm"></h5>
-                        <h6 class="fw-bold d-block d-lg-none" id="keysm"></h6>
+                <div class="col-sm mx-auto mt-1" id="center"> 
+                    <div class="col-sm-10 col-md-9 col-xl-8 border border-2 rounded-3 border-dark p-2 mx-auto bg-light px-3" style="width: fit-content;">
+                        <h4 class="fw-bold d-none d-sm-block" id="roomlg"></h4>
+                        <h5 class="fw-bold d-none d-sm-block" id="keylg"></h5>
+                        <h5 class="fw-bold d-block d-sm-none" style="font-size: 16px;" id="roomsm"></h5>
+                        <h6 class="fw-bold d-block d-sm-none" style="font-size: 14px;"  id="keysm"></h6>
                     </div>
-                    <img id="gachabox" class="my-3 gachabox" src="img/gift jump.gif"><br>
-                    <button type="button" class="btn btn-light btn-lg" onclick="rollgacha()" id="rollgacha">สุ่มกาชา</button>
-                    <h6 class="my-3 mt-5 mt-lg-4 border border-1 border-dark rounded-pill bg-light mx-auto p-1 px-5" style="width: fit-content;" id="count">คุณมีสิทธิ์สุ่มได้อีก 0 ครั้ง</h6>
+                    <img id="gachabox" class="my-3 gachabox border-2 border border-dark rounded-pill" src="img/gift jump.gif"><br>
+                    <button type="button" class="btn btn-light btn-lg mt-5" onclick="rollgacha()" id="rollgacha">สุ่มกาชา</button>
+                    <h6 class="my-3 mt-5 mt-lg-4 border border-1 border-dark rounded-pill bg-light mx-auto p-1 px-3" style="width: fit-content;" id="count">คุณมีสิทธิ์สุ่มได้อีก 0 ครั้ง</h6>
                 </div>
 
                 <!-- กล่องขวา -->
@@ -96,6 +96,7 @@
                         </div>
                     </div>
                 </div>
+                <img class="d-none" src="img/gift pop.gif">
             </div>
         </div>
         <script src="js/gacharoom.js"></script>
