@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
 
-//Twotype Fetch Data Function
+//Twotype Fetch Data Function ขอมีส่วนร่วมด้วยดิ
 function getData(){
     try {
         db.collection("room").doc(roomid).get().then((item) => {  
