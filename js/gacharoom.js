@@ -238,6 +238,59 @@ function getCount(name, count){
 }
 
 //onEvent Function
+function accept(userid){
+    db.runTransaction((transaction) => {
+        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
+            let newname = [...item.data().name]
+            let newcount = [...item.data().count]
+            let newwaitinglist = [...item.data().waitinglist]
+            newname.push(userid)
+            let index = newwaitinglist.indexOf(userid);
+            if (index !== -1) newwaitinglist.splice(index, 1);
+            newcount.push(item.data().startcount)
+            transaction.update(db.collection("room").doc(roomid), {
+                name:newname,
+                count:newcount,
+                waitinglist: newwaitinglist
+            });
+        });
+    }).then(() => {
+        db.runTransaction((transaction) => {
+            return transaction.get(db.collection("user").doc(userid)).then((user) => {
+                let newwaitroom = [...user.data().waitroom]
+                let newjoinroom = [...user.data().joinroom]
+                let index = newwaitroom.indexOf(roomid);
+                if (index !== -1) newwaitroom.splice(index, 1);
+                newjoinroom.push(roomid)
+                transaction.update(db.collection("user").doc(userid), {
+                    joinroom: newjoinroom,
+                    waitroom: newwaitroom
+                });
+            });
+        })
+    });
+}
+
+function deny(userid){
+    db.runTransaction((transaction) => {
+        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
+            let newwaitinglist = [...item.data().waitinglist]
+            let index = newwaitinglist.indexOf(userid);
+            if (index !== -1) newwaitinglist.splice(index, 1);
+            transaction.update(db.collection("room").doc(roomid), { waitinglist: newwaitinglist });
+        });
+    }).then(() => {
+        db.runTransaction((transaction) => {
+            return transaction.get(db.collection("user").doc(userid)).then((user) => {
+                let newwaitroom = [...user.data().waitroom]
+                let index = newwaitroom.indexOf(roomid);
+                if (index !== -1) newwaitroom.splice(index, 1);
+                transaction.update(db.collection("user").doc(userid), { waitroom: newwaitroom });
+            });
+        })
+    });
+}
+
 async function rollgacha() {
     document.getElementById("rollgacha").disabled = true;
     document.getElementById("gachabox").src = "img/gift pop.gif";
@@ -303,59 +356,6 @@ async function rollgacha() {
             console.log("Transaction failed: ", error);
         });
     },1500)
-}
-
-function accept(userid){
-    db.runTransaction((transaction) => {
-        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
-            let newname = [...item.data().name]
-            let newcount = [...item.data().count]
-            let newwaitinglist = [...item.data().waitinglist]
-            newname.push(userid)
-            let index = newwaitinglist.indexOf(userid);
-            if (index !== -1) newwaitinglist.splice(index, 1);
-            newcount.push(item.data().startcount)
-            transaction.update(db.collection("room").doc(roomid), {
-                name:newname,
-                count:newcount,
-                waitinglist: newwaitinglist
-            });
-        });
-    }).then(() => {
-        db.runTransaction((transaction) => {
-            return transaction.get(db.collection("user").doc(userid)).then((user) => {
-                let newwaitroom = [...user.data().waitroom]
-                let newjoinroom = [...user.data().joinroom]
-                let index = newwaitroom.indexOf(roomid);
-                if (index !== -1) newwaitroom.splice(index, 1);
-                newjoinroom.push(roomid)
-                transaction.update(db.collection("user").doc(userid), {
-                    joinroom: newjoinroom,
-                    waitroom: newwaitroom
-                });
-            });
-        })
-    });
-}
-
-function deny(userid){
-    db.runTransaction((transaction) => {
-        return transaction.get(db.collection("room").doc(roomid)).then((item) => {
-            let newwaitinglist = [...item.data().waitinglist]
-            let index = newwaitinglist.indexOf(userid);
-            if (index !== -1) newwaitinglist.splice(index, 1);
-            transaction.update(db.collection("room").doc(roomid), { waitinglist: newwaitinglist });
-        });
-    }).then(() => {
-        db.runTransaction((transaction) => {
-            return transaction.get(db.collection("user").doc(userid)).then((user) => {
-                let newwaitroom = [...user.data().waitroom]
-                let index = newwaitroom.indexOf(roomid);
-                if (index !== -1) newwaitroom.splice(index, 1);
-                transaction.update(db.collection("user").doc(userid), { waitroom: newwaitroom });
-            });
-        })
-    });
 }
 
 function seeProfile(userid) {
