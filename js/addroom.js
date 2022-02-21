@@ -61,60 +61,64 @@ document.getElementById("roomPicture").onchange = evt => {
 }
 
 async function addRoom(){
-  var path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807";
-  var roomname = document.getElementById("roomName").value;
-  var maxparticipant = document.getElementById("maxParticipant").value;
-  var rollstart = document.getElementById("rollStart").value;
-  var autojoin = document.getElementById("autoJoin").checked;
-  var statusroom = document.getElementById("statusRoom").checked;
-  var file = document.querySelector("#roomPicture").files[0];
-  var inputgift = getGiftNameList();
-  var giftquantity = getGiftQuantityList();
-  document.getElementById("myModal").style.display = "block";
-  db.collection("room").add({
-    admin: currentuserid,
-    allgiftnum: giftquantity.reduce((a, b) => a + b),        // ทำรวม list
-    count: [Number(rollstart)],
-    giftName: inputgift,                                // ทำ list
-    giftQuantity: giftquantity,      // ทำ list
-    maxname: Number(maxparticipant), // จำนวนผู้เข้าร่วมทั้งหมด
-    name: [currentuserid],
-    picture: path,
-    rewardgift: [],
-    rewarduser: [],
-    room: roomname,
-    startcount: Number(rollstart),
-    autoallow: autojoin,
-    status: statusroom,
-    waitinglist: []
-  }).then((newroom) => {
-      db.collection("user").doc(currentuserid).get().then((user)=> {
-      let newmakeroom = [...user.data().makeroom]
-      newmakeroom.push(newroom.id)
-      db.collection("user").doc(currentuserid).update({
-      makeroom: newmakeroom
-      }).then(async () => {
-        if(file !== undefined){
-          var metadata = { contentType:file.type }
-          let img = ref.child("roomImage/" + newroom.id + ".jpg")
-          await img.put(file, metadata)
-          await img.getDownloadURL().then(function(url) {
-              path = url;
-          });
-        }
-        else{
-          path = randomnoroom[Math.floor((Math.random()*10)%5)];
-        } 
-        db.collection("room").doc(newroom.id).update({
-          picture: path
-        }).then(() => {
-        document.getElementById("myModal").style.display = "none";
-        alert("สร้างห้องเรียบร้อยแล้ว")
-        sessionStorage.setItem("roomid", newroom.id);
-        document.location='gacharoom.html'})
+  if(!haveSameText()){
+    var path = "https://firebasestorage.googleapis.com/v0/b/stargacha-4806d.appspot.com/o/no%20roompic.png?alt=media&token=c06192f8-4c02-4217-823f-5b11537bc807";
+    var roomname = document.getElementById("roomName").value;
+    var maxparticipant = document.getElementById("maxParticipant").value;
+    var rollstart = document.getElementById("rollStart").value;
+    var autojoin = document.getElementById("autoJoin").checked;
+    var statusroom = document.getElementById("statusRoom").checked;
+    var file = document.querySelector("#roomPicture").files[0];
+    var inputgift = getGiftNameList();
+    var giftquantity = getGiftQuantityList();
+    document.getElementById("myModal").style.display = "block";
+    db.collection("room").add({
+      admin: currentuserid,
+      allgiftnum: giftquantity.reduce((a, b) => a + b),        // ทำรวม list
+      count: [Number(rollstart)],
+      giftName: inputgift,                                // ทำ list
+      giftQuantity: giftquantity,      // ทำ list
+      maxname: Number(maxparticipant), // จำนวนผู้เข้าร่วมทั้งหมด
+      name: [currentuserid],
+      picture: path,
+      rewardgift: [],
+      rewarduser: [],
+      room: roomname,
+      startcount: Number(rollstart),
+      autoallow: autojoin,
+      status: statusroom,
+      waitinglist: []
+    }).then((newroom) => {
+        db.collection("user").doc(currentuserid).get().then((user)=> {
+        let newmakeroom = [...user.data().makeroom]
+        newmakeroom.push(newroom.id)
+        db.collection("user").doc(currentuserid).update({
+        makeroom: newmakeroom
+        }).then(async () => {
+          if(file !== undefined){
+            var metadata = { contentType:file.type }
+            let img = ref.child("roomImage/" + newroom.id + ".jpg")
+            await img.put(file, metadata)
+            await img.getDownloadURL().then(function(url) {
+                path = url;
+            });
+          }
+          else{
+            path = randomnoroom[Math.floor((Math.random()*10)%5)];
+          } 
+          db.collection("room").doc(newroom.id).update({
+            picture: path
+          }).then(() => {
+          document.getElementById("myModal").style.display = "none";
+          alert("สร้างห้องเรียบร้อยแล้ว")
+          sessionStorage.setItem("roomid", newroom.id);
+          document.location='gacharoom.html'})
+        })
       })
     })
-  })
+  }else{
+    alert("มีชื่อของขวัญซ้ำกัน กรุณาตรวจสอบอีกครั้ง")
+  }
 }
 
 function getGiftQuantityList(){
@@ -158,7 +162,7 @@ function addRow(i){
         <label for="inputGift" class="mt-1 rownumber"></label>
       </td>
       <td style="width: 50%;">
-        <input type="gift" required class="w-100 inputGift">
+        <input type="gift" required class="w-100 inputGift" autocomplete="off">
       </td>
       <td>
         <input type="number" class="giftQuantity" min="1" required max="100" step="1" value="1">
@@ -203,4 +207,28 @@ function isImage(filename) {
     return true;
   }
   return false;
+}
+
+function haveSameText(){
+  //clear black border
+  let inputtext = document.getElementsByTagName("textarea")
+  for (let i = 1; i <= inputtext.length; i++) {
+      inputtext[i-1].style.borderColor = "black";
+  }
+
+  //choose zone
+  let hasSame = false;
+  let choosetext;
+  let comparetext;
+  var x = document.getElementsByClassName("inputGift");
+  for (let i = 0; i < x.length; i++) {
+    choosetext = x[i].value;
+    for (let j = 0; j < x.length; j++) {
+      comparetext = x[j].value;
+      if(choosetext == comparetext && i != j){
+        hasSame = true;
+      }
+    }
+  }
+  return hasSame;
 }
